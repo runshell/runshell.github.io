@@ -1,6 +1,1 @@
-# shashade Blog
-the first blog repository
-## Why the name is shashade? 
-shashade is my good friend.
-## 那啥？
-听朋友说GitHub可以写博客，今天刚好看到点东西想试试
+0x00 [SSH隧道转发](/docs/SSH%E9%9A%A7%E9%81%93%E8%BD%AC%E5%8F%91.html)

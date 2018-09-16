@@ -6,14 +6,14 @@
 
 1. 在user option中设置字符集(character sets)为显示原始字节流(Display as raw bytes);
 
-![image1](../images/image1.png)
+![image1](..\images\image1.png)
 
 2. 在响应包中复制要匹配的中文，显示的是乱码；
 
-![image2](../images/image2.png)
+![image2](..\images\image2.png)
 
 
 
 3. 将复制的乱码粘贴到添加匹配字符串的地方。
 
-![image3](../images/image3.png)
+![image3](..\images\image3.png)

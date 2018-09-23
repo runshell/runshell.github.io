@@ -28,7 +28,7 @@ PS C:\Users\92363> $s.LastWriteTime
 在不了解powershell的时候，没有找到很好的工具来修改文件时间戳，于是有了下面的代码，用户交互上完全模仿linux中的touch。所以用法和linux中touch相同。  
 该程序本质是调用`SetFileTime(f,ct,at,mt)`函数修改时间戳，一大把的代码都在做参数解析，真正实现修改时间戳的就这一个函数。  
 
-[wtouch.cpp⬇](../other/wtouch.cpp) &nbsp;&nbsp; [wtouch.exe](../other/wtouch.exe)
+[wtouch.cpp⬇](https://raw.githubusercontent.com/shashade250/shashade250.github.io/master/other/wtouch.cpp) &nbsp;&nbsp; [wtouch.exe](../other/wtouch.exe)
 ```c
 #include <iostream>
 #include <windows.h>

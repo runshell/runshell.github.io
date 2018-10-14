@@ -1,5 +1,3 @@
-[TOC]
-
 # Burp suite中的dnslog
 
 [注]本文提到的burp均为付费专业版，免费社区版不具有该功能。

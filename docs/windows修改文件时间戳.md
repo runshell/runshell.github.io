@@ -2,7 +2,7 @@
 
 * powershell  
 
-使用Get-ChildItem获得FileInfo对象，直接给其对应属性赋值即可，时间格式为`2018-08-25 15:23:36`,如果选用当前时间可直接使用命令`date`代替时间。  
+使用Set-ItemProperty来修改文件属性，-name参数指定属性名，-value参数指定参数值。时间格式为`2018-08-25 15:23:36`,如果选用当前时间可直接使用命令`date`代替时间。  
 
 ```powershell
 PS C:\Users\HUAWEI\Desktop> Get-ItemProperty -Path .\1.jsp | fl
@@ -70,7 +70,7 @@ VersionInfo    : File:             C:\Users\HUAWEI\Desktop\1.jsp
 
 PS C:\Users\HUAWEI\Desktop>
 ```
-一个问题值得思考：我们只是对powershell中的一个变量赋值，这顶多改变内存中的值，它怎么就同步到磁盘将文件时间戳永久改变了呢？一开始我在网上看到这中操作的时候，我是试都不想试，但最终事实摆在眼前，不得不服这种骚操作。
+
 
 * c/c++  
 

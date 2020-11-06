@@ -5,21 +5,70 @@
 使用Get-ChildItem获得FileInfo对象，直接给其对应属性赋值即可，时间格式为`2018-08-25 15:23:36`,如果选用当前时间可直接使用命令`date`代替时间。  
 
 ```powershell
-PS C:\Users\92363> $s=Get-ChildItem Desktop\ca_setup.exe
-PS C:\Users\92363> $s
+PS C:\Users\HUAWEI\Desktop> Get-ItemProperty -Path .\1.jsp | fl
 
 
-    目录: C:\Users\92363\Desktop
 
 
-Mode                LastWriteTime         Length Name
-----                -------------         ------ ----
--a----         2016/7/9      0:00        8244106 ca_setup.exe
+Name           : 1.jsp
+Length         : 2598
+CreationTime   : 2020/8/24 14:29:10
+LastWriteTime  : 2020/8/24 14:29:10
+LastAccessTime : 2020/11/6 14:54:12
+Mode           : -a----
+LinkType       :
+Target         : {}
+VersionInfo    : File:             C:\Users\HUAWEI\Desktop\1.jsp
+                 InternalName:
+                 OriginalFilename:
+                 FileVersion:
+                 FileDescription:
+                 Product:
+                 ProductVersion:
+                 Debug:            False
+                 Patched:          False
+                 PreRelease:       False
+                 PrivateBuild:     False
+                 SpecialBuild:     False
+                 Language:
 
-PS C:\Users\92363> $s.CreationTime
-PS C:\Users\92363> $s.LastAccessTime=date
-PS C:\Users\92363> $s.LastAccessTime="2018-08-25 15:23:36"
-PS C:\Users\92363> $s.LastWriteTime
+
+
+
+PS C:\Users\HUAWEI\Desktop> Set-ItemProperty -Path .\1.jsp -Name CreationTime -Value '2020年11月6日 14:56:25'
+PS C:\Users\HUAWEI\Desktop> Get-ItemProperty -Path .\1.jsp | fl
+
+
+    目录: C:\Users\HUAWEI\Desktop
+
+
+
+Name           : 1.jsp
+Length         : 2598
+CreationTime   : 2020/11/6 14:56:25
+LastWriteTime  : 2020/8/24 14:29:10
+LastAccessTime : 2020/11/6 14:57:36
+Mode           : -a----
+LinkType       :
+Target         : {}
+VersionInfo    : File:             C:\Users\HUAWEI\Desktop\1.jsp
+                 InternalName:
+                 OriginalFilename:
+                 FileVersion:
+                 FileDescription:
+                 Product:
+                 ProductVersion:
+                 Debug:            False
+                 Patched:          False
+                 PreRelease:       False
+                 PrivateBuild:     False
+                 SpecialBuild:     False
+                 Language:
+
+
+
+
+PS C:\Users\HUAWEI\Desktop>
 ```
 一个问题值得思考：我们只是对powershell中的一个变量赋值，这顶多改变内存中的值，它怎么就同步到磁盘将文件时间戳永久改变了呢？一开始我在网上看到这中操作的时候，我是试都不想试，但最终事实摆在眼前，不得不服这种骚操作。
 

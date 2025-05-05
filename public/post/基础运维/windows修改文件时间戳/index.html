@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="介绍Windows使用powershell或api来实现修改文件时间戳功能">
+<title>windows修改文件时间戳</title>
+
+<link rel='canonical' href='http://localhost:1313/post/%E5%9F%BA%E7%A1%80%E8%BF%90%E7%BB%B4/windows%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%97%B6%E9%97%B4%E6%88%B3/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="windows修改文件时间戳">
+<meta property='og:description' content="介绍Windows使用powershell或api来实现修改文件时间戳功能">
+<meta property='og:url' content='http://localhost:1313/post/%E5%9F%BA%E7%A1%80%E8%BF%90%E7%BB%B4/windows%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%97%B6%E9%97%B4%E6%88%B3/'>
+<meta property='og:site_name' content='runshell'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='touch' /><meta property='article:tag' content='文件时间戳' /><meta property='article:published_time' content='2020-07-15T14:30:00&#43;08:00'/><meta property='article:modified_time' content='2020-07-15T14:30:00&#43;08:00'/>
+<meta name="twitter:title" content="windows修改文件时间戳">
+<meta name="twitter:description" content="介绍Windows使用powershell或api来实现修改文件时间戳功能">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_a0209d8e65c434cd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤣</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">runshell</a></h1>
+            <h2 class="site-description">Dream is possible!</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/runshell'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='' >
+                
+                
+                
+                <span></span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%9F%BA%E7%A1%80%E8%BF%90%E7%BB%B4/" >
+                基础运维
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E5%9F%BA%E7%A1%80%E8%BF%90%E7%BB%B4/windows%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E6%97%B6%E9%97%B4%E6%88%B3/">windows修改文件时间戳</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            介绍Windows使用powershell或api来实现修改文件时间戳功能
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 15, 2020</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <ul>
+<li>powershell</li>
+</ul>
+<p>使用Set-ItemProperty来修改文件属性，-name参数指定属性名，-value参数指定参数值。时间格式为<code>2018-08-25 15:23:36</code>,如果选用当前时间可直接使用命令<code>date</code>代替时间。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>PS C:\Users\HUAWEI\Desktop&gt; Get-ItemProperty -Path .\1.jsp | fl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Name           : 1.jsp
+</span></span><span style="display:flex;"><span>Length         : 2598
+</span></span><span style="display:flex;"><span>CreationTime   : 2020/8/24 14:29:10
+</span></span><span style="display:flex;"><span>LastWriteTime  : 2020/8/24 14:29:10
+</span></span><span style="display:flex;"><span>LastAccessTime : 2020/11/6 14:54:12
+</span></span><span style="display:flex;"><span>Mode           : -a----
+</span></span><span style="display:flex;"><span>LinkType       :
+</span></span><span style="display:flex;"><span>Target         : {}
+</span></span><span style="display:flex;"><span>VersionInfo    : File:             C:\Users\HUAWEI\Desktop\1.jsp
+</span></span><span style="display:flex;"><span>                 InternalName:
+</span></span><span style="display:flex;"><span>                 OriginalFilename:
+</span></span><span style="display:flex;"><span>                 FileVersion:
+</span></span><span style="display:flex;"><span>                 FileDescription:
+</span></span><span style="display:flex;"><span>                 Product:
+</span></span><span style="display:flex;"><span>                 ProductVersion:
+</span></span><span style="display:flex;"><span>                 Debug:            False
+</span></span><span style="display:flex;"><span>                 Patched:          False
+</span></span><span style="display:flex;"><span>                 PreRelease:       False
+</span></span><span style="display:flex;"><span>                 PrivateBuild:     False
+</span></span><span style="display:flex;"><span>                 SpecialBuild:     False
+</span></span><span style="display:flex;"><span>                 Language:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PS C:\Users\HUAWEI\Desktop&gt; Set-ItemProperty -Path .\1.jsp -Name CreationTime -Value &#39;2020年11月6日 14:56:25&#39;
+</span></span><span style="display:flex;"><span>PS C:\Users\HUAWEI\Desktop&gt; Get-ItemProperty -Path .\1.jsp | fl
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    目录: C:\Users\HUAWEI\Desktop
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Name           : 1.jsp
+</span></span><span style="display:flex;"><span>Length         : 2598
+</span></span><span style="display:flex;"><span>CreationTime   : 2020/11/6 14:56:25
+</span></span><span style="display:flex;"><span>LastWriteTime  : 2020/8/24 14:29:10
+</span></span><span style="display:flex;"><span>LastAccessTime : 2020/11/6 14:57:36
+</span></span><span style="display:flex;"><span>Mode           : -a----
+</span></span><span style="display:flex;"><span>LinkType       :
+</span></span><span style="display:flex;"><span>Target         : {}
+</span></span><span style="display:flex;"><span>VersionInfo    : File:             C:\Users\HUAWEI\Desktop\1.jsp
+</span></span><span style="display:flex;"><span>                 InternalName:
+</span></span><span style="display:flex;"><span>                 OriginalFilename:
+</span></span><span style="display:flex;"><span>                 FileVersion:
+</span></span><span style="display:flex;"><span>                 FileDescription:
+</span></span><span style="display:flex;"><span>                 Product:
+</span></span><span style="display:flex;"><span>                 ProductVersion:
+</span></span><span style="display:flex;"><span>                 Debug:            False
+</span></span><span style="display:flex;"><span>                 Patched:          False
+</span></span><span style="display:flex;"><span>                 PreRelease:       False
+</span></span><span style="display:flex;"><span>                 PrivateBuild:     False
+</span></span><span style="display:flex;"><span>                 SpecialBuild:     False
+</span></span><span style="display:flex;"><span>                 Language:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PS C:\Users\HUAWEI\Desktop&gt;
+</span></span></code></pre></div><ul>
+<li>c/c++</li>
+</ul>
+<p>在不了解powershell的时候，没有找到很好的工具来修改文件时间戳，于是有了下面的代码，用户交互上完全模仿linux中的touch。所以用法和linux中touch相同。<br>
+该程序本质是调用<code>SetFileTime(f,ct,at,mt)</code>函数修改时间戳，一大把的代码都在做参数解析，真正实现修改时间戳的就这一个函数。</p>
+<p><a class="link" href="https://raw.githubusercontent.com/shashade250/shashade250.github.io/master/other/wtouch.cpp"  target="_blank" rel="noopener"
+    >wtouch.cpp⬇</a>    <a class="link" href="../other/wtouch.exe" >wtouch.exe</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;windows.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>using namespace std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc,<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>argv[])
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    string inputtime,rfile,file;
+</span></span><span style="display:flex;"><span>    string help<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;用法：wtouch [选项]... 文件...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;更新文件的访问时间、修改时间和创建时间为当前时间。</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;如果文件不存在将创建一个空文件，除非提供了-c参数</span><span style="color:#ae81ff">\n\n\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;通过使用一些特定的参数对文件时间做相应的修改。</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;  -a                       只更改访问时间</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;  -c                       只更改创建时间</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;  -m                       只更改修改时间</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;  -n, --no-create          不创建任何文件</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;  -r, --reference=FILE     使用这个文件的时间而不是当前时间</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;  -t STAMP                 使用[YYYY]MMDDhhmm[.ss]而非当前时间</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;  -h, --help               显示此帮助信息并退出</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;请注意，-d 和-t 选项可接受不同的时间/日期格式。</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>    FILETIME ctim,atim,mtim;
+</span></span><span style="display:flex;"><span>    FILETIME <span style="color:#f92672">*</span>ct;
+</span></span><span style="display:flex;"><span>    FILETIME <span style="color:#f92672">*</span>mt;
+</span></span><span style="display:flex;"><span>    FILETIME <span style="color:#f92672">*</span>at;
+</span></span><span style="display:flex;"><span>    SYSTEMTIME systime;
+</span></span><span style="display:flex;"><span>    HANDLE rf,f;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> m<span style="color:#f92672">=</span>true,a<span style="color:#f92672">=</span>true,c<span style="color:#f92672">=</span>true,n<span style="color:#f92672">=</span>true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(argc<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        cout<span style="color:#f92672">&lt;&lt;</span>help;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;</span>argc;i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-m&#34;</span>)) {a<span style="color:#f92672">=</span>false;c<span style="color:#f92672">=</span>false;}
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-c&#34;</span>)) {a<span style="color:#f92672">=</span>false;m<span style="color:#f92672">=</span>false;}
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-a&#34;</span>)) {m<span style="color:#f92672">=</span>false;c<span style="color:#f92672">=</span>false;}
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-acm&#34;</span>)<span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>                argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-cam&#34;</span>)<span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>                argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-cma&#34;</span>)<span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>                argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-amc&#34;</span>)<span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>                argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-mac&#34;</span>)<span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>                argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-mca&#34;</span>))
+</span></span><span style="display:flex;"><span>            {m<span style="color:#f92672">=</span>true;a<span style="color:#f92672">=</span>true;c<span style="color:#f92672">=</span>true;}
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-cm&#34;</span>)<span style="color:#f92672">||</span>argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-mc&#34;</span>)) a<span style="color:#f92672">=</span>false;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-ac&#34;</span>)<span style="color:#f92672">||</span>argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-ca&#34;</span>)) m<span style="color:#f92672">=</span>false;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-am&#34;</span>)<span style="color:#f92672">||</span>argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-ma&#34;</span>)) c<span style="color:#f92672">=</span>false;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-n&#34;</span>)<span style="color:#f92672">||</span>argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;--no-create&#34;</span>)) n<span style="color:#f92672">=</span>true;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;--reference&#34;</span>)<span style="color:#f92672">||</span>argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-r&#34;</span>)) rfile<span style="color:#f92672">=</span>argv[<span style="color:#f92672">++</span>i];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-t&#34;</span>)) inputtime<span style="color:#f92672">=</span>argv[<span style="color:#f92672">++</span>i];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;--help&#34;</span>)<span style="color:#f92672">||</span>argv[i]<span style="color:#f92672">==</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#34;-h&#34;</span>)) cout<span style="color:#f92672">&lt;&lt;</span>help;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> file<span style="color:#f92672">=</span>argv[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//获取当前时间
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">GetLocalTime</span>(<span style="color:#f92672">&amp;</span>systime);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//从-t获取时间覆盖当前时间
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(inputtime.<span style="color:#a6e22e">length</span>()<span style="color:#f92672">!=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">=</span>inputtime.<span style="color:#a6e22e">length</span>()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(inputtime[i<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;.&#39;</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            systime.wSecond<span style="color:#f92672">=</span><span style="color:#a6e22e">atoi</span>(inputtime.<span style="color:#a6e22e">substr</span>(i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>).<span style="color:#a6e22e">c_str</span>());
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">-=</span><span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            systime.wSecond<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            systime.wMinute<span style="color:#f92672">=</span><span style="color:#a6e22e">atoi</span>(inputtime.<span style="color:#a6e22e">substr</span>(i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>).<span style="color:#a6e22e">c_str</span>());
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">-=</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            systime.wHour<span style="color:#f92672">=</span><span style="color:#a6e22e">atoi</span>(inputtime.<span style="color:#a6e22e">substr</span>(i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>).<span style="color:#a6e22e">c_str</span>());
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">-=</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            systime.wDay<span style="color:#f92672">=</span><span style="color:#a6e22e">atoi</span>(inputtime.<span style="color:#a6e22e">substr</span>(i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>).<span style="color:#a6e22e">c_str</span>());
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">-=</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            systime.wMonth<span style="color:#f92672">=</span><span style="color:#a6e22e">atoi</span>(inputtime.<span style="color:#a6e22e">substr</span>(i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>).<span style="color:#a6e22e">c_str</span>());
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">-=</span><span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            systime.wYear<span style="color:#f92672">=</span><span style="color:#a6e22e">atoi</span>(inputtime.<span style="color:#a6e22e">substr</span>(i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">4</span>).<span style="color:#a6e22e">c_str</span>());
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">SystemTimeToFileTime</span>(<span style="color:#f92672">&amp;</span>systime,<span style="color:#f92672">&amp;</span>ctim);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">LocalFileTimeToFileTime</span>(<span style="color:#f92672">&amp;</span>ctim,<span style="color:#f92672">&amp;</span>atim);
+</span></span><span style="display:flex;"><span>    ctim<span style="color:#f92672">=</span>atim;mtim<span style="color:#f92672">=</span>atim;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//从参照文件获得文件时间
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(rfile.<span style="color:#a6e22e">length</span>()<span style="color:#f92672">!=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        rf<span style="color:#f92672">=</span><span style="color:#a6e22e">CreateFileA</span>(rfile.<span style="color:#a6e22e">c_str</span>(),GENERIC_READ <span style="color:#f92672">|</span> GENERIC_WRITE,
+</span></span><span style="display:flex;"><span>                       FILE_SHARE_READ <span style="color:#f92672">|</span> FILE_SHARE_WRITE,
+</span></span><span style="display:flex;"><span>                       NULL,OPEN_EXISTING,
+</span></span><span style="display:flex;"><span>                       FILE_ATTRIBUTE_NORMAL,NULL);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(rf<span style="color:#f92672">==</span>INVALID_HANDLE_VALUE)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;打开参照文件失败！&#34;</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">GetFileTime</span>(rf,<span style="color:#f92672">&amp;</span>ctim,<span style="color:#f92672">&amp;</span>atim,<span style="color:#f92672">&amp;</span>mtim))
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;获取参照文件时间信息失败！&#34;</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">CloseHandle</span>(rf);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">CloseHandle</span>(rf);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//i暂时用作dwCreationDisposition
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(n) i<span style="color:#f92672">=</span>OPEN_EXISTING;<span style="color:#75715e">//不创建新文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">else</span> i<span style="color:#f92672">=</span>OPEN_ALWAYS;<span style="color:#75715e">//文件不存在时新建空文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    f<span style="color:#f92672">=</span><span style="color:#a6e22e">CreateFileA</span>(file.<span style="color:#a6e22e">c_str</span>(),GENERIC_READ <span style="color:#f92672">|</span> GENERIC_WRITE,
+</span></span><span style="display:flex;"><span>                    FILE_SHARE_READ <span style="color:#f92672">|</span> FILE_SHARE_WRITE,
+</span></span><span style="display:flex;"><span>                    NULL,i,
+</span></span><span style="display:flex;"><span>                    FILE_ATTRIBUTE_NORMAL,NULL);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(f<span style="color:#f92672">==</span>INVALID_HANDLE_VALUE)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;打开文件失败！&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    ct<span style="color:#f92672">=&amp;</span>ctim;mt<span style="color:#f92672">=&amp;</span>mtim;at<span style="color:#f92672">=&amp;</span>atim;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>m) mt<span style="color:#f92672">=</span>NULL;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>c) ct<span style="color:#f92672">=</span>NULL;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>a) at<span style="color:#f92672">=</span>NULL;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">SetFileTime</span>(f,ct,at,mt))
+</span></span><span style="display:flex;"><span>        cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;修改失败！&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CloseHandle</span>(f);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/touch/">Touch</a>
+        
+            <a href="/tags/%E6%96%87%E4%BB%B6%E6%97%B6%E9%97%B4%E6%88%B3/">文件时间戳</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2018 - 
+        
+        2025 runshell
+    </section>
+    
+    <section class="powerby">
+        
+            runshell <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.3b26d4996b06948d0792fcac8160425612872c44e8ab5bbefcb4e83f1f9cf335.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

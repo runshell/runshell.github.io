@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Burpsuite中的信息外功能Burp Collaborator介绍">
+<title>Loadrunner12 使用基础教程</title>
+
+<link rel='canonical' href='http://localhost:1313/post/%E5%9F%BA%E7%A1%80%E8%BF%90%E7%BB%B4/loadrunner12-%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Loadrunner12 使用基础教程">
+<meta property='og:description' content="Burpsuite中的信息外功能Burp Collaborator介绍">
+<meta property='og:url' content='http://localhost:1313/post/%E5%9F%BA%E7%A1%80%E8%BF%90%E7%BB%B4/loadrunner12-%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/'>
+<meta property='og:site_name' content='runshell'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='性能测试' /><meta property='article:tag' content='Loadrunner12' /><meta property='article:published_time' content='2019-07-15T14:30:00&#43;08:00'/><meta property='article:modified_time' content='2019-07-15T14:30:00&#43;08:00'/><meta property='og:image' content='http://localhost:1313/images/operate.png' />
+<meta name="twitter:title" content="Loadrunner12 使用基础教程">
+<meta name="twitter:description" content="Burpsuite中的信息外功能Burp Collaborator介绍"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/images/operate.png' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_a0209d8e65c434cd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤣</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">runshell</a></h1>
+            <h2 class="site-description">Dream is possible!</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/runshell'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>首页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='' >
+                
+                
+                
+                <span></span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-安装略">1. 安装（略）</a></li>
+    <li><a href="#2-使用简介">2. 使用简介</a>
+      <ul>
+        <li><a href="#21-录制脚本">2.1 录制脚本</a></li>
+        <li><a href="#22-运行脚本">2.2 运行脚本</a></li>
+        <li><a href="#23-结果分析">2.3 结果分析</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考链接">【参考链接】</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/%E5%9F%BA%E7%A1%80%E8%BF%90%E7%BB%B4/loadrunner12-%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/">
+                
+                    <img src="/images/operate.png" loading="lazy" alt="Featured image of post Loadrunner12 使用基础教程" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%9F%BA%E7%A1%80%E8%BF%90%E7%BB%B4/" >
+                基础运维
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/%E5%9F%BA%E7%A1%80%E8%BF%90%E7%BB%B4/loadrunner12-%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/">Loadrunner12 使用基础教程</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Burpsuite中的信息外功能Burp Collaborator介绍
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 15, 2019</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    1 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="1-安装略">1. 安装（略）
+</h2><ul>
+<li>程序安装包</li>
+</ul>
+<p>HP_LoadRunner_12.02_Community_Edition_T7177-15059.exe</p>
+<ul>
+<li>语言包</li>
+</ul>
+<p>HP_LoadRunner_12.02_Community_Edition_Language_Packs_T7177-15062.exe</p>
+<h2 id="2-使用简介">2. 使用简介
+</h2><p>​	安装完成后，桌面上新增3个图标，分别是<code>Virtual User Generator</code>、 <code>Controller</code> 、<code>Analysis</code> 。</p>
+<p><img src="/images/loadrunner_img1.jpg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="21-录制脚本">2.1 录制脚本
+</h3><p>​	打开<code>Virtual User Generator</code> ，使用组合键<code>Ctrl</code>+<code>N</code>打开如下对话框，选择<code>单协议</code>→<code>Web-HTTP/HTML</code>，填写脚本名称和保存位置后，点击创建。</p>
+<p><img src="/images/new_script.jpg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<blockquote>
+<p>创建后到达如下界面，可以发先操作分3类，分别为<code>vuser_init</code>、<code>Action</code>、<code>vuser_end</code>。他们的区别在于<code>vuser_init</code>只运行一次，在启动运行场景后最先运行；在<code>vuser_init</code>部分运行完后，<code>Action</code>根据运行场景的设置，多次并发运行；<code>Action</code>运行结束后，运行场景结束前运行<code>vuser_end</code>，也只运行一次。通常来说，<code>vuser_init</code>录制登录操作，<code>Action</code>部分录制需要测试并发的业务操作，<code>vuser_end</code>部分录制最后登出注销之类的释放资源的操作。</p></blockquote>
+<p><img src="/images/operate.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>​	录制vuser_init：选中vuser_init，按组合键<code>Ctrl</code>+<code>R</code>打开如下对话框，配置好url等相关参数后点击开始录制。Loadrunner会自动打开您选择的浏览器并访问您指定的URL。</p>
+<p><img src="/images/vuser_init.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1551752491440"
+	
+	
+></p>
+<p>【注】如果出现下图错误，请确认网络是否正常，网络正常即可忽略该错误。</p>
+<p><img src="/images/net_error.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1551686888809"
+	
+	
+></p>
+<p>​	输入用户名密码进行正常登录，</p>
+<p><img src="/images/login.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1551752859139"
+	
+	
+></p>
+<p>​	登录完成后，将操作切换为Action，继续进行收件操作，如果还想测试其它事件场景，点击右侧加号，添加新的事件场景。需要测试的场景录制完成后，将操作切换至vuser_end，录制注销操作。录制完成后点击终止按钮结束录制。</p>
+<h3 id="22-运行脚本">2.2 运行脚本
+</h3><p>​	录制完成后打开<code>Controller</code>，选中刚才录制的脚本，点击添加，然后点击<code>确定</code>按钮，进入场景配置界面。</p>
+<p><img src="/images/run_script.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1551756887458"
+	
+	
+></p>
+<h4 id="221-场景配置">2.2.1 场景配置
+</h4><p>​	加载生成器，由于<code>Virtual User Generator</code>与<code>Controller</code>在同一计算机，所以添加一个localhost的生成器，确定即可。</p>
+<p><img src="/images/load_generator.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1551757110771"
+	
+	
+></p>
+<p>​	配置全局计划，配置初始化方式、启动的vuser个数以及启动的时间、测试持续时间等。</p>
+<p><img src="/images/global.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1551757309957"
+	
+	
+></p>
+<h4 id="222-监视服务器资源">2.2.2 监视服务器资源
+</h4><p>​	点击底部的<code>运行</code>标签，切换至如下界面，根据服务器操作系统类型，选择<code>Windows资源</code>或<code>UNIX资源</code>，右击最右下角的统计图，在右击菜单中选择<code>添加度量</code>，到达服务器信息配置界面。</p>
+<p><img src="/images/monitor.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1551757770639"
+	
+	
+></p>
+<h4 id="2221-linux">2.2.2.1 Linux
+</h4><ol>
+<li>在Linux服务器上安装并启动rstatd</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apt-get install rstatd#安装rstatd
+</span></span><span style="display:flex;"><span>service rpcbind start <span style="color:#75715e">#启动rpc服务</span>
+</span></span><span style="display:flex;"><span>rpc.rstatd			  <span style="color:#75715e">#启动rpc.rstatd服务</span>
+</span></span><span style="display:flex;"><span>rpcinfo -p			  <span style="color:#75715e">#查看服务状态和端口</span>
+</span></span></code></pre></div><p><img src="/images/rstatd_status.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<ol start="2">
+<li>在Controller中添加资源视图，添加时，注意带上rstatd服务所监听的端口。</li>
+</ol>
+<p><img src="/images/Linux.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1551773072125"
+	
+	
+></p>
+<h4 id="2222-windows">2.2.2.2 Windows
+</h4><ol>
+<li>确保机器B的Remote ProcedureCall(RPC)和Remote Registry Service服务开启。</li>
+<li>确保C盘默认共享开启。</li>
+<li>添加主机，输入用户名密码，用户必须为administrator或同权限用户。</li>
+</ol>
+<p><img src="/images/windows.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1551770475231"
+	
+	
+></p>
+<ol start="4">
+<li>点击确定片刻后出现数据，表明资源监控配置成功。</li>
+</ol>
+<p><img src="/images/windows_OK.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1551770718005"
+	
+	
+></p>
+<h4 id="223-开始场景">2.2.3 开始场景
+</h4><p>​	一切就绪，点击<code>开始场景</code>开始运行，等待测试结束。</p>
+<p><img src="/images/start.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1551770816588"
+	
+	
+></p>
+<h3 id="23-结果分析">2.3 结果分析
+</h3><p>​	场景测试完成后，点击如下图标，将打开<code>Analysis</code>，自动分析统计测试产生的数据。</p>
+<p><img src="/images/Analysis.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1551771453694"
+	
+	
+></p>
+<p>​	<code>Analysis</code>打开后的界面如下，默认展示的统计图不包含系统资源的统计图。</p>
+<p><img src="/images/analysis1.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1551771964737"
+	
+	
+></p>
+<p>​	按下组合键<code>Ctrl</code>+<code>A</code>来添加统计图</p>
+<p><img src="/images/analysis2.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1551772097547"
+	
+	
+></p>
+<h2 id="参考链接">【参考链接】
+</h2><p><a class="link" href="https://blog.csdn.net/Summer_Hanson/article/details/55504619"  target="_blank" rel="noopener"
+    >LoadRunner11实操压力测试</a></p>
+<p><a class="link" href="https://www.cnblogs.com/seekwind/p/5817345.html"  target="_blank" rel="noopener"
+    >loadrunner监控linux服务器</a></p>
+<p><a class="link" href="https://www.cnblogs.com/chengssblog/p/6646451.html"  target="_blank" rel="noopener"
+    >loadrunner监控Windows服务器</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a>
+        
+            <a href="/tags/loadrunner12/">Loadrunner12</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2018 - 
+        
+        2025 runshell
+    </section>
+    
+    <section class="powerby">
+        
+            runshell <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.3b26d4996b06948d0792fcac8160425612872c44e8ab5bbefcb4e83f1f9cf335.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

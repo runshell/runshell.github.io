@@ -13,3 +13,5 @@
 ## 0x06 [powersploit中多个脚本在windows10和server2016上报错](https://runshell.github.io/docs/powersploit%e4%b8%ad%e5%a4%9a%e4%b8%aa%e8%84%9a%e6%9c%ac%e5%9c%a8windows10%e5%92%8cserver2016%e4%b8%8a%e6%8a%a5%e9%94%99.html)
 
 ## 0x07 [Loadrunner12 使用基础教程](https://runshell.github.io/docs/Loadrunner12%20%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B.html)
+
+## 0x07 [office 下载安装激活](https://runshell.github.io/docs/office+%e4%b8%8b%e8%bd%bd%e5%ae%89%e8%a3%85%e6%bf%80%e6%b4%bb.html)

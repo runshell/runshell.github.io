@@ -26,6 +26,7 @@ features = [
             src = "img/avatar.png"
     [Params.Article]
         toc = true
+        showAuthor = true 
     [Params.Footer]
         since = 2018
         customText = "runshell"

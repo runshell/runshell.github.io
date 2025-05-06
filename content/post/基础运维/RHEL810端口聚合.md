@@ -1,5 +1,5 @@
 ---
-title: "RHEL 8.10端口聚合" # 文章标题
+title: "RHEL810端口聚合" # 文章标题
 date: 2025-05-06T10:58:00+08:00 # 文章创建日期
 draft: false # 是否为草稿，true 表示草稿，不会在网站上显示
 author: "runshell" # 文章作者

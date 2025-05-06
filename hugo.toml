@@ -38,7 +38,7 @@ features = [
     [Params.widgets]
         [[Params.widgets.homepage]]
             type = "search"
-            params = {placeholder = "搜索文章...",searchJsonUrl = "/search.json"}
+            params = {}
         [[Params.widgets.homepage]]
             type = "archives"
             params = {}

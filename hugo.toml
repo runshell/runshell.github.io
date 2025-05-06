@@ -37,10 +37,18 @@ features = [
     [Params.Footer]
         since = 2018
         customText = "runshell"
+    [Params.Search]
+        enable = true
+        type = "json"
+        contentLength = 5000  # 索引内容长度
+        
     [Params.widgets]
         [[Params.widgets.homepage]]
             type = "search"
-            params = {}
+            params = {
+                placeholder = "搜索文章...", 
+                searchJsonUrl = "/index.json"
+            }
         [[Params.widgets.homepage]]
             type = "archives"
             params = {}

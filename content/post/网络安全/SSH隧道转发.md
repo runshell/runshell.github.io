@@ -4,7 +4,7 @@ date: 2018-07-15T14:30:00+08:00  # 文章创建日期
 draft: false  # 是否为草稿，true 表示草稿，不会在网站上显示
 author: "runshell"  # 文章作者
 description: "介绍利用ssh实现本地转发、远程转发以及socks5代理"  # 文章描述
-tags: ["网络安全","ssh隧道","端口转发","内网穿透"]  # 文章标签
+tags: ["ssh隧道","端口转发","内网穿透"]  # 文章标签
 categories: ["网络安全"]  # 文章分类
 image: "/images/1536460373438.png"
 ---

@@ -4,7 +4,7 @@ date: 2018-07-15T14:30:00+08:00  # 文章创建日期
 draft: false  # 是否为草稿，true 表示草稿，不会在网站上显示
 author: "runshell"  # 文章作者
 description: "报错的脚本主要为invoke-reflectivepeinjection.ps1，其它部分脚本由于使用了invoke-reflectivepeinjection.ps1中的代码，所以也报同样的错误,比如Invoke-Mimikatz、invoke-ninjacopy等。"  # 文章描述
-tags: ["网络安全","powersploit"]  # 文章标签
+tags: ["powersploit"]  # 文章标签
 categories: ["网络安全"]  # 文章分类
 ---
 

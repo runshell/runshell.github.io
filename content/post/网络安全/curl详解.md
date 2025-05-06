@@ -4,7 +4,7 @@ date: 2018-07-15T14:30:00+08:00  # 文章创建日期
 draft: false  # 是否为草稿，true 表示草稿，不会在网站上显示
 author: "runshell"  # 文章作者
 description: "介绍Linux curl命令用法和Windows服务器powershell实现类似功能的方法"  # 文章描述
-tags: ["网络安全","curl"]  # 文章标签
+tags: ["curl"]  # 文章标签
 categories: ["网络安全"]  # 文章分类
 ---
 

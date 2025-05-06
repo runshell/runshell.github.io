@@ -1,6 +1,6 @@
 ---
 title: "Centos Stream9安装Arkime" # 文章标题
-date: 2024-17-15T14:30:00+08:00 # 文章创建日期
+date: 2024-07-15T14:30:00+08:00 # 文章创建日期
 draft: false # 是否为草稿，true 表示草稿，不会在网站上显示
 author: "runshell" # 文章作者
 description: "Burpsuite匹配中文" # 文章描述

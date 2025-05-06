@@ -3,14 +3,6 @@ languageCode = 'zh-CN'
 title = 'runshell'
 theme = 'stack'
 
-[outputs]
-home = ["HTML", "JSON"]
-
-[outputFormats.JSON]
-mediaType = "application/json"
-baseName = "index"
-isPlainText = true
-
 
 
 features = [
@@ -45,10 +37,6 @@ features = [
     [Params.widgets]
         [[Params.widgets.homepage]]
             type = "search"
-            params = {
-                placeholder = "搜索文章...", 
-                searchJsonUrl = "/index.json"
-            }
         [[Params.widgets.homepage]]
             type = "archives"
             params = {}

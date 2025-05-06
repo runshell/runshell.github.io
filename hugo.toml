@@ -33,10 +33,12 @@ features = [
         enable = true
         type = "json"
         contentLength = 5000  # 索引内容长度
+        mainSections = ["post"]
         
     [Params.widgets]
         [[Params.widgets.homepage]]
             type = "search"
+            params = {placeholder = "搜索文章...",searchJsonUrl = "/search.json"}
         [[Params.widgets.homepage]]
             type = "archives"
             params = {}

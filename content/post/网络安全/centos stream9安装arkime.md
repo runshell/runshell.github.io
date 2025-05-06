@@ -6,7 +6,7 @@ author: "runshell" # 文章作者
 description: "Burpsuite匹配中文" # 文章描述
 tags: ["Arkime"] # 文章标签
 categories: ["网络安全"] # 文章分类
-image: "/images/image1.png"
+image: "/images/Arkime_Logo.png"
 ---
 
 # 下载包

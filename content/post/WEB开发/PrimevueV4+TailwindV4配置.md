@@ -6,7 +6,6 @@ author: "runshell" # 文章作者
 description: "介绍PrimevueV4+TailwindV4配置" # 文章描述
 tags: ["Primevue", "vue3", "前端"] # 文章标签
 categories: ["WEB开发"] # 文章分类
-image: "/images/1757657429839.png"
 ---
 
 # 初始化项目

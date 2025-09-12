@@ -1,128 +1,128 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>性能测试 on runshell</title><link>https://runshell.github.io/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</link><description>Recent content in 性能测试 on runshell</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 15 Jul 2019 14:30:00 +0800</lastBuildDate><atom:link href="https://runshell.github.io/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml"/><item><title>Loadrunner12 使用基础教程</title><link>https://runshell.github.io/post/%E5%9F%BA%E7%A1%80%E8%BF%90%E7%BB%B4/loadrunner12-%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/</link><pubDate>Mon, 15 Jul 2019 14:30:00 +0800</pubDate><guid>https://runshell.github.io/post/%E5%9F%BA%E7%A1%80%E8%BF%90%E7%BB%B4/loadrunner12-%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/</guid><description>&lt;img src="https://runshell.github.io/images/operate.png" alt="Featured image of post Loadrunner12 使用基础教程" />&lt;h2 id="1-安装略">1. 安装（略）
-&lt;/h2>&lt;ul>
-&lt;li>程序安装包&lt;/li>
-&lt;/ul>
-&lt;p>HP_LoadRunner_12.02_Community_Edition_T7177-15059.exe&lt;/p>
-&lt;ul>
-&lt;li>语言包&lt;/li>
-&lt;/ul>
-&lt;p>HP_LoadRunner_12.02_Community_Edition_Language_Packs_T7177-15062.exe&lt;/p>
-&lt;h2 id="2-使用简介">2. 使用简介
-&lt;/h2>&lt;p>​ 安装完成后，桌面上新增3个图标，分别是&lt;code>Virtual User Generator&lt;/code>、 &lt;code>Controller&lt;/code> 、&lt;code>Analysis&lt;/code> 。&lt;/p>
-&lt;p>&lt;img src="https://runshell.github.io/images/loadrunner_img1.jpg"
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>性能测试 on runshell</title><link>https://runshell.github.io/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</link><description>Recent content in 性能测试 on runshell</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 15 Jul 2019 14:30:00 +0800</lastBuildDate><atom:link href="https://runshell.github.io/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml"/><item><title>Loadrunner12 使用基础教程</title><link>https://runshell.github.io/post/%E5%9F%BA%E7%A1%80%E8%BF%90%E7%BB%B4/loadrunner12-%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/</link><pubDate>Mon, 15 Jul 2019 14:30:00 +0800</pubDate><guid>https://runshell.github.io/post/%E5%9F%BA%E7%A1%80%E8%BF%90%E7%BB%B4/loadrunner12-%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/</guid><description>&lt;img src="https://runshell.github.io/images/operate.png" alt="Featured image of post Loadrunner12 使用基础教程" /&gt;&lt;h2 id="1-安装略"&gt;1. 安装（略）
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;程序安装包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;HP_LoadRunner_12.02_Community_Edition_T7177-15059.exe&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;语言包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;HP_LoadRunner_12.02_Community_Edition_Language_Packs_T7177-15062.exe&lt;/p&gt;
+&lt;h2 id="2-使用简介"&gt;2. 使用简介
+&lt;/h2&gt;&lt;p&gt;​ 安装完成后，桌面上新增3个图标，分别是&lt;code&gt;Virtual User Generator&lt;/code&gt;、 &lt;code&gt;Controller&lt;/code&gt; 、&lt;code&gt;Analysis&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/loadrunner_img1.jpg"
 loading="lazy"
->&lt;/p>
-&lt;h3 id="21-录制脚本">2.1 录制脚本
-&lt;/h3>&lt;p>​ 打开&lt;code>Virtual User Generator&lt;/code> ，使用组合键&lt;code>Ctrl&lt;/code>+&lt;code>N&lt;/code>打开如下对话框，选择&lt;code>单协议&lt;/code>→&lt;code>Web-HTTP/HTML&lt;/code>，填写脚本名称和保存位置后，点击创建。&lt;/p>
-&lt;p>&lt;img src="https://runshell.github.io/images/new_script.jpg"
+&gt;&lt;/p&gt;
+&lt;h3 id="21-录制脚本"&gt;2.1 录制脚本
+&lt;/h3&gt;&lt;p&gt;​ 打开&lt;code&gt;Virtual User Generator&lt;/code&gt; ，使用组合键&lt;code&gt;Ctrl&lt;/code&gt;+&lt;code&gt;N&lt;/code&gt;打开如下对话框，选择&lt;code&gt;单协议&lt;/code&gt;→&lt;code&gt;Web-HTTP/HTML&lt;/code&gt;，填写脚本名称和保存位置后，点击创建。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/new_script.jpg"
 loading="lazy"
->&lt;/p>
-&lt;blockquote>
-&lt;p>创建后到达如下界面，可以发先操作分3类，分别为&lt;code>vuser_init&lt;/code>、&lt;code>Action&lt;/code>、&lt;code>vuser_end&lt;/code>。他们的区别在于&lt;code>vuser_init&lt;/code>只运行一次，在启动运行场景后最先运行；在&lt;code>vuser_init&lt;/code>部分运行完后，&lt;code>Action&lt;/code>根据运行场景的设置，多次并发运行；&lt;code>Action&lt;/code>运行结束后，运行场景结束前运行&lt;code>vuser_end&lt;/code>，也只运行一次。通常来说，&lt;code>vuser_init&lt;/code>录制登录操作，&lt;code>Action&lt;/code>部分录制需要测试并发的业务操作，&lt;code>vuser_end&lt;/code>部分录制最后登出注销之类的释放资源的操作。&lt;/p>&lt;/blockquote>
-&lt;p>&lt;img src="https://runshell.github.io/images/operate.png"
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;创建后到达如下界面，可以发先操作分3类，分别为&lt;code&gt;vuser_init&lt;/code&gt;、&lt;code&gt;Action&lt;/code&gt;、&lt;code&gt;vuser_end&lt;/code&gt;。他们的区别在于&lt;code&gt;vuser_init&lt;/code&gt;只运行一次，在启动运行场景后最先运行；在&lt;code&gt;vuser_init&lt;/code&gt;部分运行完后，&lt;code&gt;Action&lt;/code&gt;根据运行场景的设置，多次并发运行；&lt;code&gt;Action&lt;/code&gt;运行结束后，运行场景结束前运行&lt;code&gt;vuser_end&lt;/code&gt;，也只运行一次。通常来说，&lt;code&gt;vuser_init&lt;/code&gt;录制登录操作，&lt;code&gt;Action&lt;/code&gt;部分录制需要测试并发的业务操作，&lt;code&gt;vuser_end&lt;/code&gt;部分录制最后登出注销之类的释放资源的操作。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/operate.png"
 loading="lazy"
->&lt;/p>
-&lt;p>​ 录制vuser_init：选中vuser_init，按组合键&lt;code>Ctrl&lt;/code>+&lt;code>R&lt;/code>打开如下对话框，配置好url等相关参数后点击开始录制。Loadrunner会自动打开您选择的浏览器并访问您指定的URL。&lt;/p>
-&lt;p>&lt;img src="https://runshell.github.io/images/vuser_init.png"
+&gt;&lt;/p&gt;
+&lt;p&gt;​ 录制vuser_init：选中vuser_init，按组合键&lt;code&gt;Ctrl&lt;/code&gt;+&lt;code&gt;R&lt;/code&gt;打开如下对话框，配置好url等相关参数后点击开始录制。Loadrunner会自动打开您选择的浏览器并访问您指定的URL。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/vuser_init.png"
 loading="lazy"
 alt="1551752491440"
->&lt;/p>
-&lt;p>【注】如果出现下图错误，请确认网络是否正常，网络正常即可忽略该错误。&lt;/p>
-&lt;p>&lt;img src="https://runshell.github.io/images/net_error.png"
+&gt;&lt;/p&gt;
+&lt;p&gt;【注】如果出现下图错误，请确认网络是否正常，网络正常即可忽略该错误。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/net_error.png"
 loading="lazy"
 alt="1551686888809"
->&lt;/p>
-&lt;p>​ 输入用户名密码进行正常登录，&lt;/p>
-&lt;p>&lt;img src="https://runshell.github.io/images/login.png"
+&gt;&lt;/p&gt;
+&lt;p&gt;​ 输入用户名密码进行正常登录，&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/login.png"
 loading="lazy"
 alt="1551752859139"
->&lt;/p>
-&lt;p>​ 登录完成后，将操作切换为Action，继续进行收件操作，如果还想测试其它事件场景，点击右侧加号，添加新的事件场景。需要测试的场景录制完成后，将操作切换至vuser_end，录制注销操作。录制完成后点击终止按钮结束录制。&lt;/p>
-&lt;h3 id="22-运行脚本">2.2 运行脚本
-&lt;/h3>&lt;p>​ 录制完成后打开&lt;code>Controller&lt;/code>，选中刚才录制的脚本，点击添加，然后点击&lt;code>确定&lt;/code>按钮，进入场景配置界面。&lt;/p>
-&lt;p>&lt;img src="https://runshell.github.io/images/run_script.png"
+&gt;&lt;/p&gt;
+&lt;p&gt;​ 登录完成后，将操作切换为Action，继续进行收件操作，如果还想测试其它事件场景，点击右侧加号，添加新的事件场景。需要测试的场景录制完成后，将操作切换至vuser_end，录制注销操作。录制完成后点击终止按钮结束录制。&lt;/p&gt;
+&lt;h3 id="22-运行脚本"&gt;2.2 运行脚本
+&lt;/h3&gt;&lt;p&gt;​ 录制完成后打开&lt;code&gt;Controller&lt;/code&gt;，选中刚才录制的脚本，点击添加，然后点击&lt;code&gt;确定&lt;/code&gt;按钮，进入场景配置界面。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/run_script.png"
 loading="lazy"
 alt="1551756887458"
->&lt;/p>
-&lt;h4 id="221-场景配置">2.2.1 场景配置
-&lt;/h4>&lt;p>​ 加载生成器，由于&lt;code>Virtual User Generator&lt;/code>与&lt;code>Controller&lt;/code>在同一计算机，所以添加一个localhost的生成器，确定即可。&lt;/p>
-&lt;p>&lt;img src="https://runshell.github.io/images/load_generator.png"
+&gt;&lt;/p&gt;
+&lt;h4 id="221-场景配置"&gt;2.2.1 场景配置
+&lt;/h4&gt;&lt;p&gt;​ 加载生成器，由于&lt;code&gt;Virtual User Generator&lt;/code&gt;与&lt;code&gt;Controller&lt;/code&gt;在同一计算机，所以添加一个localhost的生成器，确定即可。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/load_generator.png"
 loading="lazy"
 alt="1551757110771"
->&lt;/p>
-&lt;p>​ 配置全局计划，配置初始化方式、启动的vuser个数以及启动的时间、测试持续时间等。&lt;/p>
-&lt;p>&lt;img src="https://runshell.github.io/images/global.png"
+&gt;&lt;/p&gt;
+&lt;p&gt;​ 配置全局计划，配置初始化方式、启动的vuser个数以及启动的时间、测试持续时间等。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/global.png"
 loading="lazy"
 alt="1551757309957"
->&lt;/p>
-&lt;h4 id="222-监视服务器资源">2.2.2 监视服务器资源
-&lt;/h4>&lt;p>​ 点击底部的&lt;code>运行&lt;/code>标签，切换至如下界面，根据服务器操作系统类型，选择&lt;code>Windows资源&lt;/code>或&lt;code>UNIX资源&lt;/code>，右击最右下角的统计图，在右击菜单中选择&lt;code>添加度量&lt;/code>，到达服务器信息配置界面。&lt;/p>
-&lt;p>&lt;img src="https://runshell.github.io/images/monitor.png"
+&gt;&lt;/p&gt;
+&lt;h4 id="222-监视服务器资源"&gt;2.2.2 监视服务器资源
+&lt;/h4&gt;&lt;p&gt;​ 点击底部的&lt;code&gt;运行&lt;/code&gt;标签，切换至如下界面，根据服务器操作系统类型，选择&lt;code&gt;Windows资源&lt;/code&gt;或&lt;code&gt;UNIX资源&lt;/code&gt;，右击最右下角的统计图，在右击菜单中选择&lt;code&gt;添加度量&lt;/code&gt;，到达服务器信息配置界面。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/monitor.png"
 loading="lazy"
 alt="1551757770639"
->&lt;/p>
-&lt;h4 id="2221-linux">2.2.2.1 Linux
-&lt;/h4>&lt;ol>
-&lt;li>在Linux服务器上安装并启动rstatd&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt-get install rstatd#安装rstatd
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>service rpcbind start &lt;span style="color:#75715e">#启动rpc服务&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rpc.rstatd &lt;span style="color:#75715e">#启动rpc.rstatd服务&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rpcinfo -p &lt;span style="color:#75715e">#查看服务状态和端口&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://runshell.github.io/images/rstatd_status.png"
+&gt;&lt;/p&gt;
+&lt;h4 id="2221-linux"&gt;2.2.2.1 Linux
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;在Linux服务器上安装并启动rstatd&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;apt-get install rstatd#安装rstatd
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;service rpcbind start &lt;span style="color:#75715e"&gt;#启动rpc服务&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rpc.rstatd &lt;span style="color:#75715e"&gt;#启动rpc.rstatd服务&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rpcinfo -p &lt;span style="color:#75715e"&gt;#查看服务状态和端口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://runshell.github.io/images/rstatd_status.png"
 loading="lazy"
 alt="img"
->&lt;/p>
-&lt;ol start="2">
-&lt;li>在Controller中添加资源视图，添加时，注意带上rstatd服务所监听的端口。&lt;/li>
-&lt;/ol>
-&lt;p>&lt;img src="https://runshell.github.io/images/Linux.png"
+&gt;&lt;/p&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;在Controller中添加资源视图，添加时，注意带上rstatd服务所监听的端口。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/Linux.png"
 loading="lazy"
 alt="1551773072125"
->&lt;/p>
-&lt;h4 id="2222-windows">2.2.2.2 Windows
-&lt;/h4>&lt;ol>
-&lt;li>确保机器B的Remote ProcedureCall(RPC)和Remote Registry Service服务开启。&lt;/li>
-&lt;li>确保C盘默认共享开启。&lt;/li>
-&lt;li>添加主机，输入用户名密码，用户必须为administrator或同权限用户。&lt;/li>
-&lt;/ol>
-&lt;p>&lt;img src="https://runshell.github.io/images/windows.png"
+&gt;&lt;/p&gt;
+&lt;h4 id="2222-windows"&gt;2.2.2.2 Windows
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;确保机器B的Remote ProcedureCall(RPC)和Remote Registry Service服务开启。&lt;/li&gt;
+&lt;li&gt;确保C盘默认共享开启。&lt;/li&gt;
+&lt;li&gt;添加主机，输入用户名密码，用户必须为administrator或同权限用户。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/windows.png"
 loading="lazy"
 alt="1551770475231"
->&lt;/p>
-&lt;ol start="4">
-&lt;li>点击确定片刻后出现数据，表明资源监控配置成功。&lt;/li>
-&lt;/ol>
-&lt;p>&lt;img src="https://runshell.github.io/images/windows_OK.png"
+&gt;&lt;/p&gt;
+&lt;ol start="4"&gt;
+&lt;li&gt;点击确定片刻后出现数据，表明资源监控配置成功。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/windows_OK.png"
 loading="lazy"
 alt="1551770718005"
->&lt;/p>
-&lt;h4 id="223-开始场景">2.2.3 开始场景
-&lt;/h4>&lt;p>​ 一切就绪，点击&lt;code>开始场景&lt;/code>开始运行，等待测试结束。&lt;/p>
-&lt;p>&lt;img src="https://runshell.github.io/images/start.png"
+&gt;&lt;/p&gt;
+&lt;h4 id="223-开始场景"&gt;2.2.3 开始场景
+&lt;/h4&gt;&lt;p&gt;​ 一切就绪，点击&lt;code&gt;开始场景&lt;/code&gt;开始运行，等待测试结束。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/start.png"
 loading="lazy"
 alt="1551770816588"
->&lt;/p>
-&lt;h3 id="23-结果分析">2.3 结果分析
-&lt;/h3>&lt;p>​ 场景测试完成后，点击如下图标，将打开&lt;code>Analysis&lt;/code>，自动分析统计测试产生的数据。&lt;/p>
-&lt;p>&lt;img src="https://runshell.github.io/images/Analysis.png"
+&gt;&lt;/p&gt;
+&lt;h3 id="23-结果分析"&gt;2.3 结果分析
+&lt;/h3&gt;&lt;p&gt;​ 场景测试完成后，点击如下图标，将打开&lt;code&gt;Analysis&lt;/code&gt;，自动分析统计测试产生的数据。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/Analysis.png"
 loading="lazy"
 alt="1551771453694"
->&lt;/p>
-&lt;p>​ &lt;code>Analysis&lt;/code>打开后的界面如下，默认展示的统计图不包含系统资源的统计图。&lt;/p>
-&lt;p>&lt;img src="https://runshell.github.io/images/analysis1.png"
+&gt;&lt;/p&gt;
+&lt;p&gt;​ &lt;code&gt;Analysis&lt;/code&gt;打开后的界面如下，默认展示的统计图不包含系统资源的统计图。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/analysis1.png"
 loading="lazy"
 alt="1551771964737"
->&lt;/p>
-&lt;p>​ 按下组合键&lt;code>Ctrl&lt;/code>+&lt;code>A&lt;/code>来添加统计图&lt;/p>
-&lt;p>&lt;img src="https://runshell.github.io/images/analysis2.png"
+&gt;&lt;/p&gt;
+&lt;p&gt;​ 按下组合键&lt;code&gt;Ctrl&lt;/code&gt;+&lt;code&gt;A&lt;/code&gt;来添加统计图&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/analysis2.png"
 loading="lazy"
 alt="1551772097547"
->&lt;/p>
-&lt;h2 id="参考链接">【参考链接】
-&lt;/h2>&lt;p>&lt;a class="link" href="https://blog.csdn.net/Summer_Hanson/article/details/55504619" target="_blank" rel="noopener"
->LoadRunner11实操压力测试&lt;/a>&lt;/p>
-&lt;p>&lt;a class="link" href="https://www.cnblogs.com/seekwind/p/5817345.html" target="_blank" rel="noopener"
->loadrunner监控linux服务器&lt;/a>&lt;/p>
-&lt;p>&lt;a class="link" href="https://www.cnblogs.com/chengssblog/p/6646451.html" target="_blank" rel="noopener"
->loadrunner监控Windows服务器&lt;/a>&lt;/p></description></item></channel></rss>
+&gt;&lt;/p&gt;
+&lt;h2 id="参考链接"&gt;【参考链接】
+&lt;/h2&gt;&lt;p&gt;&lt;a class="link" href="https://blog.csdn.net/Summer_Hanson/article/details/55504619" target="_blank" rel="noopener"
+&gt;LoadRunner11实操压力测试&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://www.cnblogs.com/seekwind/p/5817345.html" target="_blank" rel="noopener"
+&gt;loadrunner监控linux服务器&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://www.cnblogs.com/chengssblog/p/6646451.html" target="_blank" rel="noopener"
+&gt;loadrunner监控Windows服务器&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>

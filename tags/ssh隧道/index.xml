@@ -1,36 +1,36 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ssh隧道 on runshell</title><link>https://runshell.github.io/tags/ssh%E9%9A%A7%E9%81%93/</link><description>Recent content in Ssh隧道 on runshell</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 15 Jul 2018 14:30:00 +0800</lastBuildDate><atom:link href="https://runshell.github.io/tags/ssh%E9%9A%A7%E9%81%93/index.xml" rel="self" type="application/rss+xml"/><item><title>SSH隧道转发</title><link>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/ssh%E9%9A%A7%E9%81%93%E8%BD%AC%E5%8F%91/</link><pubDate>Sun, 15 Jul 2018 14:30:00 +0800</pubDate><guid>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/ssh%E9%9A%A7%E9%81%93%E8%BD%AC%E5%8F%91/</guid><description>&lt;img src="https://runshell.github.io/images/1536460373438.png" alt="Featured image of post SSH隧道转发" />&lt;h2 id="0x00-ssh常用参数说明">0x00 ssh常用参数说明
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>-C 压缩传输数据,加快传输速度
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-f 后台对用户名密码进行认证
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-N 仅仅只用来转发,不用再弹回一个新的shell
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-n 后台运行
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-q 安静模式,不要显示警告等信息
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-l 指定ssh登录名
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-g 允许远程主机连接到本地转发的端口（本机监听地址设为0.0.0.0，不选则为127.0.0.1）
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-L 进行本地端口转发
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-R 进行远程端口转发
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-D 动态转发,即socks代理
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-T 禁止分配伪终端
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-p 指定远程ssh服务端口
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="0x01-本地转发">0x01 本地转发
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ssh &lt;span style="color:#f92672">[&lt;/span>-C&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span>-f&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span>-N&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#f92672">[&lt;/span>-g&lt;span style="color:#f92672">]&lt;/span> -L &lt;span style="color:#f92672">[&lt;/span>本机ip&lt;span style="color:#f92672">]&lt;/span>:本机端口:vps能访问的主机ip:端口 &amp;lt;user@vps&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>将本地的一个端口映射到vps能到达的主机的一个端口。如果vps是边界设备，拥有多网卡，那么就可以用该方法访问内网主机的服务。&lt;/p>
-&lt;blockquote>
-&lt;p>例：假如你拥有一台web服务器的控制权，但是数据库服务器没有公网IP，你想直接访问数据库的服务，这时就可以使用本地转发，在本地（local）执行如下命令：&lt;/p>&lt;/blockquote>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ssh -Nnf -L 6666:10.10.10.12:3306 root@188.224.123.45
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#访问本地的6666端口就可以被映射到数据库10.10.10.12的3306端口&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mysql -u root -ppassword -P &lt;span style="color:#ae81ff">6666&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>序列图如下：&lt;/p>
-&lt;p>&lt;img src="https://runshell.github.io/images/1536460373438.png"
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ssh隧道 on runshell</title><link>https://runshell.github.io/tags/ssh%E9%9A%A7%E9%81%93/</link><description>Recent content in Ssh隧道 on runshell</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 15 Jul 2018 14:30:00 +0800</lastBuildDate><atom:link href="https://runshell.github.io/tags/ssh%E9%9A%A7%E9%81%93/index.xml" rel="self" type="application/rss+xml"/><item><title>SSH隧道转发</title><link>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/ssh%E9%9A%A7%E9%81%93%E8%BD%AC%E5%8F%91/</link><pubDate>Sun, 15 Jul 2018 14:30:00 +0800</pubDate><guid>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/ssh%E9%9A%A7%E9%81%93%E8%BD%AC%E5%8F%91/</guid><description>&lt;img src="https://runshell.github.io/images/1536460373438.png" alt="Featured image of post SSH隧道转发" /&gt;&lt;h2 id="0x00-ssh常用参数说明"&gt;0x00 ssh常用参数说明
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-C 压缩传输数据,加快传输速度
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-f 后台对用户名密码进行认证
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-N 仅仅只用来转发,不用再弹回一个新的shell
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-n 后台运行
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-q 安静模式,不要显示警告等信息
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-l 指定ssh登录名
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-g 允许远程主机连接到本地转发的端口（本机监听地址设为0.0.0.0，不选则为127.0.0.1）
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-L 进行本地端口转发
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-R 进行远程端口转发
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-D 动态转发,即socks代理
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-T 禁止分配伪终端
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-p 指定远程ssh服务端口
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="0x01-本地转发"&gt;0x01 本地转发
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ssh &lt;span style="color:#f92672"&gt;[&lt;/span&gt;-C&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;-f&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;-N&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;-g&lt;span style="color:#f92672"&gt;]&lt;/span&gt; -L &lt;span style="color:#f92672"&gt;[&lt;/span&gt;本机ip&lt;span style="color:#f92672"&gt;]&lt;/span&gt;:本机端口:vps能访问的主机ip:端口 &amp;lt;user@vps&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将本地的一个端口映射到vps能到达的主机的一个端口。如果vps是边界设备，拥有多网卡，那么就可以用该方法访问内网主机的服务。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;例：假如你拥有一台web服务器的控制权，但是数据库服务器没有公网IP，你想直接访问数据库的服务，这时就可以使用本地转发，在本地（local）执行如下命令：&lt;/p&gt;&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ssh -Nnf -L 6666:10.10.10.12:3306 root@188.224.123.45
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#访问本地的6666端口就可以被映射到数据库10.10.10.12的3306端口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mysql -u root -ppassword -P &lt;span style="color:#ae81ff"&gt;6666&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;序列图如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://runshell.github.io/images/1536460373438.png"
 loading="lazy"
 alt="1536460373438"
->&lt;/p>
-&lt;h2 id="0x02-远程转发">0x02 远程转发
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ssh -C -f -N -R 0.0.0.0:vps_port:本机能访问的IP:端口 root@vps
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>将vps上的一个端口映射到本机能到达的主机的一个端口。以至于可以通过vps访问内网的计算机上面的服务。遗憾的是，即使你指定了监听地址为0.0.0.0，它也仅能监听127.0.0.1，不能实现内网穿透。&lt;/p>
-&lt;p>然后经过一番折腾，得出答案，需要修改sshd的配置文件&lt;code>/etc/ssh/sshd_config&lt;/code>,将配置做如下修改：&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-config" data-lang="config">GatewayPorts yes
-&lt;/code>&lt;/pre>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#重启sshd服务&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>service sshd restart &lt;span style="color:#f92672">||&lt;/span> systemctl restart sshd
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="0x03-动态转发">0x03 动态转发
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ssh -qTfnN -D 0.0.0.0:1080 root@vps -p &lt;span style="color:#ae81ff">22&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>本机将本地1080端口的所有流量发给vps，vps转发收到的流量。这就是赤裸裸的socks代理啊。&lt;/p></description></item></channel></rss>
+&gt;&lt;/p&gt;
+&lt;h2 id="0x02-远程转发"&gt;0x02 远程转发
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ssh -C -f -N -R 0.0.0.0:vps_port:本机能访问的IP:端口 root@vps
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将vps上的一个端口映射到本机能到达的主机的一个端口。以至于可以通过vps访问内网的计算机上面的服务。遗憾的是，即使你指定了监听地址为0.0.0.0，它也仅能监听127.0.0.1，不能实现内网穿透。&lt;/p&gt;
+&lt;p&gt;然后经过一番折腾，得出答案，需要修改sshd的配置文件&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;,将配置做如下修改：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-config" data-lang="config"&gt;GatewayPorts yes
+&lt;/code&gt;&lt;/pre&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#重启sshd服务&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;service sshd restart &lt;span style="color:#f92672"&gt;||&lt;/span&gt; systemctl restart sshd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="0x03-动态转发"&gt;0x03 动态转发
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ssh -qTfnN -D 0.0.0.0:1080 root@vps -p &lt;span style="color:#ae81ff"&gt;22&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;本机将本地1080端口的所有流量发给vps，vps转发收到的流量。这就是赤裸裸的socks代理啊。&lt;/p&gt;</description></item></channel></rss>

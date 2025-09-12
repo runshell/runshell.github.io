@@ -1,69 +1,69 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Arkime on runshell</title><link>https://runshell.github.io/tags/arkime/</link><description>Recent content in Arkime on runshell</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 15 Jul 2024 14:30:00 +0800</lastBuildDate><atom:link href="https://runshell.github.io/tags/arkime/index.xml" rel="self" type="application/rss+xml"/><item><title>Centos Stream9安装Arkime</title><link>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/centos-stream9%E5%AE%89%E8%A3%85arkime/</link><pubDate>Mon, 15 Jul 2024 14:30:00 +0800</pubDate><guid>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/centos-stream9%E5%AE%89%E8%A3%85arkime/</guid><description>&lt;img src="https://runshell.github.io/images/Arkime_Logo.png" alt="Featured image of post Centos Stream9安装Arkime" />&lt;h2 id="下载包">下载包
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://mirror.ghproxy.com/https://github.com/arkime/arkime/releases/download/v4.3.0/arkime-4.3.0-1.el9.x86_64.rpm
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="安装依赖">安装依赖
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>yum install -y perl-libwww-perl perl-JSON perl-LWP-Protocol-https
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="安装-arkime">安装 arkime
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>rpm -i arkime-4.3.0-1.el9.x86_64.rpm
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="阅读-readme">阅读 readme
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cat /opt/arkime/README.txt
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="查看网卡清楚管理口网卡和用于接收镜像的网卡">查看网卡，清楚管理口网卡和用于接收镜像的网卡
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ifconfig
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="执行配置脚本进行交互式配置">执行配置脚本进行交互式配置
-&lt;/h2>&lt;p>根据提示选择镜像网卡，输入密码等。配置过程会自动安装 elasticsearch，如果是内网机需手动安装，elasticsearch 可自行安装，本机部署建议监听 127.0.0.1&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>/opt/arkime/bin/Configure
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="启动服务">启动服务
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>systemctl start elasticsearch.service
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 开机自启&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl enable elasticsearch.service
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>netstat -lnp | grep &lt;span style="color:#ae81ff">9200&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="初始化-elasticsearch">初始化 elasticsearch
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>/opt/arkime/db/db.pl http://127.0.0.1:9200 init
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="添加-web-管理员账号">添加 web 管理员账号
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>/opt/arkime/bin/arkime_add_user.sh cbtdadmin &lt;span style="color:#e6db74">&amp;#34;Admin User&amp;#34;&lt;/span> fuzak0uling --admin
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="启动服务-1">启动服务
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>systemctl start arkimecapture.service
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl start arkimeviewer.service
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl enable arkimecapture.service
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl enable arkimeviewer.service
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>netstat -lnp | grep &lt;span style="color:#ae81ff">8005&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="出现-bug-查看日志">出现 bug 查看日志
-&lt;/h2>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cat /opt/arkime/logs/viewer.log
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cat /opt/arkime/logs/capture.log
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 出现 bug 查看 seLinux 开关&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>getenforce
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 主机防火墙配置&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>firewall-cmd --add-rich-rule&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;rule family=&amp;#34;ipv4&amp;#34; source address=&amp;#34;10.x.x.x&amp;#34; port port=8005 protocol=&amp;#34;tcp&amp;#34; accept&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>firewall-cmd --runtime-to-permanent
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="可能缺失的文件">可能缺失的文件
-&lt;/h2>&lt;h3 id="国内访问需要使用镜像站">国内访问需要使用镜像站
-&lt;/h3>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget &lt;span style="color:#e6db74">&amp;#34; https://mirror.ghproxy.com/https://raw.githubusercontent.com/wireshark/wireshark/master/manuf&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mv manuf /opt/arkime/etc/oui.txt
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通常无需访问镜像站">通常无需访问镜像站
-&lt;/h3>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget &lt;span style="color:#e6db74">&amp;#34;https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.csv&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vi /opt/arkime/bin/arkime_update_geo.sh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mv ipv4-address-space.csv /opt/arkime/etc/
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>systemctl restart arkimecapture.service
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="优化配置">优化配置
-&lt;/h2>&lt;h3 id="清理-60-天以前的流量日志">清理 60 天以前的流量日志
-&lt;/h3>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>crontab -e
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span> * * * /opt/arkime/db/db.pl 127.0.0.1:9200 expire daily &lt;span style="color:#ae81ff">60&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="配置-elasticsearch-水位线">配置 elasticsearch 水位线
-&lt;/h3>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl -X PUT &lt;span style="color:#e6db74">&amp;#34;http://127.0.0.1:9200/_cluster/settings?pretty&amp;#34;&lt;/span> -H &lt;span style="color:#e6db74">&amp;#39;Content-Type: application/json&amp;#39;&lt;/span> -d&lt;span style="color:#e6db74">&amp;#39;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">{
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;persistent&amp;#34;: {
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;cluster.routing.allocation.disk.watermark.low&amp;#34;: &amp;#34;90gb&amp;#34;,
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;cluster.routing.allocation.disk.watermark.high&amp;#34;: &amp;#34;50gb&amp;#34;,
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;cluster.routing.allocation.disk.watermark.flood_stage&amp;#34;: &amp;#34;10gb&amp;#34;,
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;cluster.info.update.interval&amp;#34;: &amp;#34;1m&amp;#34;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">}
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">}&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="配置删除-pcap-包保证空闲磁盘空间">配置删除 pcap 包保证空闲磁盘空间
-&lt;/h3>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>vi /opt/arkime/etc/config.ini
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>freeSpaceG&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">200&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Arkime on runshell</title><link>https://runshell.github.io/tags/arkime/</link><description>Recent content in Arkime on runshell</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 15 Jul 2024 14:30:00 +0800</lastBuildDate><atom:link href="https://runshell.github.io/tags/arkime/index.xml" rel="self" type="application/rss+xml"/><item><title>Centos Stream9安装Arkime</title><link>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/centos-stream9%E5%AE%89%E8%A3%85arkime/</link><pubDate>Mon, 15 Jul 2024 14:30:00 +0800</pubDate><guid>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/centos-stream9%E5%AE%89%E8%A3%85arkime/</guid><description>&lt;img src="https://runshell.github.io/images/Arkime_Logo.png" alt="Featured image of post Centos Stream9安装Arkime" /&gt;&lt;h2 id="下载包"&gt;下载包
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wget https://mirror.ghproxy.com/https://github.com/arkime/arkime/releases/download/v4.3.0/arkime-4.3.0-1.el9.x86_64.rpm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="安装依赖"&gt;安装依赖
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum install -y perl-libwww-perl perl-JSON perl-LWP-Protocol-https
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="安装-arkime"&gt;安装 arkime
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rpm -i arkime-4.3.0-1.el9.x86_64.rpm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="阅读-readme"&gt;阅读 readme
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat /opt/arkime/README.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="查看网卡清楚管理口网卡和用于接收镜像的网卡"&gt;查看网卡，清楚管理口网卡和用于接收镜像的网卡
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ifconfig
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="执行配置脚本进行交互式配置"&gt;执行配置脚本进行交互式配置
+&lt;/h2&gt;&lt;p&gt;根据提示选择镜像网卡，输入密码等。配置过程会自动安装 elasticsearch，如果是内网机需手动安装，elasticsearch 可自行安装，本机部署建议监听 127.0.0.1&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/opt/arkime/bin/Configure
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="启动服务"&gt;启动服务
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl start elasticsearch.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 开机自启&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl enable elasticsearch.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;netstat -lnp | grep &lt;span style="color:#ae81ff"&gt;9200&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="初始化-elasticsearch"&gt;初始化 elasticsearch
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/opt/arkime/db/db.pl http://127.0.0.1:9200 init
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="添加-web-管理员账号"&gt;添加 web 管理员账号
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/opt/arkime/bin/arkime_add_user.sh cbtdadmin &lt;span style="color:#e6db74"&gt;&amp;#34;Admin User&amp;#34;&lt;/span&gt; fuzak0uling --admin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="启动服务-1"&gt;启动服务
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl start arkimecapture.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl start arkimeviewer.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl enable arkimecapture.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl enable arkimeviewer.service
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;netstat -lnp | grep &lt;span style="color:#ae81ff"&gt;8005&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="出现-bug-查看日志"&gt;出现 bug 查看日志
+&lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat /opt/arkime/logs/viewer.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cat /opt/arkime/logs/capture.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 出现 bug 查看 seLinux 开关&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;getenforce
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 主机防火墙配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;firewall-cmd --add-rich-rule&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;rule family=&amp;#34;ipv4&amp;#34; source address=&amp;#34;10.x.x.x&amp;#34; port port=8005 protocol=&amp;#34;tcp&amp;#34; accept&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;firewall-cmd --runtime-to-permanent
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="可能缺失的文件"&gt;可能缺失的文件
+&lt;/h2&gt;&lt;h3 id="国内访问需要使用镜像站"&gt;国内访问需要使用镜像站
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wget &lt;span style="color:#e6db74"&gt;&amp;#34; https://mirror.ghproxy.com/https://raw.githubusercontent.com/wireshark/wireshark/master/manuf&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mv manuf /opt/arkime/etc/oui.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="通常无需访问镜像站"&gt;通常无需访问镜像站
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wget &lt;span style="color:#e6db74"&gt;&amp;#34;https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.csv&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vi /opt/arkime/bin/arkime_update_geo.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mv ipv4-address-space.csv /opt/arkime/etc/
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl restart arkimecapture.service
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="优化配置"&gt;优化配置
+&lt;/h2&gt;&lt;h3 id="清理-60-天以前的流量日志"&gt;清理 60 天以前的流量日志
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;crontab -e
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; * * * /opt/arkime/db/db.pl 127.0.0.1:9200 expire daily &lt;span style="color:#ae81ff"&gt;60&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="配置-elasticsearch-水位线"&gt;配置 elasticsearch 水位线
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -X PUT &lt;span style="color:#e6db74"&gt;&amp;#34;http://127.0.0.1:9200/_cluster/settings?pretty&amp;#34;&lt;/span&gt; -H &lt;span style="color:#e6db74"&gt;&amp;#39;Content-Type: application/json&amp;#39;&lt;/span&gt; -d&lt;span style="color:#e6db74"&gt;&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;persistent&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;cluster.routing.allocation.disk.watermark.low&amp;#34;: &amp;#34;90gb&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;cluster.routing.allocation.disk.watermark.high&amp;#34;: &amp;#34;50gb&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;cluster.routing.allocation.disk.watermark.flood_stage&amp;#34;: &amp;#34;10gb&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;cluster.info.update.interval&amp;#34;: &amp;#34;1m&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt;}&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="配置删除-pcap-包保证空闲磁盘空间"&gt;配置删除 pcap 包保证空闲磁盘空间
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vi /opt/arkime/etc/config.ini
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;freeSpaceG&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;200&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item></channel></rss>

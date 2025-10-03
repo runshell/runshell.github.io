@@ -24,13 +24,13 @@ https://gravesoft.dev/office_c2r_links#chinese-simplified-zh-cn
 
 ### 转换
 
-将 office 转换成 vol 版本，才可使用 kms 激活。以管理员身份打开命令行，执行：
+将 office 转换成 vol 版本，才可使用 kms 激活。以管理员身份打开命令行(cmd非powershell)，执行：
 
 ```bat
 @rem 进入office ospp.vbs文件所在目录
 cd "C:\Program Files\Microsoft Office\Office16" || cd "C:\Program Files (x86)\Microsoft Office\Office16"
 @rem ProPlus2024为office版本，修改为你需要激活的版本即可，有哪些版本可查看..\root\Licenses16 目录
-for %x in (dir /b ..\root\Licenses16\ProPlus2024VL_*.xrm-ms) do cscript ospp.vbs /inslic:"..\root\Licenses16\%%x"
+for %x in (dir /b ..\root\Licenses16\ProPlus2024VL_*.xrm-ms) do cscript ospp.vbs /inslic:"%x"
 ```
 
 ### gvlk

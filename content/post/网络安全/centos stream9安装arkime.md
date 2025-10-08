@@ -3,7 +3,7 @@ title: "Centos Stream9安装Arkime" # 文章标题
 date: 2024-07-15T14:30:00+08:00 # 文章创建日期
 draft: false # 是否为草稿，true 表示草稿，不会在网站上显示
 author: "runshell" # 文章作者
-description: "Burpsuite匹配中文" # 文章描述
+description: "介绍Centos Stream9安装Arkime步骤和常见问题" # 文章描述
 tags: ["Arkime"] # 文章标签
 categories: ["网络安全"] # 文章分类
 image: "/images/Arkime_Logo.png"

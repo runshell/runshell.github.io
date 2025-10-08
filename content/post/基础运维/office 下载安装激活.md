@@ -3,7 +3,7 @@ title: "office 下载安装激活" # 文章标题
 date: 2025-05-05T14:30:00+08:00 # 文章创建日期
 draft: false # 是否为草稿，true 表示草稿，不会在网站上显示
 author: "runshell" # 文章作者
-description: "下载安装激活全程安全无毒的方法介绍" # 文章描述
+description: "office下载、安装、激活全程安全无毒的方法介绍" # 文章描述
 tags: ["office"] # 文章标签
 categories: ["基础运维"] # 文章分类
 ---
@@ -24,7 +24,7 @@ https://gravesoft.dev/office_c2r_links#chinese-simplified-zh-cn
 
 ### 转换
 
-将 office 转换成 vol 版本，才可使用 kms 激活。以管理员身份打开命令行(cmd非powershell)，执行：
+将 office 转换成 vol 版本，才可使用 kms 激活。以管理员身份打开命令行(cmd 非 powershell)，执行：
 
 ```bat
 @rem 进入office ospp.vbs文件所在目录

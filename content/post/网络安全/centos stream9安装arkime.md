@@ -9,6 +9,10 @@ categories: ["网络安全"] # 文章分类
 image: "/images/Arkime_Logo.png"
 ---
 
+## Arkime 简介
+
+Arkime 是一个基于 Elasticsearch 的网络分析工具，用于捕获、存储和分析网络流量。它支持实时流量捕获和分析，以及历史流量的搜索和回放。Arkime 可以用于网络安全分析、流量监控和故障排除等场景。
+
 ## 下载包
 
 ```bash

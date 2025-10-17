@@ -281,7 +281,8 @@ loading="lazy"
 loading="lazy"
 &gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;创建后到达如下界面，可以发先操作分3类，分别为&lt;code&gt;vuser_init&lt;/code&gt;、&lt;code&gt;Action&lt;/code&gt;、&lt;code&gt;vuser_end&lt;/code&gt;。他们的区别在于&lt;code&gt;vuser_init&lt;/code&gt;只运行一次，在启动运行场景后最先运行；在&lt;code&gt;vuser_init&lt;/code&gt;部分运行完后，&lt;code&gt;Action&lt;/code&gt;根据运行场景的设置，多次并发运行；&lt;code&gt;Action&lt;/code&gt;运行结束后，运行场景结束前运行&lt;code&gt;vuser_end&lt;/code&gt;，也只运行一次。通常来说，&lt;code&gt;vuser_init&lt;/code&gt;录制登录操作，&lt;code&gt;Action&lt;/code&gt;部分录制需要测试并发的业务操作，&lt;code&gt;vuser_end&lt;/code&gt;部分录制最后登出注销之类的释放资源的操作。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;创建后到达如下界面，可以发先操作分3类，分别为&lt;code&gt;vuser_init&lt;/code&gt;、&lt;code&gt;Action&lt;/code&gt;、&lt;code&gt;vuser_end&lt;/code&gt;。他们的区别在于&lt;code&gt;vuser_init&lt;/code&gt;只运行一次，在启动运行场景后最先运行；在&lt;code&gt;vuser_init&lt;/code&gt;部分运行完后，&lt;code&gt;Action&lt;/code&gt;根据运行场景的设置，多次并发运行；&lt;code&gt;Action&lt;/code&gt;运行结束后，运行场景结束前运行&lt;code&gt;vuser_end&lt;/code&gt;，也只运行一次。通常来说，&lt;code&gt;vuser_init&lt;/code&gt;录制登录操作，&lt;code&gt;Action&lt;/code&gt;部分录制需要测试并发的业务操作，&lt;code&gt;vuser_end&lt;/code&gt;部分录制最后登出注销之类的释放资源的操作。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;img src="https://runshell.github.io/images/operate.png"
 loading="lazy"
 &gt;&lt;/p&gt;
